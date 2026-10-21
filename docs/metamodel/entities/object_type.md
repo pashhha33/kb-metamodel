@@ -154,6 +154,7 @@ canonical_example: examples/vault/types/Книга (OTYPE-01J8Z6M4K2Q7V9X3N5B0C1
 ---
 id: 01J8Z6M4K2Q7V9X3N5B0C1D2HH
 type: object_type
+type_id: book
 title: Книга
 label: Книга
 type_prefix: BOOK

@@ -10,7 +10,7 @@ children: []
 superseded_by: null
 source_refs: [docs/adr/ADR-0005-classification.md, docs/adr/ADR-0007-category-assignment-storage.md, docs/adr/ADR-0008-aspect-activated-properties.md, schema/0.15.0/m1/category.json]
 schema_fragment: schema/0.15.0/m1/category.json
-canonical_example: examples/vault/taxonomy/Писатель (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3A4).md
+canonical_example: examples/vault/taxonomy/Романист (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3A5).md
 ---
 
 # Сущность: Category (`category`)

@@ -14,8 +14,9 @@
     "examples:generate": "node tools/examples/generate.cjs",
     "examples:check": "node tools/examples/check.cjs",
     "examples:all": "npm run examples:generate && npm run examples:check",
-    "test": "npm run schema:all && npm run examples:all",
-    "schema:lint": "node tools/schema-lint.cjs"
+    "test": "npm run schema:all && npm run examples:all && npm run quality:check",
+    "schema:lint": "node tools/schema-lint.cjs",
+    "quality:check": "node tools/quality-check.cjs"
   },
   "devDependencies": {
     "@apidevtools/json-schema-ref-parser": "^15.5.2",
