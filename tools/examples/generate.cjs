@@ -794,7 +794,7 @@ function main() {
       fs.writeFileSync(assetAbs, PNG_1PX);
     }
 
-    manifest.push({
+    const entry = {
       key: rec.key,
       id: rec.id,
       type: rec.type,
@@ -803,7 +803,11 @@ function main() {
       file: 'examples/vault/' + rel.split(path.sep).join('/'),
       virtual: false,
       kind: rec.kind,
-    });
+    };
+    // typeId — идентификатор предметного типа (snake_case) для записей kind: object_type;
+    // вход индекса типов в tools/examples/check.cjs (inherit.*, effective props).
+    if (rec.typeId !== undefined) entry.typeId = rec.typeId;
+    manifest.push(entry);
   }
 
   fs.writeFileSync(

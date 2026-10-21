@@ -3,10 +3,10 @@
   "schema_version": "0.14.0",
   "objects": 105,
   "summary": {
-    "error": 32,
+    "error": 9,
     "warn": 5,
     "info": 2,
-    "rules_exercised": 68,
+    "rules_exercised": 86,
     "rules_total": 114
   },
   "diagnostics": [
@@ -81,151 +81,18 @@
       "message": "Тип media_asset не входит в applicable_types таксономии «Медиа»"
     },
     {
-      "ruleId": "classif.r2",
-      "level": "error",
-      "file": "examples/vault/objects/Мастер и Маргарита (BOOK-01J8Z6M4K2Q7V9X3N5B0C1D2AC).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D2AC",
-      "message": "Тип book не входит в applicable_types таксономии «Классификация произведений»"
-    },
-    {
-      "ruleId": "classif.r2",
-      "level": "error",
-      "file": "examples/vault/objects/Мастер и Маргарита (BOOK-01J8Z6M4K2Q7V9X3N5B0C1D2AC).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D2AC",
-      "message": "Тип book не входит в applicable_types таксономии «Классификация произведений»"
-    },
-    {
-      "ruleId": "classif.r2",
-      "level": "error",
-      "file": "examples/vault/objects/Мастер и Маргарита (рукопись) (BOOK-01J8Z6M4K2Q7V9X3N5B0C1D2G7).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D2G7",
-      "message": "Тип book не входит в applicable_types таксономии «Классификация произведений»"
-    },
-    {
-      "ruleId": "classif.r2",
-      "level": "error",
-      "file": "examples/vault/objects/Михаил Булгаков (PERSON-01J8Z6M4K2Q7V9X3N5B0C1D2EF).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D2EF",
-      "message": "Тип person не входит в applicable_types таксономии «Люди и организации»"
-    },
-    {
-      "ruleId": "classif.r2",
-      "level": "error",
-      "file": "examples/vault/objects/Художественная литература (ORG-01J8Z6M4K2Q7V9X3N5B0C1D2GA).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D2GA",
-      "message": "Тип organization не входит в applicable_types таксономии «Люди и организации»"
-    },
-    {
-      "ruleId": "contract.r4",
-      "level": "error",
-      "file": "examples/vault/objects/Воланд (CHAR-01J8Z6M4K2Q7V9X3N5B0C1D2G9).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D2G9",
-      "message": "Неизвестный тип объекта: character"
-    },
-    {
-      "ruleId": "contract.r4",
-      "level": "error",
+      "ruleId": "sequence.r5",
+      "level": "warn",
       "file": "examples/vault/objects/Глава 7 (CHAP-01J8Z6M4K2Q7V9X3N5B0C1D5B7).md",
       "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D5B7",
-      "message": "Неизвестный тип объекта: chapter"
+      "message": "Между 0 и 70 пропущены значения порядка"
     },
     {
-      "ruleId": "contract.r4",
-      "level": "error",
+      "ruleId": "sequence.r5",
+      "level": "warn",
       "file": "examples/vault/objects/Глава 9 (CHAP-01J8Z6M4K2Q7V9X3N5B0C1D5B9).md",
       "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D5B9",
-      "message": "Неизвестный тип объекта: chapter"
-    },
-    {
-      "ruleId": "contract.r4",
-      "level": "error",
-      "file": "examples/vault/objects/Иван Бездомный (CHAR-01J8Z6M4K2Q7V9X3N5B0C1D2G8).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D2G8",
-      "message": "Неизвестный тип объекта: character"
-    },
-    {
-      "ruleId": "contract.r4",
-      "level": "error",
-      "file": "examples/vault/objects/Иллюстрации к «Мастеру и Маргарите» (GALLERY-01J8Z6M4K2Q7V9X3N5B0C1D2GB).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D2GB",
-      "message": "Неизвестный тип объекта: gallery"
-    },
-    {
-      "ruleId": "contract.r4",
-      "level": "error",
-      "file": "examples/vault/objects/Мастер и Маргарита (BOOK-01J8Z6M4K2Q7V9X3N5B0C1D2AC).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D2AC",
-      "message": "Неизвестный тип объекта: book"
-    },
-    {
-      "ruleId": "contract.r4",
-      "level": "error",
-      "file": "examples/vault/objects/Мастер и Маргарита (рукопись) (BOOK-01J8Z6M4K2Q7V9X3N5B0C1D2G7).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D2G7",
-      "message": "Неизвестный тип объекта: book"
-    },
-    {
-      "ruleId": "contract.r4",
-      "level": "error",
-      "file": "examples/vault/objects/Михаил Булгаков (PERSON-01J8Z6M4K2Q7V9X3N5B0C1D2EF).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D2EF",
-      "message": "Неизвестный тип объекта: person"
-    },
-    {
-      "ruleId": "contract.r4",
-      "level": "error",
-      "file": "examples/vault/objects/Пролог (CHAP-01J8Z6M4K2Q7V9X3N5B0C1D5B0).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D5B0",
-      "message": "Неизвестный тип объекта: chapter"
-    },
-    {
-      "ruleId": "contract.r4",
-      "level": "error",
-      "file": "examples/vault/objects/Художественная литература (ORG-01J8Z6M4K2Q7V9X3N5B0C1D2GA).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D2GA",
-      "message": "Неизвестный тип объекта: organization"
-    },
-    {
-      "ruleId": "relation.r2",
-      "level": "error",
-      "file": "examples/vault/relations/Авторство «Мастера и Маргариты» (REL-01J8Z6M4K2Q7V9X3N5B0C1D3B2).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D3B2",
-      "message": "Субъект типа book недопустим для отношения «Автор»"
-    },
-    {
-      "ruleId": "relation.r3",
-      "level": "error",
-      "file": "examples/vault/relations/Авторство «Мастера и Маргариты» (REL-01J8Z6M4K2Q7V9X3N5B0C1D3B2).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D3B2",
-      "message": "Объект типа person недопустим для отношения «Автор»"
-    },
-    {
-      "ruleId": "relation.r2",
-      "level": "error",
-      "file": "examples/vault/relations/Воланд — главный герой «Мастера и Маргариты» (REL-01J8Z6M4K2Q7V9X3N5B0C1D3C4).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D3C4",
-      "message": "Субъект типа character недопустим для отношения «Воплощает»"
-    },
-    {
-      "ruleId": "relation.r3",
-      "level": "error",
-      "file": "examples/vault/relations/Воланд — главный герой «Мастера и Маргариты» (REL-01J8Z6M4K2Q7V9X3N5B0C1D3C4).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D3C4",
-      "message": "Объект типа book недопустим для отношения «Воплощает»"
-    },
-    {
-      "ruleId": "relation.r2",
-      "level": "error",
-      "file": "examples/vault/relations/Иван Бездомный — главный герой «Мастера и Маргариты» (REL-01J8Z6M4K2Q7V9X3N5B0C1D3C2).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D3C2",
-      "message": "Субъект типа character недопустим для отношения «Воплощает»"
-    },
-    {
-      "ruleId": "relation.r3",
-      "level": "error",
-      "file": "examples/vault/relations/Иван Бездомный — главный герой «Мастера и Маргариты» (REL-01J8Z6M4K2Q7V9X3N5B0C1D3C2).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D3C2",
-      "message": "Объект типа book недопустим для отношения «Воплощает»"
+      "message": "Между 70 и 90 пропущены значения порядка"
     },
     {
       "ruleId": "lifecycle.r2",
@@ -233,34 +100,6 @@
       "file": "examples/vault/objects/Мастер и Маргарита (рукопись) (BOOK-01J8Z6M4K2Q7V9X3N5B0C1D2G7).md",
       "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D2G7",
       "message": "На архивный объект «Мастер и Маргарита (рукопись)» ссылаются активные: examples/vault/relations/Слияние дубликата «Мастер и Маргарита (рукопись)» (REL-01J8Z6M4K2Q7V9X3N5B0C1D4F1).md"
-    },
-    {
-      "ruleId": "lifecycle.r2",
-      "level": "warn",
-      "file": "examples/vault/taxonomy/Драматург (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3A8).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D3A8",
-      "message": "На архивный объект «Драматург» ссылаются активные: examples/vault/aspects/literary_person (ASPECT-01J8Z6M4K2Q7V9X3N5B0C1D3E1).md"
-    },
-    {
-      "ruleId": "relation.r7",
-      "level": "warn",
-      "file": "examples/vault/relations/Авторство «Мастера и Маргариты» (REL-01J8Z6M4K2Q7V9X3N5B0C1D3B2).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D3B2",
-      "message": "Не рекомендуется: «Автор» обычно связывает другие типы"
-    },
-    {
-      "ruleId": "meta.r15",
-      "level": "error",
-      "file": "examples/vault/automations/create_chapter (AUTO-01J8Z6M4K2Q7V9X3N5B0C1D5A3).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D5A3",
-      "message": "Поле part_of не принадлежит целевому типу автоматизации"
-    },
-    {
-      "ruleId": "meta.r15",
-      "level": "error",
-      "file": "examples/vault/automations/create_chapter (AUTO-01J8Z6M4K2Q7V9X3N5B0C1D5A3).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D5A3",
-      "message": "Поле order не принадлежит целевому типу автоматизации"
     },
     {
       "ruleId": "meta.r13",
@@ -350,6 +189,16 @@
       "warn": 0,
       "info": 0
     },
+    "inherit.r7": {
+      "error": 0,
+      "warn": 0,
+      "info": 0
+    },
+    "inherit.r5": {
+      "error": 0,
+      "warn": 0,
+      "info": 0
+    },
     "naming.r3": {
       "error": 0,
       "warn": 0,
@@ -426,7 +275,7 @@
       "info": 0
     },
     "classif.r2": {
-      "error": 9,
+      "error": 4,
       "warn": 0,
       "info": 0
     },
@@ -456,8 +305,88 @@
       "info": 0
     },
     "contract.r4": {
-      "error": 10,
+      "error": 0,
       "warn": 0,
+      "info": 0
+    },
+    "contract.r5": {
+      "error": 0,
+      "warn": 0,
+      "info": 0
+    },
+    "property.r5": {
+      "error": 0,
+      "warn": 0,
+      "info": 0
+    },
+    "property.r2": {
+      "error": 0,
+      "warn": 0,
+      "info": 0
+    },
+    "property.r1": {
+      "error": 0,
+      "warn": 0,
+      "info": 0
+    },
+    "link.r2": {
+      "error": 0,
+      "warn": 0,
+      "info": 0
+    },
+    "property.r3": {
+      "error": 0,
+      "warn": 0,
+      "info": 0
+    },
+    "media.r5": {
+      "error": 0,
+      "warn": 0,
+      "info": 0
+    },
+    "aspect.r1": {
+      "error": 0,
+      "warn": 0,
+      "info": 0
+    },
+    "sequence.r1": {
+      "error": 0,
+      "warn": 0,
+      "info": 0
+    },
+    "sequence.r2": {
+      "error": 0,
+      "warn": 0,
+      "info": 0
+    },
+    "sequence.r3": {
+      "error": 0,
+      "warn": 0,
+      "info": 0
+    },
+    "sequence.r6": {
+      "error": 0,
+      "warn": 0,
+      "info": 0
+    },
+    "meta.r14": {
+      "error": 0,
+      "warn": 0,
+      "info": 0
+    },
+    "sequence.r4": {
+      "error": 0,
+      "warn": 0,
+      "info": 0
+    },
+    "unique.r1": {
+      "error": 0,
+      "warn": 0,
+      "info": 0
+    },
+    "sequence.r5": {
+      "error": 0,
+      "warn": 2,
       "info": 0
     },
     "relation.r1": {
@@ -466,12 +395,12 @@
       "info": 0
     },
     "relation.r2": {
-      "error": 3,
+      "error": 0,
       "warn": 0,
       "info": 0
     },
     "relation.r3": {
-      "error": 3,
+      "error": 0,
       "warn": 0,
       "info": 0
     },
@@ -497,7 +426,7 @@
     },
     "lifecycle.r2": {
       "error": 0,
-      "warn": 2,
+      "warn": 1,
       "info": 0
     },
     "lifecycle.r4": {
@@ -517,7 +446,7 @@
     },
     "relation.r7": {
       "error": 0,
-      "warn": 1,
+      "warn": 0,
       "info": 0
     },
     "relation.r5": {
@@ -526,7 +455,7 @@
       "info": 0
     },
     "meta.r15": {
-      "error": 2,
+      "error": 0,
       "warn": 0,
       "info": 0
     },

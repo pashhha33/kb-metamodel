@@ -44,7 +44,7 @@ sources: [examples/vault/**, docs/validation/RULES.md, schema/]
 >
 > Хранилище примеров: `examples/vault/` (105 заметок). Схема: 0.14.0 (двухпроходная валидация формы) + межобъектные правила каталога.
 
-**Итог: 32 error, 5 warn, 2 info. Правил, проверенных на примерах: 68 из 114.**
+**Итог: 9 error, 5 warn, 2 info. Правил, проверенных на примерах: 86 из 114.**
 
 ### Диагностика
 
@@ -60,32 +60,9 @@ sources: [examples/vault/**, docs/validation/RULES.md, schema/]
 | error | `classif.r2` | `examples/vault/media/Обложка «Мастера и Маргариты» (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GC).md` | Тип media_asset не входит в applicable_types таксономии «Медиа» |
 | error | `classif.r2` | `examples/vault/media/Портрет Ивана Бездомного (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GF).md` | Тип media_asset не входит в applicable_types таксономии «Медиа» |
 | error | `classif.r2` | `examples/vault/media/Портрет Михаила Булгакова (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GE).md` | Тип media_asset не входит в applicable_types таксономии «Медиа» |
-| error | `classif.r2` | `examples/vault/objects/Мастер и Маргарита (BOOK-01J8Z6M4K2Q7V9X3N5B0C1D2AC).md` | Тип book не входит в applicable_types таксономии «Классификация произведений» |
-| error | `classif.r2` | `examples/vault/objects/Мастер и Маргарита (BOOK-01J8Z6M4K2Q7V9X3N5B0C1D2AC).md` | Тип book не входит в applicable_types таксономии «Классификация произведений» |
-| error | `classif.r2` | `examples/vault/objects/Мастер и Маргарита (рукопись) (BOOK-01J8Z6M4K2Q7V9X3N5B0C1D2G7).md` | Тип book не входит в applicable_types таксономии «Классификация произведений» |
-| error | `classif.r2` | `examples/vault/objects/Михаил Булгаков (PERSON-01J8Z6M4K2Q7V9X3N5B0C1D2EF).md` | Тип person не входит в applicable_types таксономии «Люди и организации» |
-| error | `classif.r2` | `examples/vault/objects/Художественная литература (ORG-01J8Z6M4K2Q7V9X3N5B0C1D2GA).md` | Тип organization не входит в applicable_types таксономии «Люди и организации» |
-| error | `contract.r4` | `examples/vault/objects/Воланд (CHAR-01J8Z6M4K2Q7V9X3N5B0C1D2G9).md` | Неизвестный тип объекта: character |
-| error | `contract.r4` | `examples/vault/objects/Глава 7 (CHAP-01J8Z6M4K2Q7V9X3N5B0C1D5B7).md` | Неизвестный тип объекта: chapter |
-| error | `contract.r4` | `examples/vault/objects/Глава 9 (CHAP-01J8Z6M4K2Q7V9X3N5B0C1D5B9).md` | Неизвестный тип объекта: chapter |
-| error | `contract.r4` | `examples/vault/objects/Иван Бездомный (CHAR-01J8Z6M4K2Q7V9X3N5B0C1D2G8).md` | Неизвестный тип объекта: character |
-| error | `contract.r4` | `examples/vault/objects/Иллюстрации к «Мастеру и Маргарите» (GALLERY-01J8Z6M4K2Q7V9X3N5B0C1D2GB).md` | Неизвестный тип объекта: gallery |
-| error | `contract.r4` | `examples/vault/objects/Мастер и Маргарита (BOOK-01J8Z6M4K2Q7V9X3N5B0C1D2AC).md` | Неизвестный тип объекта: book |
-| error | `contract.r4` | `examples/vault/objects/Мастер и Маргарита (рукопись) (BOOK-01J8Z6M4K2Q7V9X3N5B0C1D2G7).md` | Неизвестный тип объекта: book |
-| error | `contract.r4` | `examples/vault/objects/Михаил Булгаков (PERSON-01J8Z6M4K2Q7V9X3N5B0C1D2EF).md` | Неизвестный тип объекта: person |
-| error | `contract.r4` | `examples/vault/objects/Пролог (CHAP-01J8Z6M4K2Q7V9X3N5B0C1D5B0).md` | Неизвестный тип объекта: chapter |
-| error | `contract.r4` | `examples/vault/objects/Художественная литература (ORG-01J8Z6M4K2Q7V9X3N5B0C1D2GA).md` | Неизвестный тип объекта: organization |
-| error | `relation.r2` | `examples/vault/relations/Авторство «Мастера и Маргариты» (REL-01J8Z6M4K2Q7V9X3N5B0C1D3B2).md` | Субъект типа book недопустим для отношения «Автор» |
-| error | `relation.r3` | `examples/vault/relations/Авторство «Мастера и Маргариты» (REL-01J8Z6M4K2Q7V9X3N5B0C1D3B2).md` | Объект типа person недопустим для отношения «Автор» |
-| error | `relation.r2` | `examples/vault/relations/Воланд — главный герой «Мастера и Маргариты» (REL-01J8Z6M4K2Q7V9X3N5B0C1D3C4).md` | Субъект типа character недопустим для отношения «Воплощает» |
-| error | `relation.r3` | `examples/vault/relations/Воланд — главный герой «Мастера и Маргариты» (REL-01J8Z6M4K2Q7V9X3N5B0C1D3C4).md` | Объект типа book недопустим для отношения «Воплощает» |
-| error | `relation.r2` | `examples/vault/relations/Иван Бездомный — главный герой «Мастера и Маргариты» (REL-01J8Z6M4K2Q7V9X3N5B0C1D3C2).md` | Субъект типа character недопустим для отношения «Воплощает» |
-| error | `relation.r3` | `examples/vault/relations/Иван Бездомный — главный герой «Мастера и Маргариты» (REL-01J8Z6M4K2Q7V9X3N5B0C1D3C2).md` | Объект типа book недопустим для отношения «Воплощает» |
+| warn | `sequence.r5` | `examples/vault/objects/Глава 7 (CHAP-01J8Z6M4K2Q7V9X3N5B0C1D5B7).md` | Между 0 и 70 пропущены значения порядка |
+| warn | `sequence.r5` | `examples/vault/objects/Глава 9 (CHAP-01J8Z6M4K2Q7V9X3N5B0C1D5B9).md` | Между 70 и 90 пропущены значения порядка |
 | warn | `lifecycle.r2` | `examples/vault/objects/Мастер и Маргарита (рукопись) (BOOK-01J8Z6M4K2Q7V9X3N5B0C1D2G7).md` | На архивный объект «Мастер и Маргарита (рукопись)» ссылаются активные: examples/vault/relations/Слияние дубликата «Мастер и Маргарита (рукопись)» (REL-01J8Z6M4K2Q7V9X3N5B0C1D4F1).md |
-| warn | `lifecycle.r2` | `examples/vault/taxonomy/Драматург (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3A8).md` | На архивный объект «Драматург» ссылаются активные: examples/vault/aspects/literary_person (ASPECT-01J8Z6M4K2Q7V9X3N5B0C1D3E1).md |
-| warn | `relation.r7` | `examples/vault/relations/Авторство «Мастера и Маргариты» (REL-01J8Z6M4K2Q7V9X3N5B0C1D3B2).md` | Не рекомендуется: «Автор» обычно связывает другие типы |
-| error | `meta.r15` | `examples/vault/automations/create_chapter (AUTO-01J8Z6M4K2Q7V9X3N5B0C1D5A3).md` | Поле part_of не принадлежит целевому типу автоматизации |
-| error | `meta.r15` | `examples/vault/automations/create_chapter (AUTO-01J8Z6M4K2Q7V9X3N5B0C1D5A3).md` | Поле order не принадлежит целевому типу автоматизации |
 | warn | `meta.r13` | `examples/vault/properties/role (PROP-01J8Z6M4K2Q7V9X3N5B0C1D3C3).md` | Определение свойства «Роль» не используется ни одним типом или аспектом |
 | info | `link.r1` | `examples/vault/taxonomy/Медиа (TAX-01J8Z6M4K2Q7V9X3N5B0C1D3G1).md` | Ссылка «Медиаобёртка (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1000M)» разрешается записью индекса типов ядра, файла в хранилище нет (Q-55) |
 | info | `link.r1` | `examples/vault/taxonomy/Словари значений (TAX-01J8Z6M4K2Q7V9X3N5B0C1D3E8).md` | Ссылка «Отношение (REL-01J8Z6M4K2Q7V9X3N5B0C1000R)» разрешается записью индекса типов ядра, файла в хранилище нет (Q-55) |
@@ -97,14 +74,14 @@ sources: [examples/vault/**, docs/validation/RULES.md, schema/]
 | `alias.r1` | warn | ✅ нарушений нет |
 | `alias.r2` | warn | ✅ нарушений нет |
 | `alias.r3` | error | ✅ нарушений нет |
-| `aspect.r1` | warn | ⬜ не реализовано в песочнице |
+| `aspect.r1` | warn | ✅ нарушений нет |
 | `aspect.r2` | error | ⬜ не реализовано в песочнице |
 | `aspect.r3` | error | ✅ нарушений нет |
 | `aspect.r4` | error | ✅ нарушений нет |
 | `aspect.r5` | warn | ⬜ не реализовано в песочнице |
 | `aspect.r6` | info | ✅ нарушений нет |
 | `classif.r1` | error | ✅ нарушений нет |
-| `classif.r2` | error | ❌ error: 9 |
+| `classif.r2` | error | ❌ error: 4 |
 | `classif.r3` | error | ✅ нарушений нет |
 | `classif.r4` | error | ✅ нарушений нет |
 | `classif.r5` | error | ✅ нарушений нет |
@@ -118,8 +95,8 @@ sources: [examples/vault/**, docs/validation/RULES.md, schema/]
 | `contract.r1` | error | ⬜ не реализовано в песочнице |
 | `contract.r2` | error | ⬜ не реализовано в песочнице |
 | `contract.r3` | error | ✅ нарушений нет |
-| `contract.r4` | error | ❌ error: 10 |
-| `contract.r5` | error | ⬜ не реализовано в песочнице |
+| `contract.r4` | error | ✅ нарушений нет |
+| `contract.r5` | error | ✅ нарушений нет |
 | `contract.r6` | error | ⬜ не реализовано в песочнице |
 | `contract.r7` | error | ⬜ не реализовано в песочнице |
 | `contract.r8` | error | ⬜ не реализовано в песочнице |
@@ -134,16 +111,16 @@ sources: [examples/vault/**, docs/validation/RULES.md, schema/]
 | `inherit.r2` | error | ⬜ не реализовано в песочнице |
 | `inherit.r3` | error | ⬜ не реализовано в песочнице |
 | `inherit.r4` | error | ⬜ не реализовано в песочнице |
-| `inherit.r5` | error | ⬜ не реализовано в песочнице |
+| `inherit.r5` | error | ✅ нарушений нет |
 | `inherit.r6` | error | ✅ нарушений нет |
-| `inherit.r7` | warn | ⬜ не реализовано в песочнице |
+| `inherit.r7` | warn | ✅ нарушений нет |
 | `lifecycle.r1` | error | ✅ нарушений нет |
-| `lifecycle.r2` | warn | ⚠️ warn: 2 |
+| `lifecycle.r2` | warn | ⚠️ warn: 1 |
 | `lifecycle.r3` | error | ✅ нарушений нет |
 | `lifecycle.r4` | warn | ✅ нарушений нет |
 | `lifecycle.r5` | info | ✅ нарушений нет |
 | `link.r1` | error | ℹ️ info: 2 |
-| `link.r2` | error | ⬜ не реализовано в песочнице |
+| `link.r2` | error | ✅ нарушений нет |
 | `link.r3` | error | ✅ нарушений нет |
 | `link.r4` | error | ✅ нарушений нет |
 | `link.r5` | warn | ✅ нарушений нет |
@@ -152,7 +129,7 @@ sources: [examples/vault/**, docs/validation/RULES.md, schema/]
 | `media.r2` | error | ✅ нарушений нет |
 | `media.r3` | error | ✅ нарушений нет |
 | `media.r4` | warn | ✅ нарушений нет |
-| `media.r5` | warn | ⬜ не реализовано в песочнице |
+| `media.r5` | warn | ✅ нарушений нет |
 | `media.r6` | warn | ✅ нарушений нет |
 | `media.r7` | warn | ✅ нарушений нет |
 | `media.r8` | info | ✅ нарушений нет |
@@ -170,8 +147,8 @@ sources: [examples/vault/**, docs/validation/RULES.md, schema/]
 | `meta.r11` | warn | ✅ нарушений нет |
 | `meta.r12` | error | ✅ нарушений нет |
 | `meta.r13` | warn | ⚠️ warn: 1 |
-| `meta.r14` | error | ⬜ не реализовано в песочнице |
-| `meta.r15` | error | ❌ error: 2 |
+| `meta.r14` | error | ✅ нарушений нет |
+| `meta.r15` | error | ✅ нарушений нет |
 | `naming.r1` | error | ⬜ не реализовано в песочнице |
 | `naming.r2` | error | ⬜ не реализовано в песочнице |
 | `naming.r3` | error | ✅ нарушений нет |
@@ -183,28 +160,28 @@ sources: [examples/vault/**, docs/validation/RULES.md, schema/]
 | `naming.r9` | error | ✅ нарушений нет |
 | `naming.r10` | error | ✅ нарушений нет |
 | `naming.r11` | error | ✅ нарушений нет |
-| `property.r1` | error | ⬜ не реализовано в песочнице |
-| `property.r2` | error | ⬜ не реализовано в песочнице |
-| `property.r3` | error | ⬜ не реализовано в песочнице |
+| `property.r1` | error | ✅ нарушений нет |
+| `property.r2` | error | ✅ нарушений нет |
+| `property.r3` | error | ✅ нарушений нет |
 | `property.r4` | error | ⬜ не реализовано в песочнице |
-| `property.r5` | error | ⬜ не реализовано в песочнице |
+| `property.r5` | error | ✅ нарушений нет |
 | `property.r6` | warn | ⬜ не реализовано в песочнице |
 | `property.r7` | error | ⬜ не реализовано в песочнице |
 | `relation.r1` | error | ✅ нарушений нет |
-| `relation.r2` | error | ❌ error: 3 |
-| `relation.r3` | error | ❌ error: 3 |
+| `relation.r2` | error | ✅ нарушений нет |
+| `relation.r3` | error | ✅ нарушений нет |
 | `relation.r4` | error | ✅ нарушений нет |
 | `relation.r5` | error | ✅ нарушений нет |
 | `relation.r6` | error | ✅ нарушений нет |
-| `relation.r7` | warn | ⚠️ warn: 1 |
+| `relation.r7` | warn | ✅ нарушений нет |
 | `relation.r8` | warn | ⬜ не реализовано в песочнице |
-| `sequence.r1` | error | ⬜ не реализовано в песочнице |
-| `sequence.r2` | error | ⬜ не реализовано в песочнице |
-| `sequence.r3` | error | ⬜ не реализовано в песочнице |
-| `sequence.r4` | error | ⬜ не реализовано в песочнице |
-| `sequence.r5` | warn | ⬜ не реализовано в песочнице |
-| `sequence.r6` | error | ⬜ не реализовано в песочнице |
-| `unique.r1` | error | ⬜ не реализовано в песочнице |
+| `sequence.r1` | error | ✅ нарушений нет |
+| `sequence.r2` | error | ✅ нарушений нет |
+| `sequence.r3` | error | ✅ нарушений нет |
+| `sequence.r4` | error | ✅ нарушений нет |
+| `sequence.r5` | warn | ⚠️ warn: 2 |
+| `sequence.r6` | error | ✅ нарушений нет |
+| `unique.r1` | error | ✅ нарушений нет |
 | `unique.r2` | error | ✅ нарушений нет |
 | `view.r1` | error | ✅ нарушений нет |
 | `view.r2` | warn | ✅ нарушений нет |
