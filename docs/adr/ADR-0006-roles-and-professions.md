@@ -91,7 +91,7 @@ type: category
 title: Писатель
 label: Писатель
 facet: "[[Профессия (FACET-01J8Z6…)|Профессия]]"
-parent: []
+parent: null                     # корневая категория: null либо отсутствие поля (F-3.11)
 ---
 ```
 
@@ -136,8 +136,8 @@ relation_type: "[[Автор (RTYPE-01J8Z6…)|Автор]]"
 object: "[[Михаил Булгаков (PERSON-01J8Z6…)|Михаил Булгаков]]"
 order: 1
 is_primary: true
-valid_from: 1928
-valid_to: 1940
+valid_from: "1928-01-01"     # канон — YYYY-MM-DD (F-3.5), дата закавыченной строкой (D-0065)
+valid_to: "1940-12-31"
 ---
 ```
 
@@ -219,8 +219,8 @@ subject: "[[Михаил Булгаков (PERSON-01J8Z6…)|Михаил Бул
 relation_type: "[[Состоит в (RTYPE-01J8Z6…)|Состоит в]]"
 object: "[[Гудок (ORG-01J8Z6…)|Гудок]]"
 position: "[[Редактор (CAT-01J8Z6…)|Редактор]]"
-valid_from: 1921
-valid_to: 1926
+valid_from: "1921-01-01"
+valid_to: "1926-12-31"
 ---
 ```
 

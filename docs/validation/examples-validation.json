@@ -4,19 +4,12 @@
   "objects": 105,
   "summary": {
     "error": 0,
-    "warn": 5,
+    "warn": 4,
     "info": 0,
     "rules_exercised": 85,
     "rules_total": 114
   },
   "diagnostics": [
-    {
-      "ruleId": "classif.r7",
-      "level": "warn",
-      "file": "examples/vault/taxonomy/Поэт (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3A7).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D3A7",
-      "message": "Категория «Поэт» без дочерних и без назначений — возможно, мёртвая"
-    },
     {
       "ruleId": "sequence.r5",
       "level": "warn",
@@ -174,7 +167,7 @@
     },
     "classif.r7": {
       "error": 0,
-      "warn": 1,
+      "warn": 0,
       "info": 0
     },
     "classif.r10": {

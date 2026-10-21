@@ -1,7 +1,7 @@
 ---
 doc: changelog
 status: actual
-version: 0.13.0
+version: 0.14.0
 updated: 2026-10-21
 ---
 
@@ -15,8 +15,136 @@ updated: 2026-10-21
 
 ## [Unreleased]
 
-Пусто. Следующий шаг — **3b**: канонические примеры заметок в `examples/` и редакционные правки
-примеров в ADR (F-3.1, F-3.5, F-3.9, F-3.11, F-3.13, F-3.14).
+Пусто. Следующий шаг — **3c**: описания 12 системных типов M1 по `ENTITY_TEMPLATE` (пачками по 3–4).
+В фазе 3c решаются: судьба `PropertyType` в ядре (D-0066), норма `Property.applies_to`
+(допущение A-7, F-3.23), распространение `layer` на определения M1 (F-3.3).
+
+---
+
+## [0.14.0] - 2026-10-21
+
+**Версия метамодели:** 0.14.0 · **Стадия:** review
+**Причина выпуска:** завершён шаг 3b — построено каноническое хранилище примеров `examples/vault/`
+(105 заметок, все шесть сценариев) и межобъектный чекер; постройка вскрыла шесть находок
+(F-3.20…F-3.25, одна снята как неподтверждённая) и один вопрос пользователю (Q-55). Норма записи
+системных типов принята (D-0067), фрагмент `media_asset` и запись пустых полей исправлены (D-0068),
+режим предупреждений канона установлен (D-0069). Схема перевыпущена как 0.14.0, артефакты 0.13.0
+сохранены. Выполнены редакционные правки примеров ADR, запланированные фазой 3b.
+**Связанные решения:** D-0067, D-0068, D-0069 · **ADR:** нет (изменения уточняют и закрепляют
+уже принятые решения ADR-0005, ADR-0006, ADR-0008, ADR-0011; новых механизмов нет)
+
+### Added
+- **Каноническое хранилище примеров `examples/vault/` — 105 заметок + 4 медиафайла-заглушки.**
+  Все шесть сценариев фазы 3b: книга с главами и обложкой («Мастер и Маргарита»: Пролог, Глава 7,
+  Глава 9; обложка-обёртка с активным аспектом `ai_generated_media`), человек с двумя профессиями
+  и аспектами (Михаил Булгаков: `cat_profession` [Романист, Врач], аспект `literary_person`),
+  проект с задачами, организация с типом (`org_type`), галерея иллюстраций, отношение с периодом
+  (`valid_from`/`valid_to`) и слияние архивного дубликата. Хранилище **производное**: генерируется
+  `tools/examples/generate.cjs` из реестров `tools/examples/data-*.cjs` и `vault-data.cjs`;
+  ручные правки заметок запрещены. Прогон: **0 error / 4 warn / 0 info**, все четыре warn —
+  намеренные демонстрации правил (`sequence.r5` ×2, `lifecycle.r2`, `meta.r13`), объяснены в телах
+  заметок (D-0069).
+- **Межобъектный чекер `tools/examples/check.cjs`** — песочница фазы 3b, не код плагина:
+  двухпроходная валидация формы (нормативный алгоритм F-3.17) + межобъектные правила каталога
+  (разрешение ссылок и каноническая форма, уникальность, наследование и эффективный набор свойств,
+  активация аспектов, классификация, последовательности, область уникальности, медиа, жизненный
+  цикл, имена файлов). На примерах exercised **85 из 114 правил**; результат — производный отчёт
+  `docs/validation/EXAMPLES_VALIDATION_RUN.md` + `examples-validation.json`.
+- `examples/vault-manifest.json` — производный реестр хранилища (вход чекера): ключ, ULID, тип,
+  префикс, `typeId` определений `object_type` (индекс типов), путь к файлу.
+- `schema/0.14.0/**` (17 файлов): `formats.json#/$defs/system_type_name` (enum `category`,
+  `media_asset`, `relation` — D-0067); `Aspect.layer` (F-3.20); `Property.applies_to`
+  (допущение A-7, F-3.23); условие `meta.r3` — строгое `target_types: [category]`;
+  `media_asset` с открытым словарём аспектных полей (D-0068). Точка входа
+  `schema/metamodel-0.14.0.schema.json` с `x-previous-schema` на 0.13.0.
+- Контрольный пример `n15_aspect_bad_layer` (итого **33 примера**, 33 из 33 прошли).
+- `SCHEMA_VALIDATION_REPORT.md` §2.2 — находки волны 0.14.0 (F-3.20…F-3.25); §3 — допущение A-7;
+  §5 — Q-55 (закрыт D-0067).
+- `package.json`: скрипты `examples:generate`, `examples:check`, `examples:all`;
+  `test` = `schema:all` + `examples:all`; версия пакета 0.14.0. **`package-lock.json` закоммичен**:
+  производные файлы (`src/generated/**`, `schema/dist/**`) обязаны пересобираться детерминированно.
+
+### Changed
+- **Норма записи системных типов (D-0067, Q-55 = A).** В `Taxonomy.applicable_types` и
+  `Property.target_types` ссылка на `ObjectType` записывается wikilink-ссылкой в канонической
+  форме (ADR-0002 §4); системный тип M1 (`relation`, `media_asset`, `category`) — **голой строкой
+  snake_case**: у системных типов нет определения `ObjectType` и файла-цели. Запись согласована
+  с полем `type` экземпляра (ADR-0005). `NAME_MAPPING.md` §7.1 → 0.12.0 (норма + унификация
+  обозначений), `RULES.md` `meta.r5` → 0.14.0.
+- `target_types` медиа-свойств стал точным: `[media_asset]` у `cover`, `portrait`, `logo`,
+  `illustrations`, `source_image`; `[category]` у `role` — вместо пустого списка «любой тип».
+- `m1/media_asset.json`: `unevaluatedProperties: true` (D-0068) — состав полей экземпляра
+  системного типа определяют аспекты-данные (`prompt`, `model`, `seed`); эффективный набор
+  проверяется межобъектно. Закрытый словарь (A-2) сохранён для определений M1.
+- Пустое необязательное поле опускается, а не записывается как `null` (F-3.25): `source_url`
+  канонических обёрток.
+- Покрытие каталога схемой: **29 из 114** (+`meta.r3` — строгое условие покрыло правило),
+  только валидатор: 85.
+- `RULES.md` §17: восстановлены отсутствовавшие строки истории 0.12.0 и 0.13.0
+  (пробел полноты реестра, предсуществовавший волне).
+- `tools/examples/check.cjs`: `classif.r7` учитывает категории из `Aspect.trigger_categories`
+  как используемые (D-0069); `link.r1` учитывается в exercised при успешном разрешении.
+- **Редакционные правки примеров ADR (обязательство фазы 3b, отдельные коммиты):**
+  F-3.9 — ADR-0003: кардинальность `0..n`/`1..n` (3 места); F-3.5 — ADR-0006 и RULES §6:
+  интервалы в `YYYY-MM-DD` закавыченной строкой (D-0065); F-3.11 — ADR-0006 §3.1: `parent: null`;
+  F-3.13 — `03_chapter_scenario` §3.4: `sys:title` вместо wikilink-записи sys-поля.
+  F-3.14 (28-символьные «ULID») и правки `title` фасетов (F-3.1/D-0063) закрыты ранее при
+  постройке хранилища — проверено программно: все идентификаторы в ADR ровно 26 символов
+  и согласованы с идентификаторами `examples/vault/`.
+
+### Deprecated
+- `PropertyType`: без изменений — сохраняется в ядре с рекомендуемым `lifecycle: deprecated`,
+  решение об исключении отложено в фазу 3c (D-0066).
+
+### Removed
+- Промежуточный механизм **виртуальных записей индекса типов** (фабрикации псевдо-ULID
+  `…C1000M`/`…C1000R`/`…C1000C` для ссылок на системные типы, находка F-3.21) — отменён
+  решением D-0067 до выпуска; в каноническом хранилище не использовался ни дня.
+- Более ничего: артефакты 0.12.0 и 0.13.0 сохранены (точки входа помечены `x-superseded-by`).
+
+### Fixed
+- **F-3.20** (пример ADR-0008 §3.1 с `layer: system` отклонялся схемой) — поле объявлено
+  во фрагменте аспекта.
+- **F-3.21** (не определена форма ссылки на системные типы; условие `meta.r3` отклоняло канон) —
+  закрыта D-0067.
+- **F-3.22** — **снята как неподтверждённая**: ADR-0009 §5 формулирует `lifecycle.r1` так же,
+  как RULES.md §12 (цель связи замены не архивная); ошибка была в тексте примера отношения —
+  исправлен (`data-relations.cjs`), шаги процедуры слияния в тексте уточнены (4–6).
+- **F-3.24** (`media_asset` отклонял поля активного аспекта), **F-3.25** (`source_url: null`) —
+  закрыты D-0068.
+- Манифест примеров терял `typeId` записей `object_type` — чекер падал с «Индекс типов пуст»;
+  проекция манифеста исправлена.
+
+### Migrations
+- Требуется: нет (данных в хранилище пользователя нет).
+- Накопленный список миграций прежний (пять позиций), все отложены до после-MVP.
+
+### Артефакты выпуска
+- `schema/metamodel-0.14.0.schema.json`, `schema/0.14.0/**` (new, 17 файлов)
+- `schema/dist/metamodel-0.14.0.bundle.json`, `src/generated/metamodel-0.14.0.types.ts` (производные)
+- `schema/metamodel-0.13.0.schema.json` (updated: superseded)
+- `examples/vault/**` (new, 105 заметок + 4 заглушки), `examples/vault-manifest.json` (new)
+- `tools/examples/**` (new: generate, check, 9 реестров данных)
+- `tools/fixtures/invalid/n15_aspect_bad_layer.md` (new, 33 примера)
+- `docs/metamodel/NAME_MAPPING.md` → 0.12.0; `docs/metamodel/03_chapter_scenario.md` (updated)
+- `docs/validation/RULES.md` → 0.14.0 (meta.r5, §6, §17); `RULES_COVERAGE.md`,
+  `SCHEMA_VALIDATION_RUN.md`, `EXAMPLES_VALIDATION_RUN.md` (updated/new)
+- `docs/validation/SCHEMA_VALIDATION_REPORT.md` → 0.14.0 (§2.2, A-7, Q-55)
+- `docs/adr/ADR-0003`, `ADR-0006` (updated: редакционные правки примеров)
+- `docs/decisions/DECISION_LOG.md` (updated: D-0067…D-0069)
+- `package.json` (0.14.0, скрипты examples:*), `package-lock.json` (new)
+
+### Сообщение коммита
+```
+feat(metamodel): canonical examples vault and system-type notation (0.14.0)
+
+- examples/vault: 105 generated notes, six scenarios; run is green (0 errors, 4 intentional warns)
+- tools/examples: deterministic generator + cross-object checker (85 of 114 rules exercised)
+- system types in applicable_types/target_types are bare snake_case strings (D-0067)
+- media_asset fragment opens unevaluated properties for aspect fields; empty optional fields are omitted (D-0068)
+- schema 0.14.0: Aspect.layer, Property.applies_to (A-7), strict meta.r3; 0.13.0 kept as superseded
+- fixtures: 33 examples, all pass; ADR examples fixed (F-3.5, F-3.9, F-3.11, F-3.13)
+```
 
 ---
 

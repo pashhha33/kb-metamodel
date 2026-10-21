@@ -545,11 +545,22 @@ function main(objects, idx, manifest) {
   if (![...exercised.keys()].includes('classif.r9')) pass('classif.r9');
 
   // мёртвые категории
+  // D-0069 (Q-57b = A): категории-триггеры аспектов считаются используемыми — classif.r7 ищет
+  // категории без какого-либо назначения, а триггер активирует свойства аспекта (ADR-0008 §3.1),
+  // то есть роль у категории есть. Текст правила в каталоге не меняется: уточнение интерпретации
+  // эвристики уровня warn.
+  const triggerCategoryIds = new Set();
+  for (const a of aspects) {
+    for (const ref of a.fm.trigger_categories || []) {
+      const t = resolveLink(a, ref, 'aspect.r3');
+      if (t) triggerCategoryIds.add(t.id);
+    }
+  }
   for (const [id, c] of idx.categories) {
     const facet = resolveLink(c, c.fm.facet, 'classif.r1');
     if (facet && isDictionaryFacet(facet)) continue; // словарь значений не является осью назначения (D-0064)
     const hasChildren = (childrenOf.get(id) || []).length > 0;
-    const used = assignedCategories.has(id) || isUsedAsRole(id);
+    const used = assignedCategories.has(id) || isUsedAsRole(id) || triggerCategoryIds.has(id);
     if (!hasChildren && !used && c.fm.status !== 'archived') {
       diag('classif.r7', 'warn', c, 'Категория «' + c.title + '» без дочерних и без назначений — возможно, мёртвая');
     }

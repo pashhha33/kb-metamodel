@@ -171,7 +171,7 @@ target_types:
 form_fields:                       # ← необязательное сужение и порядок
   - "[[part_of (PROP-01J8Z6…)|Часть произведения]]"
   - "[[order (PROP-01J8Z6…)|Порядковый номер]]"
-  - "[[title (sys)|Имя главы]]"
+  - sys:title                      # ← поле системного контракта: адресация sys:, не wikilink (ADR-0010 §3.3, NAME_MAPPING §7.2; F-3.13)
 defaults:
   order: "{next_sequence}"
 is_active: true
