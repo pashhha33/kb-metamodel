@@ -44,26 +44,27 @@ const TAXONOMIES = [
     key: 'tax_media',
     title: 'Медиа',
     label: 'Медиа',
-    applicable_types: ['coretype_media_asset'],
+    applicable_types: ['media_asset'],
     hierarchy_mode: 'strict',
     assignment_cardinality: '0..n',
     root_requirement: 'multiple',
     description:
       'Оси классификации медиаобёрток. В MVP одна ось — метод создания (ADR-0011 §3.3, требование T9). ' +
-      'Тип media_asset является системным: ссылки на него в `applicable_types` разбираются по реестру типов ядра ' +
-      '(находка F-3.21).',
+      'Тип `media_asset` — системный: в `applicable_types` записывается голой строкой snake_case, ' +
+      'а не wikilink-ссылкой, поскольку определения ObjectType у него нет (D-0067).',
   },
   {
     key: 'tax_dictionaries',
     title: 'Словари значений',
     label: 'Словари значений',
-    applicable_types: ['coretype_relation'],
+    applicable_types: ['relation'],
     hierarchy_mode: 'strict',
     root_requirement: 'multiple',
     description:
       'Таксономия-словарь (D-0064): её категории не назначаются объектам в поля `cat_*`, а используются как ' +
-      'значения свойств — например, `Relation.role`. `applicable_types` содержит ровно один элемент, тип `relation`, ' +
-      'поэтому правило meta.r5 (список непуст и разрешим) не ослабляется, а поле `cat_char_role` не создаётся.',
+      'значения свойств — например, `Relation.role`. `applicable_types` содержит ровно один элемент, тип `relation` ' +
+      '(голое имя системного типа, D-0067), поэтому правило meta.r5 (список непуст и разрешим) не ослабляется, ' +
+      'а поле `cat_char_role` не создаётся.',
     shows: [
       'словарь отделён от осей назначения: у таксономии свой набор применимых типов',
       '`assignment_cardinality` у фасета-словаря описывает кардинальность свойства, а не поля назначений (NAME_MAPPING §7.1 п.4)',

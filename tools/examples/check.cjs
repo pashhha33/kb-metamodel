@@ -176,7 +176,6 @@ function buildIndexes(objects, manifest) {
   const categories = new Map(); // category id -> obj
   const aspects = [];
   const relationTypes = new Map(); // relation_type id -> obj
-  const virtual = new Map(); // id -> запись индекса типов
 
   for (const o of objects) {
     if (!o.id) continue;
@@ -198,11 +197,7 @@ function buildIndexes(objects, manifest) {
     if (o.type === 'relation_type') relationTypes.set(o.id, o);
   }
 
-  for (const entry of manifest.objects.filter((m) => m.virtual)) {
-    virtual.set(entry.id, entry);
-  }
-
-  return { byId, byStable, properties, facets, categories, aspects, relationTypes, virtual };
+  return { byId, byStable, properties, facets, categories, aspects, relationTypes };
 }
 
 /** Идентификатор типа (snake_case) для определения ObjectType: берётся из соответствия префиксу. */
@@ -277,7 +272,7 @@ function main(objects, idx, manifest) {
   const version = findActiveVersion();
   const catalog = loadCatalog();
   const validators = buildValidators(version);
-  const { properties, facets, categories, aspects, relationTypes, virtual, byId, byStable } = idx;
+  const { properties, facets, categories, aspects, relationTypes, byId, byStable } = idx;
 
   // ── 1. Форма объекта (двухпроходная валидация) ─────────────────────
   for (const o of objects) validateShape(o, validators);
@@ -449,8 +444,9 @@ function main(objects, idx, manifest) {
       if (!Array.isArray(p.fm.target_types)) diag('meta.r2', 'error', p, 'Свойство ' + key + ' со значением reference без target_types');
       else pass('meta.r2');
       for (const ref of p.fm.target_types || []) {
+        if (isSystemTypeName(ref)) continue; // D-0067: системный тип — голая строка snake_case
         const t = resolveLink(p, ref, 'link.r1');
-        if (t && t.type !== 'object_type' && !isVirtual(t)) {
+        if (t && t.type !== 'object_type') {
           diag('link.r2', 'error', p, 'Цель target_types не является определением типа: ' + t.rel);
         }
       }
@@ -610,9 +606,10 @@ function main(objects, idx, manifest) {
     } else {
       pass('meta.r5');
       for (const ref of o.fm.applicable_types) {
+        if (isSystemTypeName(ref)) continue; // D-0067: системный тип — голая строка snake_case
         const t = resolveLink(o, ref, 'meta.r5');
         if (!t) continue;
-        if (!isVirtual(t) && t.type !== 'object_type') {
+        if (t.type !== 'object_type') {
           diag('meta.r5', 'error', o, 'applicable_types содержит ссылку не на тип: ' + t.rel);
         }
       }
@@ -1110,12 +1107,7 @@ function main(objects, idx, manifest) {
       }
       const list = idx.byStable.get(l.prefix + '-' + l.id);
       if (!list || list.length === 0) {
-        const virt = idx.virtual.get(l.id);
-        if (virt) {
-          diag('link.r1', 'info', o, 'Ссылка «' + l.target + '» разрешается записью индекса типов ядра, файла в хранилище нет (Q-55)');
-        } else {
-          diag('link.r1', 'error', o, 'Ссылка ведёт на несуществующий объект: ' + l.raw);
-        }
+        diag('link.r1', 'error', o, 'Ссылка ведёт на несуществующий объект: ' + l.raw);
         continue;
       }
       if (list.length > 1) {
@@ -1124,6 +1116,7 @@ function main(objects, idx, manifest) {
       }
       pass('link.r6');
       pass('link.r4');
+      pass('link.r1'); // цель существует и однозначна — правило проверено (учёт exercised)
       const target = list[0];
       const expectedPrefix = prefixOfObject(target);
       if (l.prefix !== expectedPrefix) {
@@ -1202,18 +1195,14 @@ function resolveLink(from, value, ruleId) {
   if (!id) return null;
   const list = CURRENT.byId.get(id);
   if (list && list.length) return list[0];
-  const virt = CURRENT.virtual.get(id);
-  if (virt) {
-    return {
-      id, type: virt.type, title: virt.display, prefixForVirtual: virt.prefix,
-      fm: { id, type: virt.type, title: virt.display }, rel: '(запись индекса типов)', virtual: true,
-    };
-  }
   return null;
 }
 
-function isVirtual(o) {
-  return Boolean(o && o.virtual);
+/** Системные типы M1, записываемые в applicable_types/target_types голой строкой snake_case (D-0067). */
+const SYSTEM_TYPE_NAMES = new Set(['category', 'media_asset', 'relation']);
+
+function isSystemTypeName(v) {
+  return typeof v === 'string' && SYSTEM_TYPE_NAMES.has(v);
 }
 
 function cardinalityOk(card, value) {
@@ -1245,9 +1234,10 @@ function normalizeDate(v) {
 }
 
 function typeInList(obj, refs, typeIndex) {
+  // D-0067: системный тип в списке — голая строка snake_case, совпадает с type объекта.
+  if (refs.some((r) => isSystemTypeName(r) && r === obj.type)) return true;
   const targets = refs.map((r) => ({ id: linkStable(r), raw: r })).filter((t) => t.id);
   if (targets.some((t) => t.id === obj.id)) return true;
-  if (obj.virtual && targets.some((t) => t.raw.includes('(' + obj.prefixForVirtual + '-' + obj.id + ')'))) return true;
   let def = obj.type === 'object_type' ? obj : typeIndex.get(obj.type);
   let guard = 0;
   while (def && guard < 20) {
@@ -1262,10 +1252,8 @@ function typeInList(obj, refs, typeIndex) {
 function isDictionaryFacet(facet) {
   const tax = resolveLink(facet, facet.fm.taxonomy, 'meta.r6');
   if (!tax || !Array.isArray(tax.fm.applicable_types)) return false;
-  return tax.fm.applicable_types.some((r) => {
-    const t = resolveLink(tax, r, 'meta.r5');
-    return t && isVirtual(t) && t.type === 'relation';
-  });
+  // D-0064 + D-0067: словарь — таксономия с голым именем relation в applicable_types.
+  return tax.fm.applicable_types.some((r) => r === 'relation');
 }
 
 function isUsedAsRole(categoryId) {

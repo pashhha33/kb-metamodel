@@ -34,7 +34,7 @@ const { PROPERTIES_1 } = require('./data-properties-1.cjs');
 const { PROPERTIES_2, PROPERTY_TYPES } = require('./data-properties-2.cjs');
 const { RELATION_TYPES, RELATIONS } = require('./data-relations.cjs');
 const { TAXONOMIES, FACETS, CATEGORIES } = require('./data-classification.cjs');
-const { CORE_TYPE_REFS, ASPECTS, VIEWS, AUTOMATIONS } = require('./data-m1-extra.cjs');
+const { ASPECTS, VIEWS, AUTOMATIONS } = require('./data-m1-extra.cjs');
 const { INSTANCES } = require('./data-instances.cjs');
 const { MEDIA_ASSETS } = require('./data-media.cjs');
 
@@ -58,8 +58,8 @@ const BY_KEY = new Map();
 
 function register(rec) {
   if (BY_KEY.has(rec.key)) throw new Error('Дублирующийся ключ объекта примера: ' + rec.key);
-  if (!ID[rec.key] && !rec.virtualId) throw new Error('Для ключа ' + rec.key + ' нет идентификатора в vault-data.cjs');
-  rec.id = rec.virtualId || ID[rec.key];
+  if (!ID[rec.key]) throw new Error('Для ключа ' + rec.key + ' нет идентификатора в vault-data.cjs');
+  rec.id = ID[rec.key];
   if (!CROCKFORD.test(rec.id)) {
     throw new Error('Идентификатор ' + rec.key + ' не ULID: ' + rec.id + ' (длина ' + rec.id.length + ')');
   }
@@ -97,8 +97,13 @@ function quoted(value) {
   return value === null || value === undefined ? null : q(String(value));
 }
 
+/** Системные типы M1 в applicable_types/target_types — голая строка snake_case, не ссылка (D-0067). */
+const SYSTEM_TYPE_NAMES = new Set(['category', 'media_asset', 'relation']);
+
 function linkList(keys, aliases) {
-  return keys.map((k, i) => link(k, aliases ? aliases[i] : undefined));
+  return keys.map((k, i) =>
+    SYSTEM_TYPE_NAMES.has(k) ? k : link(k, aliases ? aliases[i] : undefined)
+  );
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -332,18 +337,6 @@ for (const m of MEDIA_ASSETS) {
       data: m,
     })
   );
-}
-
-for (const c of CORE_TYPE_REFS) {
-  records.push(register({
-    kind: 'core_type_ref',
-    key: c.key,
-    type: c.systemType,
-    display: c.title,
-    prefix: c.prefix,
-    virtualId: c.id,
-    note: c.note,
-  }));
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -615,7 +608,9 @@ function fmMediaAsset(rec, stamp) {
     ['galleries', linkList(d.galleries || [])],
   ];
   if (d.cat_creation_method) fm.push(['cat_creation_method', linkList(d.cat_creation_method)]);
-  if ('source_url' in d) fm.push(['source_url', d.source_url === null ? null : d.source_url]);
+  // F-3.25 (D-0068): пустое необязательное поле опускается, а не записывается как null —
+  // норма 0..1 в канонической форме означает отсутствие поля.
+  if (typeof d.source_url === 'string' && d.source_url !== '') fm.push(['source_url', d.source_url]);
   if (d.author) fm.push(['author', link(d.author)]);
   if (d.license) fm.push(['license', d.license]);
   for (const [k, v] of Object.entries(d.fields || {})) fm.push([k, v]);
@@ -759,19 +754,6 @@ function main() {
   const manifest = [];
   let minute = 0;
   for (const rec of records) {
-    if (rec.kind === 'core_type_ref') {
-      manifest.push({
-        key: rec.key,
-        id: rec.id,
-        type: rec.type,
-        prefix: prefixOf(rec),
-        display: rec.display,
-        file: null,
-        virtual: true,
-        note: rec.note,
-      });
-      continue;
-    }
     const stamp = {
       created: '2026-10-21T' + String(9 + Math.floor(minute / 60)).padStart(2, '0') + ':' + String(minute % 60).padStart(2, '0') + ':00+03:00',
       updated: '2026-10-21T18:00:00+03:00',
@@ -801,7 +783,6 @@ function main() {
       prefix: prefixOf(rec),
       display: rec.display,
       file: 'examples/vault/' + rel.split(path.sep).join('/'),
-      virtual: false,
       kind: rec.kind,
     };
     // typeId — идентификатор предметного типа (snake_case) для записей kind: object_type;
@@ -816,7 +797,7 @@ function main() {
       {
         generated_by: 'tools/examples/generate.cjs',
         schema_version: SCHEMA_VERSION,
-        note: 'Производный реестр канонического хранилища примеров. virtual: true — запись индекса типов, у которой нет файла (Q-55, находка F-3.21).',
+        note: 'Производный реестр канонического хранилища примеров — вход tools/examples/check.cjs. Системные типы записываются голой строкой snake_case (D-0067); виртуальные записи индекса типов отменены.',
         objects: manifest,
       },
       null,
@@ -826,10 +807,9 @@ function main() {
   );
 
   const byKind = {};
-  for (const m of manifest) byKind[m.kind || 'core_type_ref'] = (byKind[m.kind || 'core_type_ref'] || 0) + 1;
-  console.log('[ok] канонических примеров: ' + manifest.filter((m) => !m.virtual).length + ' в examples/vault/');
+  for (const m of manifest) byKind[m.kind] = (byKind[m.kind] || 0) + 1;
+  console.log('[ok] канонических примеров: ' + manifest.length + ' в examples/vault/');
   console.log('[info] состав: ' + Object.entries(byKind).map(([k, v]) => k + ' ' + v).join(', '));
-  console.log('[info] записей индекса типов без файла: ' + manifest.filter((m) => m.virtual).length);
   console.log('[info] схема: ' + SCHEMA_VERSION + ', реестр: examples/vault-manifest.json');
 }
 

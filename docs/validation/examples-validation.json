@@ -3,82 +3,19 @@
   "schema_version": "0.14.0",
   "objects": 105,
   "summary": {
-    "error": 9,
+    "error": 0,
     "warn": 5,
-    "info": 2,
-    "rules_exercised": 86,
+    "info": 0,
+    "rules_exercised": 85,
     "rules_total": 114
   },
   "diagnostics": [
-    {
-      "ruleId": "schema.form",
-      "level": "error",
-      "file": "examples/vault/media/Обложка «Мастера и Маргариты» (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GC).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D2GC",
-      "message": "/source_url must be string"
-    },
-    {
-      "ruleId": "schema.form",
-      "level": "error",
-      "file": "examples/vault/media/Обложка «Мастера и Маргариты» (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GC).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D2GC",
-      "message": "(корень) must NOT have unevaluated properties"
-    },
-    {
-      "ruleId": "schema.form",
-      "level": "error",
-      "file": "examples/vault/media/Обложка «Мастера и Маргариты» (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GC).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D2GC",
-      "message": "(корень) must NOT have unevaluated properties"
-    },
-    {
-      "ruleId": "schema.form",
-      "level": "error",
-      "file": "examples/vault/media/Обложка «Мастера и Маргариты» (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GC).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D2GC",
-      "message": "(корень) must NOT have unevaluated properties"
-    },
-    {
-      "ruleId": "schema.form",
-      "level": "error",
-      "file": "examples/vault/media/Портрет Михаила Булгакова (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GE).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D2GE",
-      "message": "/source_url must be string"
-    },
     {
       "ruleId": "classif.r7",
       "level": "warn",
       "file": "examples/vault/taxonomy/Поэт (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3A7).md",
       "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D3A7",
       "message": "Категория «Поэт» без дочерних и без назначений — возможно, мёртвая"
-    },
-    {
-      "ruleId": "classif.r2",
-      "level": "error",
-      "file": "examples/vault/media/Иллюстрация к «Мастеру и Маргарите» (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GD).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D2GD",
-      "message": "Тип media_asset не входит в applicable_types таксономии «Медиа»"
-    },
-    {
-      "ruleId": "classif.r2",
-      "level": "error",
-      "file": "examples/vault/media/Обложка «Мастера и Маргариты» (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GC).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D2GC",
-      "message": "Тип media_asset не входит в applicable_types таксономии «Медиа»"
-    },
-    {
-      "ruleId": "classif.r2",
-      "level": "error",
-      "file": "examples/vault/media/Портрет Ивана Бездомного (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GF).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D2GF",
-      "message": "Тип media_asset не входит в applicable_types таксономии «Медиа»"
-    },
-    {
-      "ruleId": "classif.r2",
-      "level": "error",
-      "file": "examples/vault/media/Портрет Михаила Булгакова (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GE).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D2GE",
-      "message": "Тип media_asset не входит в applicable_types таксономии «Медиа»"
     },
     {
       "ruleId": "sequence.r5",
@@ -107,28 +44,9 @@
       "file": "examples/vault/properties/role (PROP-01J8Z6M4K2Q7V9X3N5B0C1D3C3).md",
       "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D3C3",
       "message": "Определение свойства «Роль» не используется ни одним типом или аспектом"
-    },
-    {
-      "ruleId": "link.r1",
-      "level": "info",
-      "file": "examples/vault/taxonomy/Медиа (TAX-01J8Z6M4K2Q7V9X3N5B0C1D3G1).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D3G1",
-      "message": "Ссылка «Медиаобёртка (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1000M)» разрешается записью индекса типов ядра, файла в хранилище нет (Q-55)"
-    },
-    {
-      "ruleId": "link.r1",
-      "level": "info",
-      "file": "examples/vault/taxonomy/Словари значений (TAX-01J8Z6M4K2Q7V9X3N5B0C1D3E8).md",
-      "objectId": "01J8Z6M4K2Q7V9X3N5B0C1D3E8",
-      "message": "Ссылка «Отношение (REL-01J8Z6M4K2Q7V9X3N5B0C1000R)» разрешается записью индекса типов ядра, файла в хранилище нет (Q-55)"
     }
   ],
   "exercised": {
-    "schema.form": {
-      "error": 5,
-      "warn": 0,
-      "info": 0
-    },
     "contract.r3": {
       "error": 0,
       "warn": 0,
@@ -275,7 +193,7 @@
       "info": 0
     },
     "classif.r2": {
-      "error": 4,
+      "error": 0,
       "warn": 0,
       "info": 0
     },
@@ -544,15 +462,15 @@
       "warn": 0,
       "info": 0
     },
-    "link.r5": {
+    "link.r1": {
       "error": 0,
       "warn": 0,
       "info": 0
     },
-    "link.r1": {
+    "link.r5": {
       "error": 0,
       "warn": 0,
-      "info": 2
+      "info": 0
     }
   }
 }

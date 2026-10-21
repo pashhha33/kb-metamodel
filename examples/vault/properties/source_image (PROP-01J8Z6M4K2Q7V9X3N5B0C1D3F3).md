@@ -7,8 +7,9 @@ value_type: reference
 cardinality: 0..1
 required: false
 scope: specific
-target_types: []
-definition: "Медиаобёртка изображения, послужившего основой. Фильтр ролей не задан: исходником может быть обёртка с любой ролью (см. находку F-3.21 о записи типа цели media_asset)."
+target_types:
+  - media_asset
+definition: "Медиаобёртка изображения, послужившего основой. Фильтр ролей не задан: исходником может быть обёртка с любой ролью. Тип цели — системный `media_asset`, запись голая строкой (D-0067)."
 lifecycle: standard
 status: active
 created_at: "2026-10-21T09:32:00+03:00"

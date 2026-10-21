@@ -4,10 +4,10 @@ type: taxonomy
 title: Словари значений
 label: Словари значений
 applicable_types:
-  - "[[Отношение (REL-01J8Z6M4K2Q7V9X3N5B0C1000R)|Отношение]]"
+  - relation
 hierarchy_mode: strict
 root_requirement: multiple
-description: "Таксономия-словарь (D-0064): её категории не назначаются объектам в поля `cat_*`, а используются как значения свойств — например, `Relation.role`. `applicable_types` содержит ровно один элемент, тип `relation`, поэтому правило meta.r5 (список непуст и разрешим) не ослабляется, а поле `cat_char_role` не создаётся."
+description: "Таксономия-словарь (D-0064): её категории не назначаются объектам в поля `cat_*`, а используются как значения свойств — например, `Relation.role`. `applicable_types` содержит ровно один элемент, тип `relation` (голое имя системного типа, D-0067), поэтому правило meta.r5 (список непуст и разрешим) не ослабляется, а поле `cat_char_role` не создаётся."
 lifecycle: standard
 status: active
 created_at: "2026-10-21T09:56:00+03:00"

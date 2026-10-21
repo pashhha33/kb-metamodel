@@ -82,13 +82,13 @@ const PROPERTIES_2 = [
     title: 'source_image',
     label: 'Исходное изображение',
     value_type: 'reference',
-    target_types: [],
+    target_types: ['media_asset'],
     cardinality: '0..1',
     required: false,
     scope: 'specific',
     definition:
       'Медиаобёртка изображения, послужившего основой. Фильтр ролей не задан: исходником может быть обёртка ' +
-      'с любой ролью (см. находку F-3.21 о записи типа цели media_asset).',
+      'с любой ролью. Тип цели — системный `media_asset`, запись голая строкой (D-0067).',
   },
   {
     key: 'prop_first_appearance',
@@ -123,7 +123,7 @@ const PROPERTIES_2 = [
     title: 'role',
     label: 'Роль',
     value_type: 'reference',
-    target_types: [],
+    target_types: ['category'],
     target_facet: 'facet_char_role',
     cardinality: '0..1',
     required: false,
@@ -135,8 +135,8 @@ const PROPERTIES_2 = [
     shows: [
       'один тип отношения `portrays` плюс атрибут `role` вместо десятков типов отношений',
       'фасет char_role принадлежит таксономии-словарю с `applicable_types: [relation]` (D-0064)',
-      '`target_types` пуст: тип `category` — системный, определения ObjectType для него в хранилище нет, ' +
-        'поэтому ограничение цели обеспечивает валидатор (находка F-3.21, вопрос Q-55)',
+      'каноническая запись условия meta.r3: `target_facet` задан при `target_types: [category]` — ' +
+        'голое имя системного типа (D-0067, RULES.md §3)',
       'поле предназначено для экземпляров системного типа `relation`: состав таких полей задан ядром, ' +
         'а определение свойства хранит ограничение значения',
     ],

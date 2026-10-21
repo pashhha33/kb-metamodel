@@ -1,9 +1,9 @@
 ---
 doc: validation-rules
 status: actual
-version: 0.13.0
+version: 0.14.0
 updated: 2026-10-21
-metamodel_version: 0.13.0
+metamodel_version: 0.14.0
 adr: [ADR-0001, ADR-0002, ADR-0003, ADR-0004, ADR-0005, ADR-0006, ADR-0007, ADR-0008, ADR-0009, ADR-0010, ADR-0011]
 closes: [C-33, C-32]
 implements: Спецификация §19 «Контроль целостности»
@@ -221,7 +221,7 @@ JSON Schema в `schema/` покрывает только структурную 
 | `meta.r2` | error | `Property.target_types` задан, если `value_type: reference`; пустой список означает «любой тип» |
 | `meta.r3` | error | `Property.target_facet` задан только при `target_types: [category]` |
 | `meta.r4` | error | `RelationType.subject_types` и `object_types` ссылаются на существующие `ObjectType` |
-| `meta.r5` | error | `Taxonomy.applicable_types` не пуст и ссылки разрешимы |
+| `meta.r5` | error | `Taxonomy.applicable_types` не пуст и элементы разрешимы: wikilink-ссылка на определение `ObjectType` либо голое имя системного типа snake_case (D-0067) |
 | `meta.r6` | error | `Facet.taxonomy` и `Category.facet` разрешимы (ссылки только вверх, ADR-0005) |
 | `meta.r7` | error | `View.target_types` не пуст; `mechanism` входит в enum |
 | `meta.r8` | error | `Automation.trigger` и `mechanism` входят в enum |
@@ -404,6 +404,7 @@ interface Diagnostic {
 
 | Версия | Дата | Изменение |
 |---|---|---|
+| 0.14.0 | 2026-10-21 | Уточнена формулировка `meta.r5`: элементы `applicable_types` — wikilink-ссылки на `ObjectType` либо голые имена системных типов snake_case (D-0067, Q-55 = A). Состав каталога не изменился: 114 правил. Правка `meta.r3` не потребовалась: формулировка `target_types: [category]` уже соответствовала голой записи |
 | 0.10.0 | 2026-10-21 | Добавлена группа `media.*` (9 правил) и `naming.r11` — ADR-0011. Порядок в галерее не проверяется: это задача представления. Сводка пересчитана программно |
 | 0.11.0 | 2026-10-21 | Приведён в соответствие правилу расслоения L-1: убраны имена модуля реализации и точки API (3 правки), добавлена ссылка на `docs/plugin/ARCHITECTURE.md` |
 | 0.9.0 | 2026-10-21 | Правила `sequence.r1…r6`, `unique.r1…r2`, `meta.r14…r15` переведены из ожидающих в нормативные (ADR-0010). Итого **104 правила**: 79 error, 22 warn, 3 info |

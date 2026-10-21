@@ -7,7 +7,8 @@ value_type: reference
 cardinality: 0..n
 required: false
 scope: specific
-target_types: []
+target_types:
+  - media_asset
 definition: "Медиаобёртки иллюстраций произведения. Фильтр ролей не задан: в подборку может попасть обёртка с любой ролью."
 lifecycle: standard
 status: active

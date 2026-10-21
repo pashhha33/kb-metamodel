@@ -44,28 +44,17 @@ sources: [examples/vault/**, docs/validation/RULES.md, schema/]
 >
 > Хранилище примеров: `examples/vault/` (105 заметок). Схема: 0.14.0 (двухпроходная валидация формы) + межобъектные правила каталога.
 
-**Итог: 9 error, 5 warn, 2 info. Правил, проверенных на примерах: 86 из 114.**
+**Итог: 0 error, 5 warn, 0 info. Правил, проверенных на примерах: 85 из 114.**
 
 ### Диагностика
 
 | Уровень | Правило | Файл | Сообщение |
 |---|---|---|---|
-| error | `schema.form` | `examples/vault/media/Обложка «Мастера и Маргариты» (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GC).md` | /source_url must be string |
-| error | `schema.form` | `examples/vault/media/Обложка «Мастера и Маргариты» (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GC).md` | (корень) must NOT have unevaluated properties |
-| error | `schema.form` | `examples/vault/media/Обложка «Мастера и Маргариты» (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GC).md` | (корень) must NOT have unevaluated properties |
-| error | `schema.form` | `examples/vault/media/Обложка «Мастера и Маргариты» (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GC).md` | (корень) must NOT have unevaluated properties |
-| error | `schema.form` | `examples/vault/media/Портрет Михаила Булгакова (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GE).md` | /source_url must be string |
 | warn | `classif.r7` | `examples/vault/taxonomy/Поэт (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3A7).md` | Категория «Поэт» без дочерних и без назначений — возможно, мёртвая |
-| error | `classif.r2` | `examples/vault/media/Иллюстрация к «Мастеру и Маргарите» (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GD).md` | Тип media_asset не входит в applicable_types таксономии «Медиа» |
-| error | `classif.r2` | `examples/vault/media/Обложка «Мастера и Маргариты» (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GC).md` | Тип media_asset не входит в applicable_types таксономии «Медиа» |
-| error | `classif.r2` | `examples/vault/media/Портрет Ивана Бездомного (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GF).md` | Тип media_asset не входит в applicable_types таксономии «Медиа» |
-| error | `classif.r2` | `examples/vault/media/Портрет Михаила Булгакова (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GE).md` | Тип media_asset не входит в applicable_types таксономии «Медиа» |
 | warn | `sequence.r5` | `examples/vault/objects/Глава 7 (CHAP-01J8Z6M4K2Q7V9X3N5B0C1D5B7).md` | Между 0 и 70 пропущены значения порядка |
 | warn | `sequence.r5` | `examples/vault/objects/Глава 9 (CHAP-01J8Z6M4K2Q7V9X3N5B0C1D5B9).md` | Между 70 и 90 пропущены значения порядка |
 | warn | `lifecycle.r2` | `examples/vault/objects/Мастер и Маргарита (рукопись) (BOOK-01J8Z6M4K2Q7V9X3N5B0C1D2G7).md` | На архивный объект «Мастер и Маргарита (рукопись)» ссылаются активные: examples/vault/relations/Слияние дубликата «Мастер и Маргарита (рукопись)» (REL-01J8Z6M4K2Q7V9X3N5B0C1D4F1).md |
 | warn | `meta.r13` | `examples/vault/properties/role (PROP-01J8Z6M4K2Q7V9X3N5B0C1D3C3).md` | Определение свойства «Роль» не используется ни одним типом или аспектом |
-| info | `link.r1` | `examples/vault/taxonomy/Медиа (TAX-01J8Z6M4K2Q7V9X3N5B0C1D3G1).md` | Ссылка «Медиаобёртка (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1000M)» разрешается записью индекса типов ядра, файла в хранилище нет (Q-55) |
-| info | `link.r1` | `examples/vault/taxonomy/Словари значений (TAX-01J8Z6M4K2Q7V9X3N5B0C1D3E8).md` | Ссылка «Отношение (REL-01J8Z6M4K2Q7V9X3N5B0C1000R)» разрешается записью индекса типов ядра, файла в хранилище нет (Q-55) |
 
 ### Матрица: какие правила проверены на канонических примерах
 
@@ -81,7 +70,7 @@ sources: [examples/vault/**, docs/validation/RULES.md, schema/]
 | `aspect.r5` | warn | ⬜ не реализовано в песочнице |
 | `aspect.r6` | info | ✅ нарушений нет |
 | `classif.r1` | error | ✅ нарушений нет |
-| `classif.r2` | error | ❌ error: 4 |
+| `classif.r2` | error | ✅ нарушений нет |
 | `classif.r3` | error | ✅ нарушений нет |
 | `classif.r4` | error | ✅ нарушений нет |
 | `classif.r5` | error | ✅ нарушений нет |
@@ -119,7 +108,7 @@ sources: [examples/vault/**, docs/validation/RULES.md, schema/]
 | `lifecycle.r3` | error | ✅ нарушений нет |
 | `lifecycle.r4` | warn | ✅ нарушений нет |
 | `lifecycle.r5` | info | ✅ нарушений нет |
-| `link.r1` | error | ℹ️ info: 2 |
+| `link.r1` | error | ✅ нарушений нет |
 | `link.r2` | error | ✅ нарушений нет |
 | `link.r3` | error | ✅ нарушений нет |
 | `link.r4` | error | ✅ нарушений нет |

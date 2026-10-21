@@ -11,7 +11,6 @@ galleries:
   - "[[Иллюстрации к «Мастеру и Маргарите» (GALLERY-01J8Z6M4K2Q7V9X3N5B0C1D2GB)|Иллюстрации к «Мастеру и Маргарите»]]"
 cat_creation_method:
   - "[[Фото (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3G4)|Фото]]"
-source_url: null
 license: Общественное достояние
 description: Портрет автора. Файл в каноническом хранилище — заглушка 1×1 px.
 status: active

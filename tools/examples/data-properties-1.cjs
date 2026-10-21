@@ -8,8 +8,9 @@
  *
  * Про `target_types` у свойств, цель которых — медиаобёртка: `MediaAsset` является системным
  * типом M1, определения `ObjectType` с `type: media_asset` в хранилище нет (форма обёртки задана
- * ядром). Поэтому `target_types` оставлен пустым («любой тип»), а ограничение обеспечивают
- * `expected_media_roles` и валидатор (media.r5). Расхождение зафиксировано как находка F-3.21.
+ * ядром). Системный тип записывается в `target_types` голой строкой snake_case: `['media_asset']`
+ * (D-0067, закрывает находку F-3.21); отбор кандидатов дополнительно сужают
+ * `expected_media_roles` и валидатор (media.r5).
  */
 'use strict';
 
@@ -71,7 +72,7 @@ const PROPERTIES_1 = [
     title: 'cover',
     label: 'Обложка',
     value_type: 'reference',
-    target_types: [],
+    target_types: ['media_asset'],
     cardinality: '0..1',
     required: false,
     scope: 'specific',
@@ -79,11 +80,11 @@ const PROPERTIES_1 = [
     definition:
       'Медиаобёртка обложки. Значение — ссылка на объект media_asset, а не путь к файлу: у связи файла с объектом ' +
       'есть атрибуты (роли, источник, автор, лицензия, метод создания), поэтому связь реифицирована (ADR-0011 §3.1). ' +
-      'Тип цели не ограничивается списком target_types: media_asset — системный тип без определения ObjectType; ' +
-      'кандидаты отбираются по ролям (см. находку F-3.21).',
+      'Тип цели — системный тип `media_asset`, записан голой строкой snake_case (D-0067); ' +
+      'кандидаты дополнительно отбираются по ролям.',
     shows: [
       '`expected_media_roles` — фильтр кандидатов: предлагаются обёртки, у которых роль совпадает (ADR-0011 §3.1)',
-      'пустой `target_types` означает «любой тип» при обязательном присутствии поля (meta.r2)',
+      'системный тип в `target_types` — голая строка snake_case, wikilink не применяется: файла-определения нет (D-0067)',
       'значение свойства — единственное место, где хранится связь объекта с обёрткой (Q-37 = C)',
     ],
   },
@@ -92,7 +93,7 @@ const PROPERTIES_1 = [
     title: 'illustrations',
     label: 'Иллюстрации',
     value_type: 'reference',
-    target_types: [],
+    target_types: ['media_asset'],
     cardinality: '0..n',
     required: false,
     scope: 'specific',
@@ -105,7 +106,7 @@ const PROPERTIES_1 = [
     title: 'portrait',
     label: 'Портрет',
     value_type: 'reference',
-    target_types: [],
+    target_types: ['media_asset'],
     cardinality: '0..1',
     required: false,
     scope: 'specific',
@@ -117,7 +118,7 @@ const PROPERTIES_1 = [
     title: 'logo',
     label: 'Логотип',
     value_type: 'reference',
-    target_types: [],
+    target_types: ['media_asset'],
     cardinality: '0..1',
     required: false,
     scope: 'specific',

@@ -7,7 +7,8 @@ value_type: reference
 cardinality: 0..1
 required: false
 scope: specific
-target_types: []
+target_types:
+  - media_asset
 expected_media_roles:
   - logo
 definition: Медиаобёртка логотипа организации.

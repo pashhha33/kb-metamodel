@@ -178,10 +178,6 @@ const ID = {
   cat_poem: '01J8Z6M4K2Q7V9X3N5B0C1D3E7',
   tax_dictionaries: '01J8Z6M4K2Q7V9X3N5B0C1D3E8',
 
-  // ── виртуальные записи индекса типов (Q-55, находка F-3.21) ───────
-  coretype_relation: '01J8Z6M4K2Q7V9X3N5B0C1000R',
-  coretype_media_asset: '01J8Z6M4K2Q7V9X3N5B0C1000M',
-  coretype_category: '01J8Z6M4K2Q7V9X3N5B0C1000C',
 };
 
 /** Каталоги хранилища примеров: kebab-case, EN (правило именования файлов документов). */

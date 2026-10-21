@@ -1,7 +1,7 @@
 {
   "generated_by": "tools/examples/generate.cjs",
   "schema_version": "0.14.0",
-  "note": "Производный реестр канонического хранилища примеров. virtual: true — запись индекса типов, у которой нет файла (Q-55, находка F-3.21).",
+  "note": "Производный реестр канонического хранилища примеров — вход tools/examples/check.cjs. Системные типы записываются голой строкой snake_case (D-0067); виртуальные записи индекса типов отменены.",
   "objects": [
     {
       "key": "otype_context",
@@ -10,7 +10,6 @@
       "prefix": "OTYPE",
       "display": "Контекст",
       "file": "examples/vault/types/Контекст (OTYPE-01J8Z6M4K2Q7V9X3N5B0C1D2G1).md",
-      "virtual": false,
       "kind": "object_type",
       "typeId": "context"
     },
@@ -21,7 +20,6 @@
       "prefix": "OTYPE",
       "display": "Деятельность",
       "file": "examples/vault/types/Деятельность (OTYPE-01J8Z6M4K2Q7V9X3N5B0C1D2G2).md",
-      "virtual": false,
       "kind": "object_type",
       "typeId": "activity"
     },
@@ -32,7 +30,6 @@
       "prefix": "OTYPE",
       "display": "Произведение",
       "file": "examples/vault/types/Произведение (OTYPE-01J8Z6M4K2Q7V9X3N5B0C1D2AA).md",
-      "virtual": false,
       "kind": "object_type",
       "typeId": "work"
     },
@@ -43,7 +40,6 @@
       "prefix": "OTYPE",
       "display": "Подборка",
       "file": "examples/vault/types/Подборка (OTYPE-01J8Z6M4K2Q7V9X3N5B0C1D2G3).md",
-      "virtual": false,
       "kind": "object_type",
       "typeId": "collection"
     },
@@ -54,7 +50,6 @@
       "prefix": "OTYPE",
       "display": "Источник",
       "file": "examples/vault/types/Источник (OTYPE-01J8Z6M4K2Q7V9X3N5B0C1D2G4).md",
-      "virtual": false,
       "kind": "object_type",
       "typeId": "source"
     },
@@ -65,7 +60,6 @@
       "prefix": "OTYPE",
       "display": "Знание",
       "file": "examples/vault/types/Знание (OTYPE-01J8Z6M4K2Q7V9X3N5B0C1D2G5).md",
-      "virtual": false,
       "kind": "object_type",
       "typeId": "knowledge"
     },
@@ -76,7 +70,6 @@
       "prefix": "OTYPE",
       "display": "Человек",
       "file": "examples/vault/types/Человек (OTYPE-01J8Z6M4K2Q7V9X3N5B0C1D2AD).md",
-      "virtual": false,
       "kind": "object_type",
       "typeId": "person"
     },
@@ -87,7 +80,6 @@
       "prefix": "OTYPE",
       "display": "Организация",
       "file": "examples/vault/types/Организация (OTYPE-01J8Z6M4K2Q7V9X3N5B0C1D2AE).md",
-      "virtual": false,
       "kind": "object_type",
       "typeId": "organization"
     },
@@ -98,7 +90,6 @@
       "prefix": "OTYPE",
       "display": "Персонаж",
       "file": "examples/vault/types/Персонаж (OTYPE-01J8Z6M4K2Q7V9X3N5B0C1D2G6).md",
-      "virtual": false,
       "kind": "object_type",
       "typeId": "character"
     },
@@ -109,7 +100,6 @@
       "prefix": "OTYPE",
       "display": "Книга",
       "file": "examples/vault/types/Книга (OTYPE-01J8Z6M4K2Q7V9X3N5B0C1D2HH).md",
-      "virtual": false,
       "kind": "object_type",
       "typeId": "book"
     },
@@ -120,7 +110,6 @@
       "prefix": "OTYPE",
       "display": "Глава",
       "file": "examples/vault/types/Глава (OTYPE-01J8Z6M4K2Q7V9X3N5B0C1D5A1).md",
-      "virtual": false,
       "kind": "object_type",
       "typeId": "chapter"
     },
@@ -131,7 +120,6 @@
       "prefix": "OTYPE",
       "display": "Галерея",
       "file": "examples/vault/types/Галерея (OTYPE-01J8Z6M4K2Q7V9X3N5B0C1D2AF).md",
-      "virtual": false,
       "kind": "object_type",
       "typeId": "gallery"
     },
@@ -142,7 +130,6 @@
       "prefix": "PROP",
       "display": "part_of",
       "file": "examples/vault/properties/part_of (PROP-01J8Z6M4K2Q7V9X3N5B0C1D5A2).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -152,7 +139,6 @@
       "prefix": "PROP",
       "display": "order",
       "file": "examples/vault/properties/order (PROP-01J8Z6M4K2Q7V9X3N5B0C1D2B3).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -162,7 +148,6 @@
       "prefix": "PROP",
       "display": "chapter_label",
       "file": "examples/vault/properties/chapter_label (PROP-01J8Z6M4K2Q7V9X3N5B0C1D2H5).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -172,7 +157,6 @@
       "prefix": "PROP",
       "display": "cover",
       "file": "examples/vault/properties/cover (PROP-01J8Z6M4K2Q7V9X3N5B0C1D2B4).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -182,7 +166,6 @@
       "prefix": "PROP",
       "display": "illustrations",
       "file": "examples/vault/properties/illustrations (PROP-01J8Z6M4K2Q7V9X3N5B0C1D2H6).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -192,7 +175,6 @@
       "prefix": "PROP",
       "display": "portrait",
       "file": "examples/vault/properties/portrait (PROP-01J8Z6M4K2Q7V9X3N5B0C1D2H7).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -202,7 +184,6 @@
       "prefix": "PROP",
       "display": "logo",
       "file": "examples/vault/properties/logo (PROP-01J8Z6M4K2Q7V9X3N5B0C1D2H8).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -212,7 +193,6 @@
       "prefix": "PROP",
       "display": "publisher",
       "file": "examples/vault/properties/publisher (PROP-01J8Z6M4K2Q7V9X3N5B0C1D2AB).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -222,7 +202,6 @@
       "prefix": "PROP",
       "display": "isbn",
       "file": "examples/vault/properties/isbn (PROP-01J8Z6M4K2Q7V9X3N5B0C1D2H1).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -232,7 +211,6 @@
       "prefix": "PROP",
       "display": "page_count",
       "file": "examples/vault/properties/page_count (PROP-01J8Z6M4K2Q7V9X3N5B0C1D2H2).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -242,7 +220,6 @@
       "prefix": "PROP",
       "display": "publication_date",
       "file": "examples/vault/properties/publication_date (PROP-01J8Z6M4K2Q7V9X3N5B0C1D2H3).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -252,7 +229,6 @@
       "prefix": "PROP",
       "display": "language",
       "file": "examples/vault/properties/language (PROP-01J8Z6M4K2Q7V9X3N5B0C1D2H4).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -262,7 +238,6 @@
       "prefix": "PROP",
       "display": "birth_date",
       "file": "examples/vault/properties/birth_date (PROP-01J8Z6M4K2Q7V9X3N5B0C1D2H9).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -272,7 +247,6 @@
       "prefix": "PROP",
       "display": "death_date",
       "file": "examples/vault/properties/death_date (PROP-01J8Z6M4K2Q7V9X3N5B0C1D2HA).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -282,7 +256,6 @@
       "prefix": "PROP",
       "display": "pen_name",
       "file": "examples/vault/properties/pen_name (PROP-01J8Z6M4K2Q7V9X3N5B0C1D3E2).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -292,7 +265,6 @@
       "prefix": "PROP",
       "display": "literary_period",
       "file": "examples/vault/properties/literary_period (PROP-01J8Z6M4K2Q7V9X3N5B0C1D3E3).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -302,7 +274,6 @@
       "prefix": "PROP",
       "display": "awards",
       "file": "examples/vault/properties/awards (PROP-01J8Z6M4K2Q7V9X3N5B0C1D3E4).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -312,7 +283,6 @@
       "prefix": "PROP",
       "display": "prompt",
       "file": "examples/vault/properties/prompt (PROP-01J8Z6M4K2Q7V9X3N5B0C1D2A5).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -322,7 +292,6 @@
       "prefix": "PROP",
       "display": "model",
       "file": "examples/vault/properties/model (PROP-01J8Z6M4K2Q7V9X3N5B0C1D3F1).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -332,7 +301,6 @@
       "prefix": "PROP",
       "display": "seed",
       "file": "examples/vault/properties/seed (PROP-01J8Z6M4K2Q7V9X3N5B0C1D3F2).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -342,7 +310,6 @@
       "prefix": "PROP",
       "display": "source_image",
       "file": "examples/vault/properties/source_image (PROP-01J8Z6M4K2Q7V9X3N5B0C1D3F3).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -352,7 +319,6 @@
       "prefix": "PROP",
       "display": "first_appearance",
       "file": "examples/vault/properties/first_appearance (PROP-01J8Z6M4K2Q7V9X3N5B0C1D3D6).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -362,7 +328,6 @@
       "prefix": "PROP",
       "display": "appears_in_work",
       "file": "examples/vault/properties/appears_in_work (PROP-01J8Z6M4K2Q7V9X3N5B0C1D3D7).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -372,7 +337,6 @@
       "prefix": "PROP",
       "display": "role",
       "file": "examples/vault/properties/role (PROP-01J8Z6M4K2Q7V9X3N5B0C1D3C3).md",
-      "virtual": false,
       "kind": "property"
     },
     {
@@ -382,7 +346,6 @@
       "prefix": "PTYPE",
       "display": "text",
       "file": "examples/vault/property-types/text (PTYPE-01J8Z6M4K2Q7V9X3N5B0C1D2C1).md",
-      "virtual": false,
       "kind": "property_type"
     },
     {
@@ -392,7 +355,6 @@
       "prefix": "PTYPE",
       "display": "number",
       "file": "examples/vault/property-types/number (PTYPE-01J8Z6M4K2Q7V9X3N5B0C1D2C2).md",
-      "virtual": false,
       "kind": "property_type"
     },
     {
@@ -402,7 +364,6 @@
       "prefix": "PTYPE",
       "display": "date",
       "file": "examples/vault/property-types/date (PTYPE-01J8Z6M4K2Q7V9X3N5B0C1D2C3).md",
-      "virtual": false,
       "kind": "property_type"
     },
     {
@@ -412,7 +373,6 @@
       "prefix": "PTYPE",
       "display": "datetime",
       "file": "examples/vault/property-types/datetime (PTYPE-01J8Z6M4K2Q7V9X3N5B0C1D2C4).md",
-      "virtual": false,
       "kind": "property_type"
     },
     {
@@ -422,7 +382,6 @@
       "prefix": "PTYPE",
       "display": "boolean",
       "file": "examples/vault/property-types/boolean (PTYPE-01J8Z6M4K2Q7V9X3N5B0C1D2C5).md",
-      "virtual": false,
       "kind": "property_type"
     },
     {
@@ -432,7 +391,6 @@
       "prefix": "PTYPE",
       "display": "reference",
       "file": "examples/vault/property-types/reference (PTYPE-01J8Z6M4K2Q7V9X3N5B0C1D2C6).md",
-      "virtual": false,
       "kind": "property_type"
     },
     {
@@ -442,7 +400,6 @@
       "prefix": "RTYPE",
       "display": "author",
       "file": "examples/vault/relation-types/author (RTYPE-01J8Z6M4K2Q7V9X3N5B0C1D3B1).md",
-      "virtual": false,
       "kind": "relation_type"
     },
     {
@@ -452,7 +409,6 @@
       "prefix": "RTYPE",
       "display": "portrays",
       "file": "examples/vault/relation-types/portrays (RTYPE-01J8Z6M4K2Q7V9X3N5B0C1D3C1).md",
-      "virtual": false,
       "kind": "relation_type"
     },
     {
@@ -462,7 +418,6 @@
       "prefix": "RTYPE",
       "display": "member_of",
       "file": "examples/vault/relation-types/member_of (RTYPE-01J8Z6M4K2Q7V9X3N5B0C1D3D2).md",
-      "virtual": false,
       "kind": "relation_type"
     },
     {
@@ -472,7 +427,6 @@
       "prefix": "RTYPE",
       "display": "appears_in",
       "file": "examples/vault/relation-types/appears_in (RTYPE-01J8Z6M4K2Q7V9X3N5B0C1D3D3).md",
-      "virtual": false,
       "kind": "relation_type"
     },
     {
@@ -482,7 +436,6 @@
       "prefix": "RTYPE",
       "display": "derived_from",
       "file": "examples/vault/relation-types/derived_from (RTYPE-01J8Z6M4K2Q7V9X3N5B0C1D3D4).md",
-      "virtual": false,
       "kind": "relation_type"
     },
     {
@@ -492,7 +445,6 @@
       "prefix": "RTYPE",
       "display": "supersedes",
       "file": "examples/vault/relation-types/supersedes (RTYPE-01J8Z6M4K2Q7V9X3N5B0C1D4F2).md",
-      "virtual": false,
       "kind": "relation_type"
     },
     {
@@ -502,7 +454,6 @@
       "prefix": "RTYPE",
       "display": "merged_into",
       "file": "examples/vault/relation-types/merged_into (RTYPE-01J8Z6M4K2Q7V9X3N5B0C1D4F3).md",
-      "virtual": false,
       "kind": "relation_type"
     },
     {
@@ -512,7 +463,6 @@
       "prefix": "REL",
       "display": "Авторство «Мастера и Маргариты»",
       "file": "examples/vault/relations/Авторство «Мастера и Маргариты» (REL-01J8Z6M4K2Q7V9X3N5B0C1D3B2).md",
-      "virtual": false,
       "kind": "relation"
     },
     {
@@ -522,7 +472,6 @@
       "prefix": "REL",
       "display": "Иван Бездомный — главный герой «Мастера и Маргариты»",
       "file": "examples/vault/relations/Иван Бездомный — главный герой «Мастера и Маргариты» (REL-01J8Z6M4K2Q7V9X3N5B0C1D3C2).md",
-      "virtual": false,
       "kind": "relation"
     },
     {
@@ -532,7 +481,6 @@
       "prefix": "REL",
       "display": "Воланд — главный герой «Мастера и Маргариты»",
       "file": "examples/vault/relations/Воланд — главный герой «Мастера и Маргариты» (REL-01J8Z6M4K2Q7V9X3N5B0C1D3C4).md",
-      "virtual": false,
       "kind": "relation"
     },
     {
@@ -542,7 +490,6 @@
       "prefix": "REL",
       "display": "Слияние дубликата «Мастер и Маргарита (рукопись)»",
       "file": "examples/vault/relations/Слияние дубликата «Мастер и Маргарита (рукопись)» (REL-01J8Z6M4K2Q7V9X3N5B0C1D4F1).md",
-      "virtual": false,
       "kind": "relation"
     },
     {
@@ -552,7 +499,6 @@
       "prefix": "TAX",
       "display": "Классификация произведений",
       "file": "examples/vault/taxonomy/Классификация произведений (TAX-01J8Z6M4K2Q7V9X3N5B0C1D2E1).md",
-      "virtual": false,
       "kind": "taxonomy"
     },
     {
@@ -562,7 +508,6 @@
       "prefix": "TAX",
       "display": "Люди и организации",
       "file": "examples/vault/taxonomy/Люди и организации (TAX-01J8Z6M4K2Q7V9X3N5B0C1D3A1).md",
-      "virtual": false,
       "kind": "taxonomy"
     },
     {
@@ -572,7 +517,6 @@
       "prefix": "TAX",
       "display": "Медиа",
       "file": "examples/vault/taxonomy/Медиа (TAX-01J8Z6M4K2Q7V9X3N5B0C1D3G1).md",
-      "virtual": false,
       "kind": "taxonomy"
     },
     {
@@ -582,7 +526,6 @@
       "prefix": "TAX",
       "display": "Словари значений",
       "file": "examples/vault/taxonomy/Словари значений (TAX-01J8Z6M4K2Q7V9X3N5B0C1D3E8).md",
-      "virtual": false,
       "kind": "taxonomy"
     },
     {
@@ -592,7 +535,6 @@
       "prefix": "FACET",
       "display": "genre",
       "file": "examples/vault/taxonomy/genre (FACET-01J8Z6M4K2Q7V9X3N5B0C1D3A2).md",
-      "virtual": false,
       "kind": "facet"
     },
     {
@@ -602,7 +544,6 @@
       "prefix": "FACET",
       "display": "tone",
       "file": "examples/vault/taxonomy/tone (FACET-01J8Z6M4K2Q7V9X3N5B0C1D2E2).md",
-      "virtual": false,
       "kind": "facet"
     },
     {
@@ -612,7 +553,6 @@
       "prefix": "FACET",
       "display": "profession",
       "file": "examples/vault/taxonomy/profession (FACET-01J8Z6M4K2Q7V9X3N5B0C1D3A3).md",
-      "virtual": false,
       "kind": "facet"
     },
     {
@@ -622,7 +562,6 @@
       "prefix": "FACET",
       "display": "org_type",
       "file": "examples/vault/taxonomy/org_type (FACET-01J8Z6M4K2Q7V9X3N5B0C1D3D5).md",
-      "virtual": false,
       "kind": "facet"
     },
     {
@@ -632,7 +571,6 @@
       "prefix": "FACET",
       "display": "creation_method",
       "file": "examples/vault/taxonomy/creation_method (FACET-01J8Z6M4K2Q7V9X3N5B0C1D3G2).md",
-      "virtual": false,
       "kind": "facet"
     },
     {
@@ -642,7 +580,6 @@
       "prefix": "FACET",
       "display": "char_role",
       "file": "examples/vault/taxonomy/char_role (FACET-01J8Z6M4K2Q7V9X3N5B0C1D3G3).md",
-      "virtual": false,
       "kind": "facet"
     },
     {
@@ -652,7 +589,6 @@
       "prefix": "CAT",
       "display": "Фантастика",
       "file": "examples/vault/taxonomy/Фантастика (CAT-01J8Z6M4K2Q7V9X3N5B0C1D2E3).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -662,7 +598,6 @@
       "prefix": "CAT",
       "display": "Научная фантастика",
       "file": "examples/vault/taxonomy/Научная фантастика (CAT-01J8Z6M4K2Q7V9X3N5B0C1D2E4).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -672,7 +607,6 @@
       "prefix": "CAT",
       "display": "Фэнтези",
       "file": "examples/vault/taxonomy/Фэнтези (CAT-01J8Z6M4K2Q7V9X3N5B0C1D2E5).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -682,7 +616,6 @@
       "prefix": "CAT",
       "display": "Проза",
       "file": "examples/vault/taxonomy/Проза (CAT-01J8Z6M4K2Q7V9X3N5B0C1D2E6).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -692,7 +625,6 @@
       "prefix": "CAT",
       "display": "Роман",
       "file": "examples/vault/taxonomy/Роман (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3E5).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -702,7 +634,6 @@
       "prefix": "CAT",
       "display": "Повесть",
       "file": "examples/vault/taxonomy/Повесть (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3E6).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -712,7 +643,6 @@
       "prefix": "CAT",
       "display": "Поэма",
       "file": "examples/vault/taxonomy/Поэма (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3E7).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -722,7 +652,6 @@
       "prefix": "CAT",
       "display": "Мрачная",
       "file": "examples/vault/taxonomy/Мрачная (CAT-01J8Z6M4K2Q7V9X3N5B0C1D2E8).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -732,7 +661,6 @@
       "prefix": "CAT",
       "display": "Светлая",
       "file": "examples/vault/taxonomy/Светлая (CAT-01J8Z6M4K2Q7V9X3N5B0C1D2E9).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -742,7 +670,6 @@
       "prefix": "CAT",
       "display": "Писатель",
       "file": "examples/vault/taxonomy/Писатель (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3A4).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -752,7 +679,6 @@
       "prefix": "CAT",
       "display": "Прозаик",
       "file": "examples/vault/taxonomy/Прозаик (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3A6).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -762,7 +688,6 @@
       "prefix": "CAT",
       "display": "Романист",
       "file": "examples/vault/taxonomy/Романист (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3A5).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -772,7 +697,6 @@
       "prefix": "CAT",
       "display": "Поэт",
       "file": "examples/vault/taxonomy/Поэт (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3A7).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -782,7 +706,6 @@
       "prefix": "CAT",
       "display": "Драматург",
       "file": "examples/vault/taxonomy/Драматург (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3A8).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -792,7 +715,6 @@
       "prefix": "CAT",
       "display": "Врач",
       "file": "examples/vault/taxonomy/Врач (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3A9).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -802,7 +724,6 @@
       "prefix": "CAT",
       "display": "Издательство",
       "file": "examples/vault/taxonomy/Издательство (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3GB).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -812,7 +733,6 @@
       "prefix": "CAT",
       "display": "Редакция и СМИ",
       "file": "examples/vault/taxonomy/Редакция и СМИ (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3GC).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -822,7 +742,6 @@
       "prefix": "CAT",
       "display": "Фото",
       "file": "examples/vault/taxonomy/Фото (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3G4).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -832,7 +751,6 @@
       "prefix": "CAT",
       "display": "Коллаж",
       "file": "examples/vault/taxonomy/Коллаж (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3G5).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -842,7 +760,6 @@
       "prefix": "CAT",
       "display": "Рисунок",
       "file": "examples/vault/taxonomy/Рисунок (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3G6).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -852,7 +769,6 @@
       "prefix": "CAT",
       "display": "Генерация ИИ",
       "file": "examples/vault/taxonomy/Генерация ИИ (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3G7).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -862,7 +778,6 @@
       "prefix": "CAT",
       "display": "Главный герой",
       "file": "examples/vault/taxonomy/Главный герой (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3G8).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -872,7 +787,6 @@
       "prefix": "CAT",
       "display": "Второстепенный персонаж",
       "file": "examples/vault/taxonomy/Второстепенный персонаж (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3G9).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -882,7 +796,6 @@
       "prefix": "CAT",
       "display": "Упомянут",
       "file": "examples/vault/taxonomy/Упомянут (CAT-01J8Z6M4K2Q7V9X3N5B0C1D3GA).md",
-      "virtual": false,
       "kind": "category"
     },
     {
@@ -892,7 +805,6 @@
       "prefix": "ASPECT",
       "display": "literary_person",
       "file": "examples/vault/aspects/literary_person (ASPECT-01J8Z6M4K2Q7V9X3N5B0C1D3E1).md",
-      "virtual": false,
       "kind": "aspect"
     },
     {
@@ -902,7 +814,6 @@
       "prefix": "ASPECT",
       "display": "ai_generated_media",
       "file": "examples/vault/aspects/ai_generated_media (ASPECT-01J8Z6M4K2Q7V9X3N5B0C1D3F4).md",
-      "virtual": false,
       "kind": "aspect"
     },
     {
@@ -912,7 +823,6 @@
       "prefix": "VIEW",
       "display": "Карточка книги",
       "file": "examples/vault/views/Карточка книги (VIEW-01J8Z6M4K2Q7V9X3N5B0C1D2A2).md",
-      "virtual": false,
       "kind": "view"
     },
     {
@@ -922,7 +832,6 @@
       "prefix": "AUTO",
       "display": "create_chapter",
       "file": "examples/vault/automations/create_chapter (AUTO-01J8Z6M4K2Q7V9X3N5B0C1D5A3).md",
-      "virtual": false,
       "kind": "automation"
     },
     {
@@ -932,7 +841,6 @@
       "prefix": "BOOK",
       "display": "Мастер и Маргарита",
       "file": "examples/vault/objects/Мастер и Маргарита (BOOK-01J8Z6M4K2Q7V9X3N5B0C1D2AC).md",
-      "virtual": false,
       "kind": "instance"
     },
     {
@@ -942,7 +850,6 @@
       "prefix": "CHAP",
       "display": "Пролог",
       "file": "examples/vault/objects/Пролог (CHAP-01J8Z6M4K2Q7V9X3N5B0C1D5B0).md",
-      "virtual": false,
       "kind": "instance"
     },
     {
@@ -952,7 +859,6 @@
       "prefix": "CHAP",
       "display": "Глава 7",
       "file": "examples/vault/objects/Глава 7 (CHAP-01J8Z6M4K2Q7V9X3N5B0C1D5B7).md",
-      "virtual": false,
       "kind": "instance"
     },
     {
@@ -962,7 +868,6 @@
       "prefix": "CHAP",
       "display": "Глава 9",
       "file": "examples/vault/objects/Глава 9 (CHAP-01J8Z6M4K2Q7V9X3N5B0C1D5B9).md",
-      "virtual": false,
       "kind": "instance"
     },
     {
@@ -972,7 +877,6 @@
       "prefix": "PERSON",
       "display": "Михаил Булгаков",
       "file": "examples/vault/objects/Михаил Булгаков (PERSON-01J8Z6M4K2Q7V9X3N5B0C1D2EF).md",
-      "virtual": false,
       "kind": "instance"
     },
     {
@@ -982,7 +886,6 @@
       "prefix": "CHAR",
       "display": "Иван Бездомный",
       "file": "examples/vault/objects/Иван Бездомный (CHAR-01J8Z6M4K2Q7V9X3N5B0C1D2G8).md",
-      "virtual": false,
       "kind": "instance"
     },
     {
@@ -992,7 +895,6 @@
       "prefix": "CHAR",
       "display": "Воланд",
       "file": "examples/vault/objects/Воланд (CHAR-01J8Z6M4K2Q7V9X3N5B0C1D2G9).md",
-      "virtual": false,
       "kind": "instance"
     },
     {
@@ -1002,7 +904,6 @@
       "prefix": "ORG",
       "display": "Художественная литература",
       "file": "examples/vault/objects/Художественная литература (ORG-01J8Z6M4K2Q7V9X3N5B0C1D2GA).md",
-      "virtual": false,
       "kind": "instance"
     },
     {
@@ -1012,7 +913,6 @@
       "prefix": "GALLERY",
       "display": "Иллюстрации к «Мастеру и Маргарите»",
       "file": "examples/vault/objects/Иллюстрации к «Мастеру и Маргарите» (GALLERY-01J8Z6M4K2Q7V9X3N5B0C1D2GB).md",
-      "virtual": false,
       "kind": "instance"
     },
     {
@@ -1022,7 +922,6 @@
       "prefix": "BOOK",
       "display": "Мастер и Маргарита (рукопись)",
       "file": "examples/vault/objects/Мастер и Маргарита (рукопись) (BOOK-01J8Z6M4K2Q7V9X3N5B0C1D2G7).md",
-      "virtual": false,
       "kind": "instance"
     },
     {
@@ -1032,7 +931,6 @@
       "prefix": "MEDIA",
       "display": "Обложка «Мастера и Маргариты»",
       "file": "examples/vault/media/Обложка «Мастера и Маргариты» (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GC).md",
-      "virtual": false,
       "kind": "media_asset"
     },
     {
@@ -1042,7 +940,6 @@
       "prefix": "MEDIA",
       "display": "Иллюстрация к «Мастеру и Маргарите»",
       "file": "examples/vault/media/Иллюстрация к «Мастеру и Маргарите» (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GD).md",
-      "virtual": false,
       "kind": "media_asset"
     },
     {
@@ -1052,7 +949,6 @@
       "prefix": "MEDIA",
       "display": "Портрет Михаила Булгакова",
       "file": "examples/vault/media/Портрет Михаила Булгакова (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GE).md",
-      "virtual": false,
       "kind": "media_asset"
     },
     {
@@ -1062,38 +958,7 @@
       "prefix": "MEDIA",
       "display": "Портрет Ивана Бездомного",
       "file": "examples/vault/media/Портрет Ивана Бездомного (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1D2GF).md",
-      "virtual": false,
       "kind": "media_asset"
-    },
-    {
-      "key": "coretype_relation",
-      "id": "01J8Z6M4K2Q7V9X3N5B0C1000R",
-      "type": "relation",
-      "prefix": "REL",
-      "display": "Отношение",
-      "file": null,
-      "virtual": true,
-      "note": "Цель `applicable_types` таксономии-словаря (D-0064) и `target_types` определения свойства role."
-    },
-    {
-      "key": "coretype_media_asset",
-      "id": "01J8Z6M4K2Q7V9X3N5B0C1000M",
-      "type": "media_asset",
-      "prefix": "MEDIA",
-      "display": "Медиаобёртка",
-      "file": null,
-      "virtual": true,
-      "note": "Цель `applicable_types` таксономии «Медиа» (ADR-0011 §3.3)."
-    },
-    {
-      "key": "coretype_category",
-      "id": "01J8Z6M4K2Q7V9X3N5B0C1000C",
-      "type": "category",
-      "prefix": "CAT",
-      "display": "Категория",
-      "file": null,
-      "virtual": true,
-      "note": "Тип цели определения свойства role (ADR-0006 §3.3)."
     }
   ]
 }

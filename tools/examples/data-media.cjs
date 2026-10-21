@@ -26,7 +26,6 @@ const MEDIA_ASSETS = [
     cat_creation_method: ['cat_ai'],
     author: 'person_bulgakov',
     license: 'CC BY 4.0',
-    source_url: null,
     description:
       'Обложка издания. Изображение создано генеративной моделью, поэтому обёртка несёт свойства метода: ' +
       'промпт, модель, seed. Файл в каноническом хранилище — заглушка 1×1 px.',
@@ -83,7 +82,6 @@ const MEDIA_ASSETS = [
     galleries: ['gallery_illustrations'],
     cat_creation_method: ['cat_photo'],
     license: 'Общественное достояние',
-    source_url: null,
     description: 'Портрет автора. Файл в каноническом хранилище — заглушка 1×1 px.',
     body:
       'Одна обёртка в двух ролях: `portrait` (используется свойством `portrait` человека) и `preview` ' +

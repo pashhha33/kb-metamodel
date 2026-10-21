@@ -4,11 +4,11 @@ type: taxonomy
 title: Медиа
 label: Медиа
 applicable_types:
-  - "[[Медиаобёртка (MEDIA-01J8Z6M4K2Q7V9X3N5B0C1000M)|Медиаобёртка]]"
+  - media_asset
 hierarchy_mode: strict
 assignment_cardinality: 0..n
 root_requirement: multiple
-description: "Оси классификации медиаобёрток. В MVP одна ось — метод создания (ADR-0011 §3.3, требование T9). Тип media_asset является системным: ссылки на него в `applicable_types` разбираются по реестру типов ядра (находка F-3.21)."
+description: "Оси классификации медиаобёрток. В MVP одна ось — метод создания (ADR-0011 §3.3, требование T9). Тип `media_asset` — системный: в `applicable_types` записывается голой строкой snake_case, а не wikilink-ссылкой, поскольку определения ObjectType у него нет (D-0067)."
 lifecycle: standard
 status: active
 created_at: "2026-10-21T09:55:00+03:00"
