@@ -440,6 +440,13 @@ function main(objects, idx, manifest) {
   for (const [key, p] of properties) {
     if (propKeyOwner.has(key)) diag('naming.r3', 'error', p, 'Ключ ' + key + ' используется несколькими свойствами');
     else { propKeyOwner.set(key, p); pass('naming.r3'); }
+    if (p.fm.scope === 'family') {
+      // D-0072 (meta.r16): семейное свойство объявляет ветви применения явно;
+      // пустой список — намеренное «все ветви», отсутствие поля — ошибка.
+      if (!Array.isArray(p.fm.applies_to)) {
+        diag('meta.r16', 'error', p, 'Свойство ' + key + ' с scope: family без applies_to: укажите ветви применения или пустой список (все ветви)');
+      } else pass('meta.r16');
+    }
     if (p.fm.value_type === 'reference') {
       if (!Array.isArray(p.fm.target_types)) diag('meta.r2', 'error', p, 'Свойство ' + key + ' со значением reference без target_types');
       else pass('meta.r2');

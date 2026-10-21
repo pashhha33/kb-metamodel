@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-10-21T17:24:44.615Z",
+  "generated_at": "2026-10-21T18:31:09.903Z",
   "schema_version": "0.14.0",
   "totals": {
-    "total": 114,
-    "error": 83,
+    "total": 115,
+    "error": 84,
     "warn": 27,
     "info": 4,
     "schema": 29,
-    "validator": 85
+    "validator": 86
   },
   "covered": [
     {
@@ -525,6 +525,11 @@
     },
     {
       "id": "meta.r15",
+      "level": "error",
+      "reason": "Разрешение ссылок"
+    },
+    {
+      "id": "meta.r16",
       "level": "error",
       "reason": "Разрешение ссылок"
     },

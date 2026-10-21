@@ -47,7 +47,7 @@ sources: [examples/vault/**, docs/validation/RULES.md, schema/]
 >
 > Хранилище примеров: `examples/vault/` (105 заметок). Схема: 0.14.0 (двухпроходная валидация формы) + межобъектные правила каталога.
 
-**Итог: 0 error, 4 warn, 0 info. Правил, проверенных на примерах: 85 из 114.**
+**Итог: 0 error, 4 warn, 0 info. Правил, проверенных на примерах: 86 из 115.**
 
 ### Диагностика
 
@@ -140,6 +140,7 @@ sources: [examples/vault/**, docs/validation/RULES.md, schema/]
 | `meta.r13` | warn | ⚠️ warn: 1 |
 | `meta.r14` | error | ✅ нарушений нет |
 | `meta.r15` | error | ✅ нарушений нет |
+| `meta.r16` | error | ✅ нарушений нет |
 | `naming.r1` | error | ⬜ не реализовано в песочнице |
 | `naming.r2` | error | ⬜ не реализовано в песочнице |
 | `naming.r3` | error | ✅ нарушений нет |
