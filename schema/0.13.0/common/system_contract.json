@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secondbrain.local/schema/0.13.0/common/system_contract.json",
+  "title": "SystemContract",
+  "description": "Системный контракт объекта: поля, которые есть у каждого объекта M0 и M1. Задаются ядром (M2) и не могут быть переопределены как обычные свойства. Нормативный источник: docs/metamodel/00_overview.md §2.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./formats.json#/$defs/ulid",
+      "description": "Единственный носитель идентичности. Не меняется никогда, не переиспользуется (ADR-0002).",
+      "x-rules": [
+        "contract.r1"
+      ]
+    },
+    "type": {
+      "$ref": "./enums.json#/$defs/type_id",
+      "description": "Идентификатор типа объекта, snake_case. Строка, а не wikilink: осознанная потеря рёбер «экземпляр → тип» в графе (ADR-0005)."
+    },
+    "title": {
+      "$ref": "./formats.json#/$defs/title",
+      "description": "Единственный источник отображаемого названия. Одинаковые title у разных объектов допустимы.",
+      "x-rules": [
+        "contract.r6"
+      ]
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 300
+      },
+      "uniqueItems": true,
+      "description": "Только реальные псевдонимы; порядок не значим. Правило aliases[0] = title отменено (ADR-0004).",
+      "x-notes": "alias.r1 (дубль title), alias.r2 (один псевдоним у нескольких объектов) — уровень warn, валидатор.",
+      "x-rules": [
+        "alias.r3"
+      ]
+    },
+    "created_at": {
+      "$ref": "./formats.json#/$defs/datetime",
+      "description": "Дата создания объекта.",
+      "x-rules": [
+        "contract.r7"
+      ]
+    },
+    "updated_at": {
+      "$ref": "./formats.json#/$defs/datetime",
+      "description": "Дата последнего изменения.",
+      "x-notes": "contract.r9 (updated_at >= created_at) — уровень warn, требует сравнения двух полей; не выражается в JSON Schema без зависимости от порядка, поэтому валидатор.",
+      "x-rules": [
+        "contract.r7"
+      ]
+    },
+    "status": {
+      "$ref": "./enums.json#/$defs/status",
+      "description": "Стадия жизненного цикла данных."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "./formats.json#/$defs/tag"
+      },
+      "description": "Свободные метки Obsidian. Не валидируются семантически (00_overview §2)."
+    }
+  },
+  "patternProperties": {
+    "^cat_[a-z][a-z0-9_]{1,30}$": {
+      "type": "array",
+      "items": {
+        "$ref": "./formats.json#/$defs/wikilink"
+      },
+      "description": "Назначения категорий одной оси классификации: cat_<facet_key> (ADR-0007). Расширяемый системный слой: состав полей порождается определениями Facet.",
+      "x-notes": "classif.r3 (кардинальность фасета), classif.r11 (цель — Category своего фасета), classif.r12 (поле без фасета) — требуют индекса фасетов, валидатор."
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "title",
+    "created_at",
+    "updated_at",
+    "status"
+  ],
+  "x-contract-size": 8,
+  "x-notes": "Восемь фиксированных полей контракта (id, type, title, aliases, created_at, updated_at, status, tags) плюс расширяемый системный слой cat_*. Поле categories удалено из контракта решением D-0029."
+}

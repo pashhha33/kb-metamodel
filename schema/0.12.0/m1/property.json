@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secondbrain.local/schema/0.12.0/m1/property.json",
+  "title": "Property",
+  "description": "Определение свойства (M1): хранит значения по умолчанию ограничений, которые тип может ужесточить через property_overrides. Нормативный источник: docs/metamodel/00_overview.md §3, §6; ADR-0003 §3.2; ADR-0006 §3.3 (target_facet); ADR-0010 §3.2 (unique_within); ADR-0011 §3.1 (expected_media_roles).",
+  "type": "object",
+  "properties": {
+    "type": {
+      "const": "property"
+    },
+    "title": {
+      "allOf": [
+        {
+          "$ref": "../common/formats.json#/$defs/property_key"
+        }
+      ],
+      "description": "Ключ свойства: именно он становится именем поля в YAML объекта (ADR-0001, ADR-0003 §3.2). Канон — EN snake_case; исторические русские ключи принимаются слоем совместимости с диагностикой warn и подлежат миграции. См. находку F-3.1."
+    },
+    "label": {
+      "$ref": "../common/formats.json#/$defs/label",
+      "description": "Подпись свойства: показывается в модалке свойств плагина и подставляется как displayName в представлениях (ADR-0001)."
+    },
+    "value_type": {
+      "$ref": "../common/enums.json#/$defs/value_type",
+      "description": "Тип значения из закрытого набора 6 значений. Не может быть изменён в наследнике (inherit.r2)."
+    },
+    "cardinality": {
+      "$ref": "../common/enums.json#/$defs/cardinality",
+      "description": "Кардинальность значения: 0..1, 1, 0..n, 1..n.",
+      "x-rules": [
+        "format.r1"
+      ]
+    },
+    "required": {
+      "type": "boolean",
+      "description": "Обязательность. Производна от кардинальности для простых случаев, но хранится явно для читаемости (ADR-0003 §3.2)."
+    },
+    "scope": {
+      "$ref": "../common/enums.json#/$defs/scope",
+      "description": "Область применения. universal применяется ко всем типам автоматически и не перечисляется в ObjectType.properties."
+    },
+    "target_types": {
+      "type": "array",
+      "items": {
+        "$ref": "../common/formats.json#/$defs/wikilink"
+      },
+      "description": "Допустимые типы цели для value_type: reference. Пустой список означает «любой тип». Абстрактный тип в списке означает «любой наследник» (ADR-0005).",
+      "x-notes": "link.r2 (тип цели соответствует target_types) — валидатор."
+    },
+    "target_facet": {
+      "oneOf": [
+        {
+          "$ref": "../common/formats.json#/$defs/wikilink"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Ограничивает допустимые значения одним фасетом при value_type: reference и target_types: [category] (ADR-0006 §3.3, D-0031). Без него значением роли могла бы стать любая категория.",
+      "x-notes": "link.r3 (цель является Category этого фасета) — валидатор."
+    },
+    "expected_media_roles": {
+      "type": "array",
+      "items": {
+        "$ref": "../common/enums.json#/$defs/media_role"
+      },
+      "uniqueItems": true,
+      "description": "Фильтр кандидатов для свойств, ссылающихся на медиаобёртки: предлагаются только обёртки, у которых хотя бы одна роль совпадает (ADR-0011 §3.1).",
+      "x-notes": "media.r5 (роль не совпала) — валидатор."
+    },
+    "unique_within": {
+      "oneOf": [
+        {
+          "$ref": "../common/formats.json#/$defs/wikilink"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Свойство, задающее область действия уникальности: пара (значение области, значение этого свойства) уникальна в хранилище. Первое межобъектное ограничение модели (ADR-0010 §3.2).",
+      "x-notes": "unique.r1 (уникальность пары в хранилище) — межобъектное, требует индекса «значение области → объекты»; валидатор."
+    },
+    "allowed_values": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "description": "Перечень допустимых значений для перечислимых свойств. В MVP — только список строк (закрывает C-24)."
+    },
+    "definition": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4000,
+      "description": "Смысл свойства (= rdfs:comment). Не может быть изменён в наследнике (inherit.r1)."
+    },
+    "lifecycle": {
+      "$ref": "../common/enums.json#/$defs/lifecycle",
+      "description": "Жизненный цикл определения."
+    }
+  },
+  "required": [
+    "type",
+    "label",
+    "value_type",
+    "cardinality",
+    "required",
+    "scope"
+  ],
+  "allOf": [
+    {
+      "$ref": "../common/system_contract.json"
+    },
+    {
+      "$comment": "meta.r2: target_types задан, если value_type: reference. Пустой список означает «любой тип», поэтому требование — наличие поля, а не непустота.",
+      "if": {
+        "properties": {
+          "value_type": {
+            "const": "reference"
+          }
+        },
+        "required": [
+          "value_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "target_types"
+        ]
+      },
+      "else": {
+        "not": {
+          "required": [
+            "target_types"
+          ]
+        }
+      },
+      "x-rules": [
+        "meta.r2"
+      ]
+    },
+    {
+      "$comment": "meta.r3: target_facet задан только при target_types: [category].",
+      "if": {
+        "properties": {
+          "target_types": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 1,
+            "items": {
+              "pattern": "\\(CAT-[0-9A-HJKMNP-TV-Z]{26}\\)"
+            }
+          }
+        },
+        "required": [
+          "target_types"
+        ]
+      },
+      "then": true,
+      "else": {
+        "properties": {
+          "target_facet": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ],
+  "x-notes": "Условие meta.r3 распознаёт target_types: [category] по стабильной части ссылки (CAT-ULID). Если ссылка записана без стабильной части (исторические данные), условие не срабатывает и проверка остаётся за валидатором — см. SCHEMA_VALIDATION_REPORT §4.",
+  "unevaluatedProperties": false,
+  "x-strictness": "unevaluatedProperties: false — определения M1 имеют закрытый словарь полей (ядро M2 заморожено, D-0056). Опечатка в поле определения даёт понятную ошибку схемы вместо молчаливого игнорирования. Последствия для локализаций label_*: они объявлены явно только там, где это задел (ObjectType); добавление остальных — аддитивное изменение схемы."
+}

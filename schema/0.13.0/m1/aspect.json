@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secondbrain.local/schema/0.13.0/m1/aspect.json",
+  "title": "Aspect",
+  "description": "Набор свойств, активируемых назначенными категориями (12-й тип M1, реализует требование R-TRIGGER). Активация включает потомков категории. Нормативный источник: ADR-0008 §3.1…§3.3; docs/metamodel/00_overview.md §7.3.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "const": "aspect"
+    },
+    "title": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{0,63}$",
+      "description": "Ключ аспекта: EN snake_case (literary_person, ai_generated_media)."
+    },
+    "label": {
+      "$ref": "../common/formats.json#/$defs/label",
+      "description": "Подпись аспекта: «Литературная деятельность», «Генерация ИИ»."
+    },
+    "trigger_categories": {
+      "type": "array",
+      "items": {
+        "$ref": "../common/formats.json#/$defs/wikilink"
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "Категории, при назначении которых объект получает свойства аспекта, кардинальность 1..n. Аспект активируется, если назначена сама категория из списка или любой её потомок (обход parent вниз)."
+    },
+    "properties": {
+      "type": "array",
+      "items": {
+        "$ref": "../common/formats.json#/$defs/wikilink"
+      },
+      "minItems": 1,
+      "description": "Плоский упорядоченный список активируемых свойств, кардинальность 1..n. Значения хранятся в плоском frontmatter самого объекта: отдельный объект-«профиль» не создаётся."
+    },
+    "property_overrides": {
+      "type": "array",
+      "items": {
+        "$ref": "./object_type.json#/$defs/property_override"
+      },
+      "description": "Ужесточения ограничений для свойств в контексте аспекта. Порядок применения аспектов — по возрастанию id (детерминированно, ADR-0008 §3.3 п.6b).",
+      "x-notes": "aspect.r2 (конфликт двух аспектов) — error при загрузке метамодели; aspect.r5 (аспект переопределяет свойство типа) — warn. Оба межобъектные, валидатор."
+    },
+    "is_active": {
+      "type": "boolean",
+      "description": "Выключенный аспект не активируется; позволяет временно отключить набор без удаления.",
+      "x-rules": [
+        "aspect.r6"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "lifecycle": {
+      "$ref": "../common/enums.json#/$defs/lifecycle"
+    },
+    "trigger_relation_types": {
+      "type": "array",
+      "items": {
+        "$ref": "../common/formats.json#/$defs/wikilink"
+      },
+      "description": "ЗАДЕЛ (в MVP не используется): расширение триггера на тип отношения. Семантика «ИЛИ» относительно trigger_categories (ADR-0008 §3.6)."
+    },
+    "trigger_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "ЗАДЕЛ (в MVP не используется): триггер по значению свойства."
+    },
+    "trigger_types": {
+      "type": "array",
+      "items": {
+        "$ref": "../common/formats.json#/$defs/wikilink"
+      },
+      "description": "ЗАДЕЛ (в MVP не используется): триггер по типу объекта."
+    }
+  },
+  "required": [
+    "type",
+    "label",
+    "trigger_categories",
+    "properties",
+    "is_active"
+  ],
+  "allOf": [
+    {
+      "$ref": "../common/system_contract.json"
+    }
+  ],
+  "x-notes": "aspect.r1 (значение свойства есть, а аспект не сработал) — warn, проверяется на объекте M0, а не на аспекте; валидатор. Поле layer у аспекта равно system (ADR-0008 §3.1), но layer обязателен только для ObjectType — см. находку F-3.3.",
+  "unevaluatedProperties": false,
+  "x-strictness": "unevaluatedProperties: false — определения M1 имеют закрытый словарь полей (ядро M2 заморожено, D-0056). Опечатка в поле определения даёт понятную ошибку схемы вместо молчаливого игнорирования. Последствия для локализаций label_*: они объявлены явно только там, где это задел (ObjectType); добавление остальных — аддитивное изменение схемы.",
+  "x-title-role": "key (D-0063, NAME_MAPPING §0)"
+}

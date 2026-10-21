@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secondbrain.local/schema/metamodel-0.13.0.schema.json",
+  "title": "Second Brain Metamodel 0.13.0 — точка входа",
+  "description": "Корневая схема метамодели: диспетчеризация объекта frontmatter по полю type. Форма — раздельные файлы (Q-49 = B, D-0061): этот файл собирает ветки из schema/0.12.0/**, производный единый файл собирается скриптом tools/schema-bundle.cjs. Схема нормативна для формы данных; из неё генерируются TypeScript-типы (Q-50 = C, D-0062). Межобъектные правила (ссылочная целостность, наследование, активация аспектов, уникальность в области действия) в JSON Schema невыразимы и остаются обязанностью валидатора: матрица покрытия — docs/validation/RULES.md §14.1.",
+  "x-metamodel-version": "0.13.0",
+  "x-metamodel-stage": "superseded",
+  "x-previous-schema": "schema/metamodel-0.12.0.schema.json",
+  "x-normative-sources": [
+    "docs/metamodel/00_overview.md",
+    "docs/metamodel/NAME_MAPPING.md",
+    "docs/metamodel/TYPE_PREFIX_REGISTRY.md",
+    "docs/validation/RULES.md",
+    "docs/adr/ADR-0001…ADR-0011",
+    "docs/metamodel/NAME_MAPPING.md §0 (норма title, D-0063)"
+  ],
+  "x-generated-artifacts": [
+    "schema/dist/metamodel-0.13.0.bundle.json",
+    "src/generated/metamodel-0.13.0.types.ts"
+  ],
+  "type": "object",
+  "required": [
+    "type"
+  ],
+  "unevaluatedProperties": false,
+  "x-registry": {
+    "description": "Снимок реестра для удобства инструментов. Источник истины — docs/metamodel/TYPE_PREFIX_REGISTRY.md (это производный снимок, не норматив).",
+    "type_prefixes": {
+      "system": {
+        "object_type": "OTYPE",
+        "property_type": "PTYPE",
+        "property": "PROP",
+        "relation_type": "RTYPE",
+        "relation": "REL",
+        "taxonomy": "TAX",
+        "facet": "FACET",
+        "category": "CAT",
+        "media_asset": "MEDIA",
+        "view": "VIEW",
+        "automation": "AUTO",
+        "aspect": "ASPECT"
+      },
+      "domain_abstract": {
+        "context": null,
+        "activity": null,
+        "knowledge": null,
+        "work": null,
+        "collection": null,
+        "source": null
+      },
+      "domain_concrete_mvp": {
+        "person": "PERSON",
+        "character": "CHAR",
+        "organization": "ORG",
+        "project": "PROJ",
+        "task": "TASK",
+        "book": "BOOK",
+        "chapter": "CHAP",
+        "article": "ARTICLE",
+        "gallery": "GALLERY"
+      },
+      "reserved_forbidden": [
+        "PROPERTY",
+        "PROPERTY-TYPE",
+        "OBJECT-TYPE",
+        "RELATION-TYPE",
+        "CHARACTЕR",
+        "DOC",
+        "SB"
+      ],
+      "count_active": 21
+    }
+  },
+  "x-dispatch-note": "Диспетчеризация выражена через anyOf, а не oneOf: ветки взаимоисключающи (каждая требует своё const значения type, а ветка экземпляра M0 запрещает идентификаторы системных типов), но oneOf заставил бы AJV сообщать «более одного совпадения» как ошибку и перечислять ошибки всех веток. anyOf даёт то же поведение с более короткой диагностикой. Ветки намеренно содержат только $ref: соседние ключевые слова применяются НАРЯДУ с целью ссылки и переопределили бы required фрагмента.",
+  "anyOf": [
+    {
+      "$ref": "./0.13.0/m1/object_type.json"
+    },
+    {
+      "$ref": "./0.13.0/m1/property_type.json"
+    },
+    {
+      "$ref": "./0.13.0/m1/property.json"
+    },
+    {
+      "$ref": "./0.13.0/m1/relation_type.json"
+    },
+    {
+      "$ref": "./0.13.0/m1/relation.json"
+    },
+    {
+      "$ref": "./0.13.0/m1/taxonomy.json"
+    },
+    {
+      "$ref": "./0.13.0/m1/facet.json"
+    },
+    {
+      "$ref": "./0.13.0/m1/category.json"
+    },
+    {
+      "$ref": "./0.13.0/m1/media_asset.json"
+    },
+    {
+      "$ref": "./0.13.0/m1/view.json"
+    },
+    {
+      "$ref": "./0.13.0/m1/automation.json"
+    },
+    {
+      "$ref": "./0.13.0/m1/aspect.json"
+    },
+    {
+      "$ref": "./0.13.0/common/m0_instance.json"
+    }
+  ],
+  "x-superseded-by": "schema/metamodel-0.14.0.schema.json"
+}

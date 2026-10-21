@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secondbrain.local/schema/0.12.0/m1/category.json",
+  "title": "Category",
+  "description": "Значение внутри фасета. Категория принадлежит ровно одному фасету; перенос в другой фасет — контролируемая операция, поскольку меняет смысл назначения. Нормативный источник: docs/metamodel/00_overview.md §4.1; ADR-0005 §3.1; ADR-0006 §3.1.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "const": "category"
+    },
+    "label": {
+      "$ref": "../common/formats.json#/$defs/label",
+      "description": "Подпись категории: «Писатель», «Генерация ИИ»."
+    },
+    "facet": {
+      "$ref": "../common/formats.json#/$defs/wikilink",
+      "description": "Фасет-владелец. Ссылка только вверх (ADR-0005 §3.1)."
+    },
+    "parent": {
+      "oneOf": [
+        {
+          "$ref": "../common/formats.json#/$defs/wikilink"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../common/formats.json#/$defs/wikilink"
+          }
+        }
+      ],
+      "description": "Родительская категория. Корень определяется пустым parent; искусственный объект «Корень» не создаётся. Форма записи — строка-ссылка; список допущен потому, что кардинальность зависит от hierarchy_mode фасета (strict — не более одного parent, polyhierarchical — несколько), а режим хранится не в категории. Пустой список как способ записи «нет родителя» (пример ADR-0006 §3.1) допущен, но помечен находкой F-3.11.",
+      "x-notes": "classif.r5 (цикл в parent) — межобъектное, валидатор."
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "lifecycle": {
+      "$ref": "../common/enums.json#/$defs/lifecycle"
+    }
+  },
+  "required": [
+    "type",
+    "label",
+    "facet"
+  ],
+  "allOf": [
+    {
+      "$ref": "../common/system_contract.json"
+    }
+  ],
+  "x-notes": "classif.r7 (мёртвая категория), classif.r8 (уникальность названия в фасете), classif.r9 (одинаковое название в разных фасетах) — межобъектные, валидатор.",
+  "unevaluatedProperties": false,
+  "x-strictness": "unevaluatedProperties: false — определения M1 имеют закрытый словарь полей (ядро M2 заморожено, D-0056). Опечатка в поле определения даёт понятную ошибку схемы вместо молчаливого игнорирования. Последствия для локализаций label_*: они объявлены явно только там, где это задел (ObjectType); добавление остальных — аддитивное изменение схемы."
+}

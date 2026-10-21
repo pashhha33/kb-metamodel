@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secondbrain.local/schema/0.12.0/m1/media_asset.json",
+  "title": "MediaAsset",
+  "description": "Медиаобёртка: реификация ссылки на файл, потому что у связи файла с объектом есть атрибуты (роли, источник, автор, лицензия, метод создания). Relation поверх обёртки не вводится — это была бы двойная реификация. Связь с объектами хранится в свойствах объекта (Book.cover, Person.portrait, Organization.logo); обёртка список объектов не хранит, обратный список вычисляется. Нормативный источник: ADR-0011 §3.1…§3.8; docs/metamodel/00_overview.md §7.5.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "const": "media_asset"
+    },
+    "label": {
+      "$ref": "../common/formats.json#/$defs/label",
+      "description": "Подпись обёртки. В нормативной таблице полей (ADR-0011 §4) label отсутствует, хотя naming.r10 требует label у каждого определения M1; обёртка является экземпляром системного типа. В схеме поле необязательно — см. находку F-3.12."
+    },
+    "file": {
+      "$ref": "../common/formats.json#/$defs/file_path",
+      "description": "Путь к медиафайлу внутри хранилища. Имя бинарного файла: {title} ({MEDIA}-{id}).{ext} — конвенция ADR-0002 распространена на бинарные файлы; расширение сохраняется, переименование только при создании и по явной команде.",
+      "x-notes": "media.r1 / meta.r9 (файл существует в хранилище) — требует vault, валидатор. naming.r11 и media.r9 (конвенция имени) — валидатор."
+    },
+    "media_kind": {
+      "$ref": "../common/enums.json#/$defs/media_kind",
+      "description": "Класс файла: image, audio, video, document.",
+      "x-rules": [
+        "media.r2"
+      ]
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "$ref": "../common/enums.json#/$defs/media_role"
+      },
+      "uniqueItems": true,
+      "description": "Семантические роли обёртки, кардинальность 0..n (T10, D-0050). Множественность ролей устраняет потребность реифицировать пару «объект — обёртка».",
+      "x-notes": "media.r5 (соответствие expected_media_roles свойства) — валидатор.",
+      "x-rules": [
+        "media.r2"
+      ]
+    },
+    "galleries": {
+      "type": "array",
+      "items": {
+        "$ref": "../common/formats.json#/$defs/wikilink"
+      },
+      "uniqueItems": true,
+      "description": "Привязка к галереям, кардинальность 0..n. Порядок не хранится: сортировка является свойством представления (Q-42 = B, D-0052). У Gallery нет поля состава — состав вычисляется из обратных ссылок.",
+      "x-notes": "media.r3 (цель — объект типа gallery, без дубликатов), media.r7 (более 5 галерей) — валидатор. Уникальность элементов обеспечивается uniqueItems."
+    },
+    "cat_creation_method": {
+      "type": "array",
+      "items": {
+        "$ref": "../common/formats.json#/$defs/wikilink"
+      },
+      "description": "Назначение метода создания: поле расширяемого системного слоя cat_<key> для фасета creation_method (ADR-0011 §3.3). Значение «Генерация ИИ» активирует аспект ai_generated_media."
+    },
+    "source_url": {
+      "type": "string",
+      "maxLength": 2048,
+      "description": "Откуда взято (справочно), кардинальность 0..1 — поле нормативно по ADR-0011 §4. Отложен механизм создания обёртки из сетевого адреса: он конфликтует с рамкой «локально и офлайн» (D-0054, отклонение 3). Заполнение поля вручную допустимо."
+    },
+    "author": {
+      "oneOf": [
+        {
+          "$ref": "../common/formats.json#/$defs/wikilink"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Автор медиафайла: ссылка на Person или Organization, кардинальность 0..1 (ADR-0011 §4, нормативно)."
+    },
+    "license": {
+      "type": "string",
+      "maxLength": 300,
+      "description": "Лицензия."
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "lifecycle": {
+      "$ref": "../common/enums.json#/$defs/lifecycle"
+    }
+  },
+  "required": [
+    "type",
+    "file",
+    "media_kind"
+  ],
+  "allOf": [
+    {
+      "$ref": "../common/system_contract.json"
+    }
+  ],
+  "x-notes": "Технические метаданные (width, height, aspect_ratio, file_size) не хранятся: читаются по требованию и кэшируются в служебной области (ADR-0011 §3.8, X-01). media.r4 (обёртка-сирота), media.r6 (один файл у нескольких обёрток), media.r8 (вложение без обёртки) — валидатор.",
+  "unevaluatedProperties": false,
+  "x-strictness": "unevaluatedProperties: false — определения M1 имеют закрытый словарь полей (ядро M2 заморожено, D-0056). Опечатка в поле определения даёт понятную ошибку схемы вместо молчаливого игнорирования. Последствия для локализаций label_*: они объявлены явно только там, где это задел (ObjectType); добавление остальных — аддитивное изменение схемы."
+}

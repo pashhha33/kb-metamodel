@@ -1,0 +1,26 @@
+{
+  "name": "second-brain-metamodel-tools",
+  "version": "0.12.0",
+  "private": true,
+  "description": "Инструменты фазы 3: сборка JSON Schema метамодели, генерация TypeScript-типов из схемы, матрица покрытия правил, песочница валидации. Не является плагином Obsidian: исходники плагина появляются в фазе 5 (plugin/).",
+  "type": "commonjs",
+  "scripts": {
+    "schema:bundle": "node tools/schema-bundle.cjs",
+    "schema:types": "node tools/schema-types.cjs",
+    "schema:coverage": "node tools/rule-coverage.cjs",
+    "fixtures": "node tools/fixtures/generate.cjs",
+    "schema:validate": "node tools/validate.cjs",
+    "schema:all": "node tools/schema-lint.cjs && node tools/schema-bundle.cjs && node tools/schema-types.cjs && node tools/rule-coverage.cjs && node tools/fixtures/generate.cjs && node tools/validate.cjs",
+    "test": "npm run schema:all",
+    "schema:lint": "node tools/schema-lint.cjs"
+  },
+  "devDependencies": {
+    "@apidevtools/json-schema-ref-parser": "^15.5.2",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
+    "json-schema-to-typescript": "^15.0.0",
+    "yaml": "^2.9.1"
+  },
+  "x-offline-note": "Все зависимости локальные и не требуют сети в момент работы плагина: они нужны только на этапе сборки артефактов. Плагин работает офлайн (рамка MVP, D-0057).",
+  "x-sandbox-note": "В песочнице ассистента пакеты установлены в /tmp/node_modules: запуск с NODE_PATH=/tmp/node_modules node tools/<скрипт>.cjs"
+}

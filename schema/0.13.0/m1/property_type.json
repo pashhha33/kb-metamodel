@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secondbrain.local/schema/0.13.0/m1/property_type.json",
+  "title": "PropertyType",
+  "description": "Тип значения свойства. УСТАРЕВШИЙ МЕХАНИЗМ: набор значений закрыт на уровне M2 (enum value_type из 6 значений, ADR-0003), поэтому объекты PropertyType не несут самостоятельной семантики и не создаются. Тип сохранён в реестре, чтобы не переиспользовать префикс PTYPE (TYPE_PREFIX_REGISTRY §1 R8) и не ломать счёт «12 типов ядра M1». Решение об удалении типа из ядра требует ADR и не принято. См. находку F-3.2.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "const": "property_type"
+    },
+    "title": {
+      "$ref": "../common/enums.json#/$defs/value_type",
+      "description": "Идентификатор типа значения: text, number, date, datetime, boolean, reference. Совпадает со значением Property.value_type. Норма D-0063: title обязателен и является значением из закрытого набора."
+    },
+    "label": {
+      "$ref": "../common/formats.json#/$defs/label",
+      "description": "Подпись: Текст, Число, Дата, Дата и время, Логическое, Ссылка (NAME_MAPPING §3)."
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "lifecycle": {
+      "$ref": "../common/enums.json#/$defs/lifecycle",
+      "default": "deprecated",
+      "description": "Рекомендуемое значение — deprecated: механизм заменён закрытым enum value_type."
+    }
+  },
+  "required": [
+    "type",
+    "title",
+    "label"
+  ],
+  "allOf": [
+    {
+      "$ref": "../common/system_contract.json"
+    }
+  ],
+  "x-notes": "meta.r1 (Property.value_type — существующий PropertyType из закрытого набора) обеспечивается enum value_type; разрешение ссылки на объект PropertyType не требуется. Судьба типа в ядре M1 решается в фазе 3c при описании 12 типов (Q-54 = C, D-0066): до этого момента тип сохраняется со статусом deprecated, префикс PTYPE не переиспользуется.",
+  "unevaluatedProperties": false,
+  "x-strictness": "unevaluatedProperties: false — определения M1 имеют закрытый словарь полей (ядро M2 заморожено, D-0056). Опечатка в поле определения даёт понятную ошибку схемы вместо молчаливого игнорирования. Последствия для локализаций label_*: они объявлены явно только там, где это задел (ObjectType); добавление остальных — аддитивное изменение схемы.",
+  "x-title-role": "key (D-0063, NAME_MAPPING §0)"
+}

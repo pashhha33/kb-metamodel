@@ -1,0 +1,273 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secondbrain.local/schema/0.13.0/common/enums.json",
+  "title": "Enums",
+  "description": "Закрытые перечисления метамодели (уровень M2, заморожены). Нормативный источник: docs/metamodel/00_overview.md §8; docs/metamodel/NAME_MAPPING.md §7.",
+  "$defs": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "capture",
+        "draft",
+        "normalizing",
+        "active",
+        "archived",
+        "deleted"
+      ],
+      "description": "Жизненный цикл данных (Спецификация §15, ADR-0009). Архивирование выражается только значением archived: файл не перемещается, имя не меняется, ссылки остаются валидными.",
+      "x-notes": "lifecycle.r1…r5 — межобъектные и процедурные, валидатор.",
+      "x-rules": [
+        "contract.r8",
+        "format.r2"
+      ]
+    },
+    "type_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "maxLength": 64,
+      "description": "Идентификатор типа: snake_case, EN, ASCII. Проверяется по индексу типов, не разрешением ссылки (ADR-0005).",
+      "x-notes": "contract.r5 (тип не абстрактный) требует индекса типов — проверяется валидатором."
+    },
+    "lifecycle": {
+      "type": "string",
+      "enum": [
+        "experimental",
+        "standard",
+        "deprecated",
+        "archived"
+      ],
+      "description": "Жизненный цикл модельных сущностей (Спецификация §16).",
+      "x-notes": "meta.r11 (deprecated, но используется) — валидатор.",
+      "x-rules": [
+        "format.r2"
+      ]
+    },
+    "value_type": {
+      "type": "string",
+      "enum": [
+        "text",
+        "number",
+        "date",
+        "datetime",
+        "boolean",
+        "reference"
+      ],
+      "description": "Тип значения свойства. Закрытый набор из 6 значений (ADR-0003, закрывает C-22). Значения «Список» и «Список ссылок» удалены: множественность выражается через cardinality.",
+      "x-rules": [
+        "meta.r1",
+        "format.r2"
+      ]
+    },
+    "cardinality": {
+      "type": "string",
+      "enum": [
+        "0..1",
+        "1",
+        "0..n",
+        "1..n"
+      ],
+      "description": "Единый формат кардинальности для всей метамодели (закрывает C-23). Записывается строчными латинскими n; варианты 0..N и 1..N из ADR-0003 — опечатка, см. находку F-3.9.",
+      "x-notes": "property.r2 (фактическая мощность значения), inherit.r4 (не расширять) — валидатор.",
+      "x-rules": [
+        "format.r1",
+        "format.r2"
+      ]
+    },
+    "scope": {
+      "type": "string",
+      "enum": [
+        "universal",
+        "family",
+        "specific"
+      ],
+      "description": "Область применения свойства (закрывает C-21). universal применяется ко всем типам автоматически и не перечисляется в ObjectType.properties.",
+      "x-notes": "property.r7 (universal не ослаблено в типе) — валидатор.",
+      "x-rules": [
+        "format.r2"
+      ]
+    },
+    "layer": {
+      "type": "string",
+      "enum": [
+        "system",
+        "domain"
+      ],
+      "description": "system — тип принадлежит метамодели; domain — описывает знания пользователя (ADR-0005).",
+      "x-rules": [
+        "format.r2"
+      ]
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "directed",
+        "symmetric"
+      ],
+      "description": "Направленность типа отношения (закрывает C-29).",
+      "x-notes": "relation.r5 (обратная связь при symmetric) — валидатор.",
+      "x-rules": [
+        "format.r2"
+      ]
+    },
+    "uniqueness_rule": {
+      "type": "string",
+      "enum": [
+        "none",
+        "unique_triple",
+        "unique_subject",
+        "unique_object"
+      ],
+      "description": "Правило уникальности экземпляров отношения (закрывает C-28).",
+      "x-notes": "relation.r4 (соблюдение правила) — межобъектное, валидатор.",
+      "x-rules": [
+        "format.r2"
+      ]
+    },
+    "hierarchy_mode": {
+      "type": "string",
+      "enum": [
+        "strict",
+        "polyhierarchical"
+      ],
+      "description": "Режим иерархии фасета. strict — у категории не более одного parent.",
+      "x-notes": "classif.r4, classif.r5 — валидатор.",
+      "x-rules": [
+        "format.r2"
+      ]
+    },
+    "root_requirement": {
+      "type": "string",
+      "enum": [
+        "single",
+        "multiple",
+        "none"
+      ],
+      "description": "Требование к числу корневых категорий фасета.",
+      "x-notes": "classif.r6 — валидатор.",
+      "x-rules": [
+        "format.r2"
+      ]
+    },
+    "assignment_cardinality": {
+      "$ref": "#/$defs/cardinality",
+      "description": "Кардинальность назначения категорий фасета: сколько категорий оси может быть назначено объекту."
+    },
+    "sequence_direction": {
+      "type": "string",
+      "enum": [
+        "ascending",
+        "descending"
+      ],
+      "default": "ascending",
+      "description": "Направление сортировки последовательности (ADR-0010 §2.2).",
+      "x-rules": [
+        "format.r2"
+      ]
+    },
+    "mechanism": {
+      "type": "string",
+      "enum": [
+        "bases",
+        "table",
+        "card",
+        "kanban",
+        "graph",
+        "query",
+        "custom"
+      ],
+      "description": "Абстрактный идентификатор механизма представления или автоматизации. Названия инструментов запрещены (правило расслоения L-1…L-4, D-0057; закрывает C-36)."
+    },
+    "trigger": {
+      "type": "string",
+      "enum": [
+        "manual",
+        "on_create",
+        "on_update",
+        "scheduled"
+      ],
+      "description": "Абстрактный идентификатор триггера автоматизации.",
+      "x-rules": [
+        "meta.r8",
+        "format.r2"
+      ]
+    },
+    "media_role": {
+      "type": "string",
+      "enum": [
+        "cover",
+        "banner",
+        "logo",
+        "portrait",
+        "avatar",
+        "preview",
+        "background",
+        "other"
+      ],
+      "description": "Семантическая роль медиаобёртки (ADR-0011 §3.2). Кардинальность roles — 0..n (T10, D-0050).",
+      "x-notes": "meta.r10 сформулировано для устаревшего поля role; см. находку F-3.6.",
+      "x-rules": [
+        "media.r2",
+        "format.r2"
+      ]
+    },
+    "media_kind": {
+      "type": "string",
+      "enum": [
+        "image",
+        "audio",
+        "video",
+        "document"
+      ],
+      "description": "Класс медиафайла обёртки.",
+      "x-rules": [
+        "media.r2",
+        "format.r2"
+      ]
+    },
+    "m1_type": {
+      "type": "string",
+      "enum": [
+        "object_type",
+        "property_type",
+        "property",
+        "relation_type",
+        "relation",
+        "taxonomy",
+        "facet",
+        "category",
+        "media_asset",
+        "view",
+        "automation",
+        "aspect"
+      ],
+      "description": "Двенадцать системных типов ядра M1 (00_overview §3). relation и media_asset — системные типы, чьи объекты являются экземплярами, а не определениями; их форма статична и задана ядром (см. SCHEMA_VALIDATION_REPORT §2)."
+    },
+    "m0_abstract_type": {
+      "type": "string",
+      "enum": [
+        "context",
+        "activity",
+        "knowledge",
+        "work",
+        "collection",
+        "source"
+      ],
+      "description": "Шесть абстрактных предметных типов. Экземпляры не создаются (contract.r5); могут быть целью subject_types/object_types в значении «любой наследник»."
+    },
+    "m0_concrete_type_mvp": {
+      "type": "string",
+      "enum": [
+        "person",
+        "character",
+        "organization",
+        "project",
+        "task",
+        "book",
+        "chapter",
+        "article",
+        "gallery"
+      ],
+      "description": "Девять конкретных предметных типов MVP (00_overview §5.2). Набор открыт: остальные 27 типов добавляются как данные M1 без ADR и релиза, поэтому значение type у экземпляра не ограничено этим enum."
+    }
+  }
+}

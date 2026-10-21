@@ -1,0 +1,648 @@
+{
+  "generated_at": "2026-10-21T14:04:11.143Z",
+  "schema_version": "0.14.0",
+  "totals": {
+    "total": 114,
+    "error": 83,
+    "warn": 27,
+    "info": 4,
+    "schema": 29,
+    "validator": 85
+  },
+  "covered": [
+    {
+      "id": "contract.r1",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/common/system_contract.json"
+      ]
+    },
+    {
+      "id": "contract.r2",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/common/formats.json"
+      ]
+    },
+    {
+      "id": "contract.r4",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/common/m0_instance.json"
+      ]
+    },
+    {
+      "id": "contract.r6",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/common/system_contract.json"
+      ]
+    },
+    {
+      "id": "contract.r7",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/common/system_contract.json"
+      ]
+    },
+    {
+      "id": "contract.r8",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/common/enums.json"
+      ]
+    },
+    {
+      "id": "naming.r1",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/common/formats.json"
+      ]
+    },
+    {
+      "id": "naming.r2",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/common/formats.json"
+      ]
+    },
+    {
+      "id": "naming.r4",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/common/formats.json"
+      ]
+    },
+    {
+      "id": "naming.r5",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/common/formats.json"
+      ]
+    },
+    {
+      "id": "naming.r7",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/m1/object_type.json"
+      ]
+    },
+    {
+      "id": "naming.r8",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/common/formats.json"
+      ]
+    },
+    {
+      "id": "format.r1",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/common/enums.json",
+        "schema/0.14.0/m1/property.json"
+      ]
+    },
+    {
+      "id": "format.r2",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/common/enums.json"
+      ]
+    },
+    {
+      "id": "link.r4",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/common/formats.json"
+      ]
+    },
+    {
+      "id": "relation.r1",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/m1/relation.json"
+      ]
+    },
+    {
+      "id": "inherit.r1",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/m1/object_type.json"
+      ]
+    },
+    {
+      "id": "inherit.r2",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/m1/object_type.json"
+      ]
+    },
+    {
+      "id": "aspect.r6",
+      "level": "info",
+      "files": [
+        "schema/0.14.0/m1/aspect.json"
+      ]
+    },
+    {
+      "id": "meta.r1",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/common/enums.json"
+      ]
+    },
+    {
+      "id": "meta.r2",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/m1/property.json"
+      ]
+    },
+    {
+      "id": "meta.r3",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/m1/property.json"
+      ]
+    },
+    {
+      "id": "meta.r5",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/m1/taxonomy.json"
+      ]
+    },
+    {
+      "id": "meta.r7",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/m1/view.json"
+      ]
+    },
+    {
+      "id": "meta.r8",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/common/enums.json",
+        "schema/0.14.0/m1/automation.json"
+      ]
+    },
+    {
+      "id": "alias.r3",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/common/system_contract.json"
+      ]
+    },
+    {
+      "id": "sequence.r1",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/m1/object_type.json"
+      ]
+    },
+    {
+      "id": "sequence.r6",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/m1/object_type.json"
+      ]
+    },
+    {
+      "id": "media.r2",
+      "level": "error",
+      "files": [
+        "schema/0.14.0/common/enums.json",
+        "schema/0.14.0/m1/media_asset.json"
+      ]
+    }
+  ],
+  "validator_only": [
+    {
+      "id": "contract.r3",
+      "level": "error",
+      "reason": "Межобъектное: уникальность id в хранилище"
+    },
+    {
+      "id": "contract.r5",
+      "level": "error",
+      "reason": "Требует индекса типов: абстрактность типа хранится в определении ObjectType"
+    },
+    {
+      "id": "contract.r9",
+      "level": "warn",
+      "reason": "Сравнение двух полей с приведением форматов даты"
+    },
+    {
+      "id": "contract.r10",
+      "level": "error",
+      "reason": "Требует имени файла: схема проверяет только frontmatter"
+    },
+    {
+      "id": "contract.r11",
+      "level": "error",
+      "reason": "Требует имени файла: соответствие шаблону {title} ({PREFIX}-{id}).md"
+    },
+    {
+      "id": "contract.r12",
+      "level": "warn",
+      "reason": "Требует имени файла: усечение title до 60 символов"
+    },
+    {
+      "id": "naming.r3",
+      "level": "error",
+      "reason": "Межобъектное: уникальность key среди всех Property"
+    },
+    {
+      "id": "naming.r6",
+      "level": "error",
+      "reason": "Межобъектное: уникальность type_prefix по реестру"
+    },
+    {
+      "id": "naming.r9",
+      "level": "error",
+      "reason": "Межобъектное: глобальная уникальность Facet.key"
+    },
+    {
+      "id": "naming.r10",
+      "level": "error",
+      "reason": "Межобъектная уникальность"
+    },
+    {
+      "id": "naming.r11",
+      "level": "error",
+      "reason": "Требует имени бинарного файла, а не frontmatter"
+    },
+    {
+      "id": "format.r3",
+      "level": "info",
+      "reason": "Уровень info: схема допускает Z как результат сериализации Obsidian"
+    },
+    {
+      "id": "property.r1",
+      "level": "error",
+      "reason": "Требует эффективного набора свойств типа (алгоритм ADR-0008 §3.3)"
+    },
+    {
+      "id": "property.r2",
+      "level": "error",
+      "reason": "Мощность значения зависит от cardinality свойства: производная схема типа"
+    },
+    {
+      "id": "property.r3",
+      "level": "error",
+      "reason": "Соответствие значения value_type: производная схема типа"
+    },
+    {
+      "id": "property.r4",
+      "level": "error",
+      "reason": "Значение allowed_values известно только из определения Property"
+    },
+    {
+      "id": "property.r5",
+      "level": "error",
+      "reason": "Требует эффективного набора свойств типа и активированных аспектов"
+    },
+    {
+      "id": "property.r6",
+      "level": "warn",
+      "reason": "Требует назначенных категорий и состава аспектов"
+    },
+    {
+      "id": "property.r7",
+      "level": "error",
+      "reason": "Сравнение переопределения с определением свойства"
+    },
+    {
+      "id": "link.r1",
+      "level": "error",
+      "reason": "Разрешение ссылки по индексу хранилища"
+    },
+    {
+      "id": "link.r2",
+      "level": "error",
+      "reason": "Требует типа цели ссылки"
+    },
+    {
+      "id": "link.r3",
+      "level": "error",
+      "reason": "Требует фасета категории-цели"
+    },
+    {
+      "id": "link.r5",
+      "level": "warn",
+      "reason": "Сравнение подписи ссылки с актуальным title цели"
+    },
+    {
+      "id": "link.r6",
+      "level": "warn",
+      "reason": "Неоднозначность разрешения: несколько файлов на одну стабильную часть"
+    },
+    {
+      "id": "relation.r2",
+      "level": "error",
+      "reason": "Требует типа субъекта и состава subject_types"
+    },
+    {
+      "id": "relation.r3",
+      "level": "error",
+      "reason": "Требует типа объекта и состава object_types"
+    },
+    {
+      "id": "relation.r4",
+      "level": "error",
+      "reason": "Межобъектное: правило уникальности экземпляров отношения"
+    },
+    {
+      "id": "relation.r5",
+      "level": "error",
+      "reason": "Межобъектное: наличие обратной связи при direction: symmetric"
+    },
+    {
+      "id": "relation.r6",
+      "level": "error",
+      "reason": "Межобъектное: связь не должна существовать в двух формах"
+    },
+    {
+      "id": "relation.r7",
+      "level": "warn",
+      "reason": "Сравнение фактических типов с рекомендацией RelationType"
+    },
+    {
+      "id": "relation.r8",
+      "level": "warn",
+      "reason": "Сравнение двух полей с приведением форматов даты"
+    },
+    {
+      "id": "classif.r1",
+      "level": "error",
+      "reason": "Разрешение ссылки на фасет"
+    },
+    {
+      "id": "classif.r2",
+      "level": "error",
+      "reason": "Требует таксономию категории и applicable_types"
+    },
+    {
+      "id": "classif.r3",
+      "level": "error",
+      "reason": "Длина списка cat_<key> против assignment_cardinality фасета"
+    },
+    {
+      "id": "classif.r4",
+      "level": "error",
+      "reason": "Требует индекса классификации"
+    },
+    {
+      "id": "classif.r5",
+      "level": "error",
+      "reason": "Межобъектное: цикл в Category.parent"
+    },
+    {
+      "id": "classif.r6",
+      "level": "warn",
+      "reason": "Межобъектное: число корневых категорий фасета"
+    },
+    {
+      "id": "classif.r7",
+      "level": "warn",
+      "reason": "Межобъектное: мёртвая категория"
+    },
+    {
+      "id": "classif.r8",
+      "level": "error",
+      "reason": "Межобъектное: уникальность названия в пределах фасета"
+    },
+    {
+      "id": "classif.r9",
+      "level": "warn",
+      "reason": "Межобъектное: одинаковое название в разных фасетах таксономии"
+    },
+    {
+      "id": "classif.r10",
+      "level": "error",
+      "reason": "Требует индекса классификации"
+    },
+    {
+      "id": "classif.r11",
+      "level": "error",
+      "reason": "Требует фасета категории-цели"
+    },
+    {
+      "id": "classif.r12",
+      "level": "warn",
+      "reason": "Межобъектное: поле cat_* без соответствующего фасета"
+    },
+    {
+      "id": "inherit.r3",
+      "level": "error",
+      "reason": "Сравнение с унаследованным определением свойства"
+    },
+    {
+      "id": "inherit.r4",
+      "level": "error",
+      "reason": "Сравнение с унаследованным определением свойства"
+    },
+    {
+      "id": "inherit.r5",
+      "level": "error",
+      "reason": "Межобъектное: цикл в parent_type"
+    },
+    {
+      "id": "inherit.r6",
+      "level": "error",
+      "reason": "Разрешение ссылки на родительский тип"
+    },
+    {
+      "id": "inherit.r7",
+      "level": "warn",
+      "reason": "Межобъектное: глубина иерархии типов"
+    },
+    {
+      "id": "aspect.r1",
+      "level": "warn",
+      "reason": "Требует назначенных категорий и состава аспектов"
+    },
+    {
+      "id": "aspect.r2",
+      "level": "error",
+      "reason": "Межобъектное: конфликт двух активированных аспектов (error при загрузке)"
+    },
+    {
+      "id": "aspect.r3",
+      "level": "error",
+      "reason": "Разрешение ссылок trigger_categories и проверка типа цели"
+    },
+    {
+      "id": "aspect.r4",
+      "level": "error",
+      "reason": "Разрешение ссылок properties и проверка типа цели"
+    },
+    {
+      "id": "aspect.r5",
+      "level": "warn",
+      "reason": "Сравнение с ограничением, заданным типом объекта"
+    },
+    {
+      "id": "meta.r4",
+      "level": "error",
+      "reason": "Разрешение ссылок subject_types и object_types"
+    },
+    {
+      "id": "meta.r6",
+      "level": "error",
+      "reason": "Разрешение ссылок Facet.taxonomy и Category.facet"
+    },
+    {
+      "id": "meta.r9",
+      "level": "error",
+      "reason": "Разрешение ссылок"
+    },
+    {
+      "id": "meta.r10",
+      "level": "error",
+      "reason": "Разрешение ссылок"
+    },
+    {
+      "id": "meta.r11",
+      "level": "warn",
+      "reason": "Межобъектное: deprecated, но используется объектами"
+    },
+    {
+      "id": "meta.r12",
+      "level": "error",
+      "reason": "Межобъектное: уникальность id среди определений M1"
+    },
+    {
+      "id": "meta.r13",
+      "level": "warn",
+      "reason": "Межобъектное: неиспользуемое определение"
+    },
+    {
+      "id": "meta.r14",
+      "level": "error",
+      "reason": "Требует состава свойств типа: плейсхолдеры {key} в title_template"
+    },
+    {
+      "id": "meta.r15",
+      "level": "error",
+      "reason": "Разрешение ссылок"
+    },
+    {
+      "id": "view.r1",
+      "level": "error",
+      "reason": "Требует состава целевого типа"
+    },
+    {
+      "id": "view.r2",
+      "level": "warn",
+      "reason": "Требует состава свойств целевого типа"
+    },
+    {
+      "id": "alias.r1",
+      "level": "warn",
+      "reason": "Сравнение с title: нормализация пробелов и регистра"
+    },
+    {
+      "id": "alias.r2",
+      "level": "warn",
+      "reason": "Межобъектное: один псевдоним у нескольких объектов"
+    },
+    {
+      "id": "lifecycle.r1",
+      "level": "error",
+      "reason": "Межобъектное: статус цели связи supersedes / merged_into"
+    },
+    {
+      "id": "lifecycle.r2",
+      "level": "warn",
+      "reason": "Межобъектное: ссылки активных объектов на архивный"
+    },
+    {
+      "id": "lifecycle.r3",
+      "level": "error",
+      "reason": "Межобъектное: число исходящих связей замены"
+    },
+    {
+      "id": "lifecycle.r4",
+      "level": "warn",
+      "reason": "Требует состояния хранилища: файл существует, ссылки не переведены"
+    },
+    {
+      "id": "lifecycle.r5",
+      "level": "info",
+      "reason": "Уровень info: необычный переход статуса"
+    },
+    {
+      "id": "sequence.r2",
+      "level": "error",
+      "reason": "Требует определения свойства: value_type и cardinality"
+    },
+    {
+      "id": "sequence.r3",
+      "level": "error",
+      "reason": "Требует определения свойства: value_type и cardinality"
+    },
+    {
+      "id": "sequence.r4",
+      "level": "error",
+      "reason": "Проверяется на объекте M0, требует производной схемы типа"
+    },
+    {
+      "id": "sequence.r5",
+      "level": "warn",
+      "reason": "Межобъектное: разрыв нумерации между соседями"
+    },
+    {
+      "id": "unique.r1",
+      "level": "error",
+      "reason": "Межобъектное: уникальность пары (область, значение) в хранилище"
+    },
+    {
+      "id": "unique.r2",
+      "level": "error",
+      "reason": "Требует эффективного набора свойств типа"
+    },
+    {
+      "id": "media.r1",
+      "level": "error",
+      "reason": "Требует хранилища: файл существует"
+    },
+    {
+      "id": "media.r3",
+      "level": "error",
+      "reason": "Разрешение ссылок galleries и проверка типа цели"
+    },
+    {
+      "id": "media.r4",
+      "level": "warn",
+      "reason": "Межобъектное: обёртка-сирота"
+    },
+    {
+      "id": "media.r5",
+      "level": "warn",
+      "reason": "Сравнение ролей обёртки с expected_media_roles свойства"
+    },
+    {
+      "id": "media.r6",
+      "level": "warn",
+      "reason": "Межобъектное: один файл у нескольких обёрток"
+    },
+    {
+      "id": "media.r7",
+      "level": "warn",
+      "reason": "Число галерей: пороговая проверка warn"
+    },
+    {
+      "id": "media.r8",
+      "level": "info",
+      "reason": "Уровень info: файл вложения без обёртки — норма"
+    },
+    {
+      "id": "media.r9",
+      "level": "warn",
+      "reason": "Требует имени бинарного файла"
+    }
+  ],
+  "unknown_annotations": []
+}
