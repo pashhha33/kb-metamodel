@@ -45,9 +45,9 @@ sources: [examples/vault/**, docs/validation/RULES.md, schema/]
 <!-- BEGIN GENERATED: examples-validation (tools/examples/check.cjs) -->
 > Прогон выполнен `tools/examples/check.cjs` (Node 20.20.2, AJV 8.20.0). Дата: 2026-10-21.
 >
-> Хранилище примеров: `examples/vault/` (105 заметок). Схема: 0.14.0 (двухпроходная валидация формы) + межобъектные правила каталога.
+> Хранилище примеров: `examples/vault/` (105 заметок). Схема: 0.15.0 (двухпроходная валидация формы) + межобъектные правила каталога.
 
-**Итог: 0 error, 4 warn, 0 info. Правил, проверенных на примерах: 86 из 115.**
+**Итог: 0 error, 4 warn, 0 info. Правил, проверенных на примерах: 87 из 117.**
 
 ### Диагностика
 
@@ -152,6 +152,8 @@ sources: [examples/vault/**, docs/validation/RULES.md, schema/]
 | `naming.r9` | error | ✅ нарушений нет |
 | `naming.r10` | error | ✅ нарушений нет |
 | `naming.r11` | error | ✅ нарушений нет |
+| `naming.r12` | error | ⬜ не реализовано в песочнице |
+| `naming.r13` | error | ✅ нарушений нет |
 | `property.r1` | error | ✅ нарушений нет |
 | `property.r2` | error | ✅ нарушений нет |
 | `property.r3` | error | ✅ нарушений нет |

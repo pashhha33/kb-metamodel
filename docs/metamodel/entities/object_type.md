@@ -3,13 +3,13 @@ doc: entity
 entity: ObjectType
 type_id: object_type
 status: draft
-metamodel_version: 0.14.0
+metamodel_version: 0.15.0
 updated: 2026-10-21
 parent: null
 children: []
 superseded_by: null
-source_refs: [docs/adr/ADR-0005-classification.md, docs/adr/ADR-0003-property-attachment.md, docs/adr/ADR-0010-sequences-and-creation-form.md, schema/0.14.0/m1/object_type.json]
-schema_fragment: schema/0.14.0/m1/object_type.json
+source_refs: [docs/adr/ADR-0012-object-type-identifier.md, docs/adr/ADR-0005-classification.md, docs/adr/ADR-0003-property-attachment.md, docs/adr/ADR-0010-sequences-and-creation-form.md, schema/0.14.0/m1/object_type.json]
+schema_fragment: schema/0.15.0/m1/object_type.json
 canonical_example: examples/vault/types/Книга (OTYPE-01J8Z6M4K2Q7V9X3N5B0C1D2HH).md
 ---
 
@@ -49,8 +49,8 @@ canonical_example: examples/vault/types/Книга (OTYPE-01J8Z6M4K2Q7V9X3N5B0C1
   ссылается на `ObjectType` как на границу классификации; `Aspect` активирует свойства на
   экземплярах по категориям, не меняя определение типа.
 - Роль `title` (D-0063): **отображаемое название** (`Книга`), не ключ. Идентификатор типа,
-  который экземпляры носят в поле `type` (`book`), определением **не хранится** — находка
-  **F-3.27**, вопрос **Q-65** (см. §12).
+  который экземпляры носят в поле `type` (`book`), хранится в обязательном поле **`type_id`**
+  (ADR-0012, D-0073): индекс типов строится из данных, а не из соответствия префиксов.
 
 ## 4. Атрибуты
 
@@ -60,6 +60,7 @@ canonical_example: examples/vault/types/Книга (OTYPE-01J8Z6M4K2Q7V9X3N5B0C1
 | Поле | Тип | Обяз. | Значение по умолчанию | Enum / формат | Описание | Пример |
 |---|---|---|---|---|---|---|
 | `type` | string | да | — | const `object_type` | Ветка диспетчеризации схемы | `object_type` |
+| `type_id` | string | да | — | `^[a-z][a-z0-9_]*$`, ≤ 64 (`naming.r12`); уникален среди `ObjectType`, не совпадает с M1-типами (`naming.r13`); неизменяем | Идентификатор типа: значение поля `type` экземпляров (ADR-0005 §3.6, ADR-0012) | `book` |
 | `title` | string | да | — | отображаемое название (D-0063); длина ≤ 60 в имени файла (`contract.r12`) | Название типа | `Книга` |
 | `label` | string | да | — | `naming.r10` | Подпись в UI и `displayName` в представлениях (ADR-0001) | `Книга` |
 | `label_ru`, `label_en` | string | нет | — | задел локализаций (A-4) | Не заполняются в MVP | — |
@@ -81,7 +82,7 @@ canonical_example: examples/vault/types/Книга (OTYPE-01J8Z6M4K2Q7V9X3N5B0C1
 
 | Поле | Как вычисляется | Где используется |
 |---|---|---|
-| идентификатор типа (`type_id`) | **НЕ хранится** — индекс типов строится соответствием префиксов; нормативный механизм не определён (**F-3.27, Q-65**) | значение `type` экземпляров, `contract.r5`, разрешение `target_types` |
+| индекс типов | строится по полю `type_id` определений (ADR-0012) | значение `type` экземпляров, `contract.r5`, разрешение `target_types`, `relation.r2/r3`, эффективный набор свойств |
 | эффективный набор свойств | inherited → own → universal → triggered → override ?? default (ADR-0003, ADR-0008 §3.3) | формы, валидация экземпляров (`property.r1…r6`) |
 
 ## 5. Связи
@@ -121,6 +122,8 @@ canonical_example: examples/vault/types/Книга (OTYPE-01J8Z6M4K2Q7V9X3N5B0C1
 | `contract.r6`, `r11`, `r12` | error/warn | `title` не пуст; имя файла `{title} ({PREFIX}-{id}).md`; `title` в имени ≤ 60 | схема (частично) + песочница |
 | `naming.r4`, `r5`, `r6`, `r7` | error | формат, ASCII, уникальность, обязательность/`null` префикса | схема (формат, r7) + песочница (уникальность) |
 | `naming.r10` | error | `label` присутствует у каждого определения M1 | схема |
+| `naming.r12` | error | `type_id` — формат EN snake_case (ADR-0012) | схема |
+| `naming.r13` | error | `type_id` уникален среди `ObjectType`, не совпадает с M1-типами | песочница / валидатор |
 | `inherit.r1…r4` | error | overrides только ужесточают: смысл, `value_type`, обязательность, кардинальность | песочница |
 | `inherit.r5`, `r6`, `r7` | error/warn | нет циклов; `parent_type` существует; глубина ≤ 5 | песочница |
 | `sequence.r1`, `r2` | error | пара полей; требования к свойствам последовательности | схема (r1) + песочница (r2) |
@@ -170,10 +173,9 @@ updated_at: "2026-10-21T18:00:00+03:00"
 
 ## 12. Открытые вопросы и расширения
 
-- [ ] **Q-65 (F-3.27, 🔴):** где хранится идентификатор типа (`book`), который экземпляры носят
-      в поле `type`? Варианты: поле `type_id` у определения (по образцу `Facet.key`, ADR-0012) /
-      конвенция от префикса с таблицей исключений / отложить в фазу 4–5. Описание (§4, производные
-      поля) будет дополнено по решению.
+- [x] **Q-65 (F-3.27)** — закрыт **ADR-0012** (D-0073): обязательное поле `type_id` (§4);
+      схема 0.15.0, правила `naming.r12`/`naming.r13`; индекс типов строится из данных.
+- [x] **F-3.26** — description `sequential_parent` приведён к `sequence.r2` в схеме 0.15.0.
 - [ ] **F-3.3:** распространение `layer` на остальные определения M1 (у `Aspect` объявлен с 0.14.0).
 - [ ] **F-3.26:** description `sequential_parent` во фрагменте схемы говорит «`cardinality: 1`»,
       правило `sequence.r2` — «∈ {1, 0..1}»; редакционная правка в схеме 0.15.0.
@@ -183,4 +185,5 @@ updated_at: "2026-10-21T18:00:00+03:00"
 
 | Версия документа | Дата | Что изменилось | Решение / ADR |
 |---|---|---|---|
+| 0.2.0 | 2026-10-21 | Поле `type_id` (обязательное) перенесено из «не хранится» в §4; правила `naming.r12`/`naming.r13`; Q-65 и F-3.26 закрыты; сверка с фрагментом 0.15.0 | ADR-0012, D-0073 |
 | 0.1.0 | 2026-10-21 | Описание создано по `ENTITY_TEMPLATE` 1.1.0 (фаза 3c, пачка 1); зафиксирована находка F-3.27 (Q-65) | D-0070 |

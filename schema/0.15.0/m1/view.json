@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secondbrain.local/schema/0.15.0/m1/view.json",
+  "title": "View",
+  "description": "Определение представления (M1). Значение mechanism — абстрактный идентификатор без названий инструментов (правило расслоения L-1…L-4, D-0057). Нормативный источник: docs/metamodel/00_overview.md §3, §8.3; ADR-0009 §3.1 (разделение «активное / архив» — задача представления).",
+  "type": "object",
+  "properties": {
+    "type": {
+      "const": "view"
+    },
+    "label": {
+      "$ref": "../common/formats.json#/$defs/label",
+      "description": "Подпись представления: «Карточка книги», «Все главы»."
+    },
+    "target_types": {
+      "type": "array",
+      "items": {
+        "$ref": "../common/formats.json#/$defs/wikilink"
+      },
+      "minItems": 1,
+      "description": "Типы объектов, которые показывает представление. Не пуст (meta.r7, view.r1).",
+      "x-notes": "meta.r7 аннотирован как покрытый в части «target_types не пуст» (minItems: 1). Разрешимость ссылок — валидатор. view.r1 дополняет правило условием is_active: true и потому остаётся за валидатором.",
+      "x-rules": [
+        "meta.r7"
+      ]
+    },
+    "mechanism": {
+      "$ref": "../common/enums.json#/$defs/mechanism",
+      "description": "bases, table, card, kanban, graph, query, custom (закрывает C-36: убрана привязка к бренду)."
+    },
+    "definition": {
+      "type": "string",
+      "maxLength": 20000,
+      "description": "Определение представления в формате выбранного механизма: текст запроса, состав и порядок колонок, фильтры (например, status != archived)."
+    },
+    "is_active": {
+      "type": "boolean",
+      "description": "Активное представление обслуживается плагином; выключенное сохраняется, но не применяется."
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "lifecycle": {
+      "$ref": "../common/enums.json#/$defs/lifecycle"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300,
+      "description": "Норма D-0063: для этого типа title — отображаемое название, а не ключ; ключом является label либо собственное поле (например, key у фасета)."
+    }
+  },
+  "required": [
+    "type",
+    "label",
+    "target_types",
+    "mechanism",
+    "is_active"
+  ],
+  "allOf": [
+    {
+      "$ref": "../common/system_contract.json"
+    }
+  ],
+  "x-notes": "view.r2 (warn: тип без свойств, пригодных для колонок) — валидатор.",
+  "unevaluatedProperties": false,
+  "x-strictness": "unevaluatedProperties: false — определения M1 имеют закрытый словарь полей (ядро M2 заморожено, D-0056). Опечатка в поле определения даёт понятную ошибку схемы вместо молчаливого игнорирования. Последствия для локализаций label_*: они объявлены явно только там, где это задел (ObjectType); добавление остальных — аддитивное изменение схемы.",
+  "x-title-role": "display name (D-0063, NAME_MAPPING §0)"
+}

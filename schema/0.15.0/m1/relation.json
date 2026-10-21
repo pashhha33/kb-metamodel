@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secondbrain.local/schema/0.15.0/m1/relation.json",
+  "title": "Relation",
+  "description": "Реифицированная связь с атрибутами. Создаётся по «правилу повышения» X-03: как только у связи появляется хотя бы один атрибут (период, порядок, источник, должность, роль), ссылка в свойстве обязана стать объектом Relation. Одна связь не может существовать в двух формах одновременно (relation.r6). Нормативный источник: docs/metamodel/00_overview.md §7.1, §7.2; ADR-0006; ADR-0009 §3.1.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "const": "relation"
+    },
+    "subject": {
+      "$ref": "../common/formats.json#/$defs/wikilink",
+      "description": "Субъект связи.",
+      "x-notes": "relation.r2 (тип субъекта соответствует subject_types) — валидатор."
+    },
+    "relation_type": {
+      "$ref": "../common/formats.json#/$defs/wikilink",
+      "description": "Ссылка на RelationType. Имя поля совпадает с именем поля определения типа отношения — намеренно (NAME_MAPPING §5)."
+    },
+    "object": {
+      "$ref": "../common/formats.json#/$defs/wikilink",
+      "description": "Объект связи.",
+      "x-notes": "relation.r3 (тип объекта соответствует object_types) — валидатор."
+    },
+    "order": {
+      "type": "number",
+      "description": "Порядковый номер связи в группе (например, порядок авторов)."
+    },
+    "is_primary": {
+      "type": "boolean",
+      "description": "Основная связь среди однотипных."
+    },
+    "role": {
+      "oneOf": [
+        {
+          "$ref": "../common/formats.json#/$defs/wikilink"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Роль персонажа: ссылка на Category фасета char_role (ADR-0006 §3.3, D-0027). Один RelationType portrays + атрибут role вместо десятков типов отношений.",
+      "x-notes": "link.r3 (цель — Category фасета, заданного Property.target_facet) — валидатор."
+    },
+    "position": {
+      "type": "string",
+      "maxLength": 300,
+      "description": "Должность в контексте организации: атрибут связи, а не категория человека (ADR-0006 §3.4, D-0028). В MVP — текст."
+    },
+    "valid_from": {
+      "$ref": "../common/formats.json#/$defs/date_or_year",
+      "description": "Начало периода действия, граница включительна."
+    },
+    "valid_to": {
+      "$ref": "../common/formats.json#/$defs/date_or_year",
+      "description": "Окончание периода действия, граница включительна. Отсутствие означает незакрытый интервал.",
+      "x-notes": "relation.r8 (valid_to < valid_from) — сравнение двух полей с приведением форматов; валидатор."
+    },
+    "source_ref": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Источник сведения. Имя не source, чтобы не конфликтовать с типом Source (NAME_MAPPING §5)."
+    },
+    "context": {
+      "type": "string",
+      "maxLength": 4000,
+      "description": "Контекст связи."
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "lifecycle": {
+      "$ref": "../common/enums.json#/$defs/lifecycle"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300,
+      "description": "Норма D-0063: для этого типа title — отображаемое название, а не ключ; ключом является label либо собственное поле (например, key у фасета)."
+    }
+  },
+  "required": [
+    "type",
+    "subject",
+    "relation_type",
+    "object"
+  ],
+  "allOf": [
+    {
+      "$ref": "../common/system_contract.json"
+    }
+  ],
+  "x-notes": "Атрибуты relation.r4 (уникальность), relation.r5 (симметрия), relation.r6 (дубль формы), lifecycle.r1 (цепочки замен), lifecycle.r3 (не более одной связи замены) — межобъектные, валидатор.",
+  "unevaluatedProperties": false,
+  "x-strictness": "unevaluatedProperties: false — определения M1 имеют закрытый словарь полей (ядро M2 заморожено, D-0056). Опечатка в поле определения даёт понятную ошибку схемы вместо молчаливого игнорирования. Последствия для локализаций label_*: они объявлены явно только там, где это задел (ObjectType); добавление остальных — аддитивное изменение схемы.",
+  "x-rules": [
+    "relation.r1"
+  ],
+  "x-title-role": "display name (D-0063, NAME_MAPPING §0)"
+}

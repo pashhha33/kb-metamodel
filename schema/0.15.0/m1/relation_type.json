@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secondbrain.local/schema/0.15.0/m1/relation_type.json",
+  "title": "RelationType",
+  "description": "Семантика связи (M1). Нормативный источник: docs/metamodel/00_overview.md §3, §7.4; ADR-0006 §3.2, §3.3, §3.4; ADR-0009 §3.1 (supersedes, merged_into).",
+  "type": "object",
+  "properties": {
+    "type": {
+      "const": "relation_type"
+    },
+    "title": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{0,63}$",
+      "description": "Ключ типа отношения: EN snake_case (author, portrays, member_of, appears_in, derived_from, supersedes, merged_into). Норма D-0063: title является ключом для определений, у которых есть отдельный label и которые адресуются по ключу. Отображаемое название — в label."
+    },
+    "label": {
+      "$ref": "../common/formats.json#/$defs/label",
+      "description": "Подпись типа отношения."
+    },
+    "forward_label": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120,
+      "description": "Прямое название связи: «автор»."
+    },
+    "inverse_label": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120,
+      "description": "Обратное название связи: «произведение автора»."
+    },
+    "direction": {
+      "$ref": "../common/enums.json#/$defs/direction",
+      "description": "directed или symmetric (закрывает C-29).",
+      "x-notes": "relation.r5 (обратная связь существует при symmetric) — межобъектное, валидатор."
+    },
+    "subject_types": {
+      "type": "array",
+      "items": {
+        "$ref": "../common/formats.json#/$defs/wikilink"
+      },
+      "description": "Допустимые типы субъекта. Абстрактный тип означает «любой наследник» (ADR-0005).",
+      "x-notes": "relation.r2 (тип субъекта соответствует subject_types с учётом наследования) — валидатор."
+    },
+    "object_types": {
+      "type": "array",
+      "items": {
+        "$ref": "../common/formats.json#/$defs/wikilink"
+      },
+      "description": "Допустимые типы объекта связи.",
+      "x-notes": "relation.r3 — валидатор."
+    },
+    "cardinality": {
+      "$ref": "../common/enums.json#/$defs/cardinality",
+      "description": "Кардинальность экземпляров отношения."
+    },
+    "uniqueness_rule": {
+      "$ref": "../common/enums.json#/$defs/uniqueness_rule",
+      "description": "none, unique_triple, unique_subject, unique_object (закрывает C-28).",
+      "x-notes": "relation.r4 (соблюдение правила уникальности), lifecycle.r3 (не более одного supersedes и merged_into) — межобъектные, валидатор."
+    },
+    "is_restriction": {
+      "type": "boolean",
+      "default": false,
+      "description": "true — запрет, false — рекомендация. Сохранено из черновиков: «рекомендация ≠ запрет».",
+      "x-notes": "relation.r7 (warn при несоответствии рекомендации) — валидатор."
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "lifecycle": {
+      "$ref": "../common/enums.json#/$defs/lifecycle"
+    }
+  },
+  "required": [
+    "type",
+    "title",
+    "label",
+    "direction",
+    "cardinality",
+    "uniqueness_rule"
+  ],
+  "allOf": [
+    {
+      "$ref": "../common/system_contract.json"
+    }
+  ],
+  "x-notes": "subject_types и object_types не обязательны на уровне схемы: тип отношения «любой → любой» (supersedes, merged_into) задаётся пустыми списками. Пустой список означает отсутствие ограничения; meta.r4 требует разрешимости заданных ссылок.",
+  "unevaluatedProperties": false,
+  "x-strictness": "unevaluatedProperties: false — определения M1 имеют закрытый словарь полей (ядро M2 заморожено, D-0056). Опечатка в поле определения даёт понятную ошибку схемы вместо молчаливого игнорирования. Последствия для локализаций label_*: они объявлены явно только там, где это задел (ObjectType); добавление остальных — аддитивное изменение схемы.",
+  "x-title-role": "key (D-0063, NAME_MAPPING §0)"
+}

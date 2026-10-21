@@ -1,0 +1,263 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secondbrain.local/schema/0.15.0/m1/object_type.json",
+  "title": "ObjectType",
+  "description": "Определение типа объекта (M1). Нормативный источник: docs/metamodel/00_overview.md §3, §5; ADR-0003 (состав и порядок свойств, переопределения); ADR-0005 (абстрактные типы, layer); ADR-0010 §3.1 (последовательности).",
+  "type": "object",
+  "properties": {
+    "type": {
+      "const": "object_type"
+    },
+    "type_id": {
+      "$ref": "../common/enums.json#/$defs/type_id",
+      "description": "Идентификатор типа: значение, которое экземпляры носят в поле type (ADR-0005 §3.6, ADR-0012). EN snake_case; глобально уникален среди определений ObjectType и не совпадает с идентификаторами системных типов M1 (naming.r13); после создания не изменяется — изменение является миграцией типа (отложена до после-MVP). Индекс типов строится по этому полю, а не по соответствию префиксов.",
+      "x-rules": [
+        "naming.r12"
+      ]
+    },
+    "label": {
+      "$ref": "../common/formats.json#/$defs/label",
+      "description": "Подпись типа в UI плагина и displayName в представлениях (ADR-0001)."
+    },
+    "label_ru": {
+      "type": "string",
+      "description": "Локализация подписи (задел, в MVP не заполняется)."
+    },
+    "label_en": {
+      "type": "string",
+      "description": "Локализация подписи (задел, в MVP не заполняется)."
+    },
+    "type_prefix": {
+      "oneOf": [
+        {
+          "$ref": "../common/formats.json#/$defs/type_prefix"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Префикс типа: обязателен для конкретного типа и равен null для абстрактного (naming.r7). Не изменяется после создания и не переиспользуется."
+    },
+    "is_abstract": {
+      "type": "boolean",
+      "description": "Абстрактный тип: экземпляры не создаются, в выборе типа не предлагается, может быть целью subject_types/object_types в значении «любой наследник» (ADR-0005)."
+    },
+    "layer": {
+      "$ref": "../common/enums.json#/$defs/layer",
+      "description": "system — тип принадлежит метамодели; domain — описывает знания пользователя."
+    },
+    "parent_type": {
+      "oneOf": [
+        {
+          "$ref": "../common/formats.json#/$defs/wikilink"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Родительский тип, кардинальность 0..1 (был список — изменено в ADR-0003). Ссылка хранится только вверх.",
+      "x-notes": "inherit.r5 (цикл), inherit.r7 (глубина > 5), inherit.r1…r4 (допустимость ужесточений) — межобъектные, валидатор."
+    },
+    "properties": {
+      "type": "array",
+      "items": {
+        "$ref": "../common/formats.json#/$defs/wikilink"
+      },
+      "description": "Плоский упорядоченный список ссылок на Property. Порядок задаёт порядок полей в форме и колонок в таблице (ADR-0003 §3.1). Свойства со scope: universal здесь не перечисляются."
+    },
+    "property_overrides": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/property_override"
+      },
+      "description": "Вложенный список только для ужесточений ограничений унаследованных свойств (ADR-0003 §3.3). Вложенный YAML не поддерживается нативной панелью свойств: редактируется через UI плагина или в режиме исходного кода."
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 4000,
+      "description": "Описание типа (= rdfs:comment)."
+    },
+    "lifecycle": {
+      "$ref": "../common/enums.json#/$defs/lifecycle",
+      "description": "Жизненный цикл определения. deprecated не удаляет определение: старые артефакты не удаляются, только помечаются."
+    },
+    "sequential_parent": {
+      "oneOf": [
+        {
+          "$ref": "../common/formats.json#/$defs/wikilink"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Свойство-родитель последовательности. Должно иметь value_type: reference и cardinality ∈ {1, 0..1} (sequence.r2) или 0..1 (ADR-0010 §3.1).",
+      "x-notes": "sequence.r2 (пригодность свойства) — требует разрешения ссылки, валидатор."
+    },
+    "sequence_key": {
+      "oneOf": [
+        {
+          "$ref": "../common/formats.json#/$defs/wikilink"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Свойство-ключ порядка. Должно иметь value_type: number и cardinality: 1 (ADR-0010 §3.1).",
+      "x-notes": "sequence.r3 (пригодность свойства), sequence.r4 (значение у объекта), sequence.r5 (разрыв нумерации) — валидатор."
+    },
+    "sequence_step": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "default": 10,
+      "description": "Шаг нумерации последовательности, по умолчанию 10. Разреженная нумерация делает вставку локальной операцией (ADR-0010 §2.2).",
+      "x-rules": [
+        "sequence.r6"
+      ]
+    },
+    "sequence_direction": {
+      "$ref": "../common/enums.json#/$defs/sequence_direction",
+      "description": "Направление сортировки, по умолчанию ascending."
+    },
+    "title_template": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300,
+      "description": "Шаблон title при создании без явного имени; плейсхолдеры {key} подставляют значения свойств объекта (ADR-0010 §2.1). Порядок вычисления: chapter_label → title_template → error (contract.r6).",
+      "x-notes": "meta.r14 (все плейсхолдеры соответствуют существующим свойствам типа) — валидатор."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300,
+      "description": "Норма D-0063: для этого типа title — отображаемое название, а не ключ; ключом является label либо собственное поле (например, key у фасета)."
+    }
+  },
+  "required": [
+    "type",
+    "type_id",
+    "label",
+    "type_prefix",
+    "is_abstract",
+    "layer",
+    "properties"
+  ],
+  "allOf": [
+    {
+      "$ref": "../common/system_contract.json"
+    },
+    {
+      "$comment": "naming.r7: type_prefix обязателен (строка) для конкретного типа и равен null для абстрактного. Третья ветка нужна потому, что if/else в JSON Schema срабатывает и при отсутствии is_abstract, а поле обязательно по списку required — иначе требовался бы null всегда.",
+      "x-rules": [
+        "naming.r7"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "is_abstract": {
+                "const": false
+              }
+            },
+            "required": [
+              "is_abstract"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type_prefix": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "is_abstract": {
+                "const": true
+              }
+            },
+            "required": [
+              "is_abstract"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type_prefix": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "$comment": "sequence.r1: sequential_parent и sequence_key задаются только парой. Выражено через dependentRequired: присутствие одного поля требует присутствия другого. Пара «оба поля со значением null» формально проходит схему и фиксируется валидатором как стиль — см. SCHEMA_VALIDATION_REPORT §4.",
+      "dependentRequired": {
+        "sequential_parent": [
+          "sequence_key"
+        ],
+        "sequence_key": [
+          "sequential_parent"
+        ]
+      },
+      "x-rules": [
+        "sequence.r1"
+      ]
+    }
+  ],
+  "$defs": {
+    "property_override": {
+      "type": "object",
+      "description": "Переопределение ограничения свойства внутри типа. Разрешены только ужесточения (ADR-0003 §3.5): повысить обязательность, сузить кардинальность, добавить ограничение.",
+      "properties": {
+        "property": {
+          "$ref": "../common/formats.json#/$defs/wikilink",
+          "description": "Ссылка на Property, ограничение которого ужесточается."
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Допустимо только false → true (inherit.r3)."
+        },
+        "cardinality": {
+          "$ref": "../common/enums.json#/$defs/cardinality",
+          "description": "Допустимо только сужение: 0..n → 1..n, 0..1 → 1 (inherit.r4)."
+        },
+        "allowed_values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Сужение перечня допустимых значений."
+        },
+        "target_types": {
+          "type": "array",
+          "items": {
+            "$ref": "../common/formats.json#/$defs/wikilink"
+          },
+          "description": "Сужение набора допустимых типов цели."
+        },
+        "definition": {
+          "not": true,
+          "description": "Изменение смысла унаследованного свойства запрещено (inherit.r1): поле не допускается в переопределении."
+        },
+        "value_type": {
+          "not": true,
+          "description": "Изменение типа значения запрещено (inherit.r2): поле не допускается в переопределении."
+        }
+      },
+      "required": [
+        "property"
+      ],
+      "x-notes": "Факт ужесточения, а не ослабления, проверяется сравнением с определением свойства — валидатор. Схема запрещает только те поля, которые менять нельзя никогда.",
+      "x-rules": [
+        "inherit.r1",
+        "inherit.r2"
+      ]
+    }
+  },
+  "unevaluatedProperties": false,
+  "x-strictness": "unevaluatedProperties: false — определения M1 имеют закрытый словарь полей (ядро M2 заморожено, D-0056). Опечатка в поле определения даёт понятную ошибку схемы вместо молчаливого игнорирования. Последствия для локализаций label_*: они объявлены явно только там, где это задел (ObjectType); добавление остальных — аддитивное изменение схемы.",
+  "x-title-role": "display name (D-0063, NAME_MAPPING §0)",
+  "x-notes": "Поле type_id (ADR-0012, D-0073): идентификатор типа хранится в определении и является нормативным источником индекса типов; формат проверяется схемой (naming.r12, $defs/type_id), уникальность и несовпадение с идентификаторами M1 — валидатором (naming.r13). Соответствие префикса и идентификатора не нормативно (исключения ядра: CHAR → character, ORG → organization)."
+}

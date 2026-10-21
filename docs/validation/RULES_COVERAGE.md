@@ -67,14 +67,14 @@ decision: [D-0061, D-0062]
 <!-- BEGIN GENERATED: rule-coverage (tools/rule-coverage.cjs) -->
 > Раздел сгенерирован `tools/rule-coverage.cjs`. Все числа пересчитаны программно, а не вписаны вручную.
 
-Схема версии **0.14.0** (17 файлов), каталог правил — `docs/validation/RULES.md`.
+Схема версии **0.15.0** (17 файлов), каталог правил — `docs/validation/RULES.md`.
 
 ## Покрытие по группам
 
 | Группа | Всего | error | warn | info | Покрывает схема | Только валидатор |
 |---|---|---|---|---|---|---|
 | `contract` | 12 | 10 | 2 | 0 | 6 | 6 |
-| `naming` | 11 | 11 | 0 | 0 | 6 | 5 |
+| `naming` | 13 | 13 | 0 | 0 | 7 | 6 |
 | `format` | 3 | 2 | 0 | 1 | 2 | 1 |
 | `property` | 7 | 6 | 1 | 0 | 0 | 7 |
 | `link` | 6 | 4 | 2 | 0 | 1 | 5 |
@@ -82,55 +82,57 @@ decision: [D-0061, D-0062]
 | `classif` | 12 | 8 | 4 | 0 | 0 | 12 |
 | `inherit` | 7 | 6 | 1 | 0 | 2 | 5 |
 | `aspect` | 6 | 3 | 2 | 1 | 1 | 5 |
-| `meta` | 16 | 14 | 2 | 0 | 6 | 10 |
+| `meta` | 16 | 14 | 2 | 0 | 7 | 9 |
 | `view` | 2 | 1 | 1 | 0 | 0 | 2 |
 | `alias` | 3 | 1 | 2 | 0 | 1 | 2 |
 | `lifecycle` | 5 | 2 | 2 | 1 | 0 | 5 |
 | `sequence` | 6 | 5 | 1 | 0 | 2 | 4 |
 | `unique` | 2 | 2 | 0 | 0 | 0 | 2 |
 | `media` | 9 | 3 | 5 | 1 | 1 | 8 |
-| **Итого** | **115** | **84** | **27** | **4** | **29** | **86** |
+| **Итого** | **117** | **86** | **27** | **4** | **31** | **86** |
 
 ## Итог
 
-- Всего правил в каталоге: **115** (84 error, 27 warn, 4 info).
-- Полностью покрывает JSON Schema: **29** (28 error, 0 warn, 1 info) — **25 %** каталога.
+- Всего правил в каталоге: **117** (86 error, 27 warn, 4 info).
+- Полностью покрывает JSON Schema: **31** (30 error, 0 warn, 1 info) — **26 %** каталога.
 - Остаются обязанностью валидатора: **86** (56 error, 27 warn, 3 info).
-- Из 84 правил уровня error схема обеспечивает **28**; 56 проверяются только валидатором. Это прямое следствие решения Q-50 = C (D-0062): межобъектные ограничения в JSON Schema невыразимы.
+- Из 86 правил уровня error схема обеспечивает **30**; 56 проверяются только валидатором. Это прямое следствие решения Q-50 = C (D-0062): межобъектные ограничения в JSON Schema невыразимы.
 
-## Правила, которые покрывает схема (29)
+## Правила, которые покрывает схема (31)
 
 | ID | Уровень | Файлы схемы с аннотацией |
 |---|---|---|
-| `contract.r1` | error | `schema/0.14.0/common/system_contract.json` |
-| `contract.r2` | error | `schema/0.14.0/common/formats.json` |
-| `contract.r4` | error | `schema/0.14.0/common/m0_instance.json` |
-| `contract.r6` | error | `schema/0.14.0/common/system_contract.json` |
-| `contract.r7` | error | `schema/0.14.0/common/system_contract.json` |
-| `contract.r8` | error | `schema/0.14.0/common/enums.json` |
-| `naming.r1` | error | `schema/0.14.0/common/formats.json` |
-| `naming.r2` | error | `schema/0.14.0/common/formats.json` |
-| `naming.r4` | error | `schema/0.14.0/common/formats.json` |
-| `naming.r5` | error | `schema/0.14.0/common/formats.json` |
-| `naming.r7` | error | `schema/0.14.0/m1/object_type.json` |
-| `naming.r8` | error | `schema/0.14.0/common/formats.json` |
-| `format.r1` | error | `schema/0.14.0/common/enums.json`, `schema/0.14.0/m1/property.json` |
-| `format.r2` | error | `schema/0.14.0/common/enums.json` |
-| `link.r4` | error | `schema/0.14.0/common/formats.json` |
-| `relation.r1` | error | `schema/0.14.0/m1/relation.json` |
-| `inherit.r1` | error | `schema/0.14.0/m1/object_type.json` |
-| `inherit.r2` | error | `schema/0.14.0/m1/object_type.json` |
-| `aspect.r6` | info | `schema/0.14.0/m1/aspect.json` |
-| `meta.r1` | error | `schema/0.14.0/common/enums.json` |
-| `meta.r2` | error | `schema/0.14.0/m1/property.json` |
-| `meta.r3` | error | `schema/0.14.0/m1/property.json` |
-| `meta.r5` | error | `schema/0.14.0/m1/taxonomy.json` |
-| `meta.r7` | error | `schema/0.14.0/m1/view.json` |
-| `meta.r8` | error | `schema/0.14.0/common/enums.json`, `schema/0.14.0/m1/automation.json` |
-| `alias.r3` | error | `schema/0.14.0/common/system_contract.json` |
-| `sequence.r1` | error | `schema/0.14.0/m1/object_type.json` |
-| `sequence.r6` | error | `schema/0.14.0/m1/object_type.json` |
-| `media.r2` | error | `schema/0.14.0/common/enums.json`, `schema/0.14.0/m1/media_asset.json` |
+| `contract.r1` | error | `schema/0.15.0/common/system_contract.json` |
+| `contract.r2` | error | `schema/0.15.0/common/formats.json` |
+| `contract.r4` | error | `schema/0.15.0/common/m0_instance.json` |
+| `contract.r6` | error | `schema/0.15.0/common/system_contract.json` |
+| `contract.r7` | error | `schema/0.15.0/common/system_contract.json` |
+| `contract.r8` | error | `schema/0.15.0/common/enums.json` |
+| `naming.r1` | error | `schema/0.15.0/common/formats.json` |
+| `naming.r2` | error | `schema/0.15.0/common/formats.json` |
+| `naming.r4` | error | `schema/0.15.0/common/formats.json` |
+| `naming.r5` | error | `schema/0.15.0/common/formats.json` |
+| `naming.r7` | error | `schema/0.15.0/m1/object_type.json` |
+| `naming.r8` | error | `schema/0.15.0/common/formats.json` |
+| `naming.r12` | error | `schema/0.15.0/m1/object_type.json` |
+| `format.r1` | error | `schema/0.15.0/common/enums.json`, `schema/0.15.0/m1/property.json` |
+| `format.r2` | error | `schema/0.15.0/common/enums.json` |
+| `link.r4` | error | `schema/0.15.0/common/formats.json` |
+| `relation.r1` | error | `schema/0.15.0/m1/relation.json` |
+| `inherit.r1` | error | `schema/0.15.0/m1/object_type.json` |
+| `inherit.r2` | error | `schema/0.15.0/m1/object_type.json` |
+| `aspect.r6` | info | `schema/0.15.0/m1/aspect.json` |
+| `meta.r1` | error | `schema/0.15.0/common/enums.json` |
+| `meta.r2` | error | `schema/0.15.0/m1/property.json` |
+| `meta.r3` | error | `schema/0.15.0/m1/property.json` |
+| `meta.r5` | error | `schema/0.15.0/m1/taxonomy.json` |
+| `meta.r7` | error | `schema/0.15.0/m1/view.json` |
+| `meta.r8` | error | `schema/0.15.0/common/enums.json`, `schema/0.15.0/m1/automation.json` |
+| `meta.r16` | error | `schema/0.15.0/m1/property.json` |
+| `alias.r3` | error | `schema/0.15.0/common/system_contract.json` |
+| `sequence.r1` | error | `schema/0.15.0/m1/object_type.json` |
+| `sequence.r6` | error | `schema/0.15.0/m1/object_type.json` |
+| `media.r2` | error | `schema/0.15.0/common/enums.json`, `schema/0.15.0/m1/media_asset.json` |
 
 ## Правила только валидатора (86)
 
@@ -150,6 +152,7 @@ decision: [D-0061, D-0062]
 | `naming.r9` | error | Межобъектное: глобальная уникальность Facet.key |
 | `naming.r10` | error | Межобъектная уникальность |
 | `naming.r11` | error | Требует имени бинарного файла, а не frontmatter |
+| `naming.r13` | error | Межобъектная уникальность |
 | `format.r3` | info | Уровень info: схема допускает Z как результат сериализации Obsidian |
 | `property.r1` | error | Требует эффективного набора свойств типа (алгоритм ADR-0008 §3.3) |
 | `property.r2` | error | Мощность значения зависит от cardinality свойства: производная схема типа |
@@ -201,7 +204,6 @@ decision: [D-0061, D-0062]
 | `meta.r13` | warn | Межобъектное: неиспользуемое определение |
 | `meta.r14` | error | Требует состава свойств типа: плейсхолдеры {key} в title_template |
 | `meta.r15` | error | Разрешение ссылок |
-| `meta.r16` | error | Разрешение ссылок |
 | `view.r1` | error | Требует состава целевого типа |
 | `view.r2` | warn | Требует состава свойств целевого типа |
 | `alias.r1` | warn | Сравнение с title: нормализация пробелов и регистра |

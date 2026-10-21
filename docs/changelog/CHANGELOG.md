@@ -1,7 +1,7 @@
 ---
 doc: changelog
 status: actual
-version: 0.14.0
+version: 0.15.0
 updated: 2026-10-21
 ---
 
@@ -15,9 +15,103 @@ updated: 2026-10-21
 
 ## [Unreleased]
 
-Пусто. Следующий шаг — **3c**: описания 12 системных типов M1 по `ENTITY_TEMPLATE` (пачками по 3–4).
-В фазе 3c решаются: судьба `PropertyType` в ядре (D-0066), норма `Property.applies_to`
-(допущение A-7, F-3.23), распространение `layer` на определения M1 (F-3.3).
+Пусто. Следующий шаг — **3c, пачка 2** (Q-66 = A): описания `Taxonomy`, `Facet`, `Category`,
+`Relation`; затем пачка 3 (`MediaAsset`, `View`, `Automation`, `Aspect` — в ней решается
+распространение `layer`, F-3.3). После пачек: перевод описаний в `status: actual`, фаза 3d
+(отчёт о качестве, Q-18).
+
+---
+
+## [0.15.0] - 2026-10-21
+
+**Версия метамодели:** 0.15.0 · **Стадия:** review
+**Причина выпуска:** старт фазы 3c. Описания первой пачки типов вскрыли нормативную дыру:
+идентификатор типа (`book` в поле `type` экземпляров) не хранился ни в одном поле определения
+`ObjectType` — индекс типов строился хардкодом (находка F-3.27). Принят **ADR-0012** — первый
+новый ADR после заморозки ядра (D-0056 допускает расширение только через ADR): введено
+обязательное поле `ObjectType.type_id`. В тот же перевыпуск схемы сложены условное ограничение
+`meta.r16` (D-0072) и редакционная правка F-3.26. Ранее в волне закреплено: `PropertyType` —
+постоянно deprecated-тип ядра (D-0071).
+**Связанные решения:** D-0070, D-0071, D-0072, D-0073 · **ADR:** ADR-0012 (новый)
+
+### Added
+- **ADR-0012 «Идентификатор типа хранится в определении (`ObjectType.type_id`)»**: поле обязательно,
+  EN snake_case (`^[a-z][a-z0-9_]*$`, ≤ 64), глобально уникально среди `ObjectType`, не совпадает
+  с идентификаторами системных типов M1, неизменяемо (изменение = миграция, отложена). Индекс типов
+  строится из данных; D-0021 (типы как данные без ADR) становится выполнимым.
+- `schema/0.15.0/**` (17 файлов) + точка входа `metamodel-0.15.0.schema.json`: поле `type_id`
+  во фрагменте `object_type` (x-rules `naming.r12`); условное ограничение `meta.r16`
+  (`scope: family` ⇒ `applies_to` присутствует; пустой список — явное «все ветви»).
+- Правила каталога **`naming.r12`** (формат `type_id`, схема) и **`naming.r13`** (уникальность
+  и несовпадение с M1, валидатор): `RULES.md` 0.16.0 — **117 правил** (86 error, 27 warn, 4 info).
+- Контрольный пример `n16_object_type_without_type_id` — **34 примера**, 34 из 34 прошли.
+- **Фаза 3c, пачка 1**: описания `entities/object_type.md`, `property.md`, `property_type.md`
+  (status deprecated), `relation_type.md` — по `ENTITY_TEMPLATE` 1.1.0, статус `draft`;
+  §4 каждого сверены с фрагментами схемы, §8 — выписки правил с отметкой «кто проверяет»,
+  §11 — заметки канонического хранилища.
+- `ENTITY_TEMPLATE.md` 1.1.0 (D-0070): описание сущности — семантика L-1, источник формы — схема
+  (ADR → схема → типы); атрибуты приведены к ADR-0001/0002, D-0065, ADR-0009; frontmatter описания
+  дополнен `schema_fragment`, `canonical_example`.
+- `docs/plugin/WORKFLOW_PROPOSALS.md` (0.2.0, L-2): реестр предложений по рабочим процессам плагина;
+  зарегистрированы и маршрутизированы **WF-01…WF-05** (действия с пустыми ссылками, псевдоним из
+  пустой ссылки, кастомный виджет свойств — конфликт P-API-1, отображение `title` вместо имени
+  файла — пересмотр отклонённого §4.4, автообновление `updated_at`). ADR-кандидатов нет.
+
+### Changed
+- `tools/examples/check.cjs`: индекс типов строится по `fm.type_id` определений; хардкод
+  `PREFIX_TO_TYPE`/`PREFIX_TO_TYPE_REV` удалён; префикс экземпляра берётся из определения его типа;
+  добавлена проверка `naming.r13`. `tools/examples/generate.cjs`: `type_id` пишется во frontmatter
+  определений; каноническое хранилище пересобрано (105 заметок, прогон 0 error / 4 warn / 0 info).
+- Покрытие каталога схемой: **31 из 117 (26 %)** (+`naming.r12`, +`meta.r16`), только валидатор: 86;
+  exercised на примерах: 87 из 117.
+- `NAME_MAPPING.md` → 0.13.0 (§1: формат `type_id`); `RULES.md` → 0.16.0.
+- `schema/metamodel-0.14.0.schema.json` помечена `x-superseded-by`; каталог `schema/0.14.0/` сохранён.
+
+### Deprecated
+- **`PropertyType` — постоянно deprecated-тип ядра (D-0071, Q-63 = A)**: переходный статус D-0066
+  стал постоянным. Ядро — 12 типов; 6 объектов канона с `lifecycle: deprecated`; `PTYPE` не
+  переиспользуется; плагин не предлагает тип при создании. Исключение из ядра (Q-63 = B) отклонено.
+
+### Removed
+- Хардкод соответствия префиксов и идентификаторов типов из песочницы (`PREFIX_TO_TYPE`,
+  `PREFIX_TO_TYPE_REV`); виртуальные записи индекса типов не возвращались (отменены D-0067).
+
+### Fixed
+- **F-3.27** (идентификатор типа не хранился) — закрыта ADR-0012/D-0073.
+- **F-3.26** (description `sequential_parent` «cardinality 1» против `sequence.r2` «∈ {1, 0..1}») —
+  исправлено в 0.15.0.
+- Манифест примеров: `typeId` записей `object_type` (чекер падал с «Индекс типов пуст») — с этого
+  выпуска индекс строится из данных заметок, зависимость от манифеста снята.
+
+### Migrations
+- Требуется: нет (данных в хранилище пользователя нет); канон и контрольные примеры пересобраны скриптами.
+- Накопленный список (пять позиций) не меняется; изменение `type_id` существующего типа запрещено
+  без отдельного решения (стало бы шестой миграцией).
+
+### Артефакты выпуска
+- `docs/adr/ADR-0012-object-type-identifier.md` (new)
+- `schema/metamodel-0.15.0.schema.json`, `schema/0.15.0/**` (new, 17 файлов);
+  `schema/dist/metamodel-0.15.0.bundle.json`, `src/generated/metamodel-0.15.0.types.ts` (производные)
+- `schema/metamodel-0.14.0.schema.json` (updated: superseded)
+- `docs/validation/RULES.md` → 0.16.0; `RULES_COVERAGE.md`, `SCHEMA_VALIDATION_RUN.md`,
+  `EXAMPLES_VALIDATION_RUN.md`, `SCHEMA_VALIDATION_REPORT.md` (updated)
+- `docs/metamodel/entities/*.md` (new, 4 описания), `docs/metamodel/NAME_MAPPING.md` → 0.13.0
+- `docs/templates/ENTITY_TEMPLATE.md` → 1.1.0; `docs/plugin/WORKFLOW_PROPOSALS.md` (new → 0.2.0)
+- `tools/fixtures/generate.cjs` (34 примера), `tools/examples/generate.cjs`, `tools/examples/check.cjs`
+- `examples/vault/types/**` (пересобрано: +`type_id`), `examples/vault-manifest.json`
+- `docs/decisions/DECISION_LOG.md` (D-0070…D-0073), `docs/PROJECT_MAP.md` → 0.15.0
+
+### Сообщение коммита
+```
+feat(metamodel): ObjectType.type_id stored in the definition (0.15.0, ADR-0012)
+
+- ADR-0012: required ObjectType.type_id — the type index is built from vault data, prefix hardcode removed (F-3.27, D-0073)
+- schema 0.15.0: type_id field (naming.r12), meta.r16 condition (scope family ⇒ applies_to, D-0072), sequential_parent description fixed (F-3.26)
+- catalog: naming.r12/naming.r13 — 117 rules (RULES 0.16.0); coverage 31/117, exercised 87/117
+- PropertyType is permanently a deprecated core type (D-0071)
+- phase 3c batch 1: entity descriptions for ObjectType, Property, PropertyType, RelationType (draft)
+- fixtures: 34 examples, all pass; vault run: 0 errors / 4 intentional warns
+```
 
 ---
 

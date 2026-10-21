@@ -1,6 +1,7 @@
 ---
 id: 01J8Z6M4K2Q7V9X3N5B0C1D2G5
 type: object_type
+type_id: knowledge
 title: Знание
 label: Знание
 type_prefix: null
@@ -31,4 +32,4 @@ updated_at: "2026-10-21T18:00:00+03:00"
 
 ---
 
-Файл сгенерирован `tools/examples/generate.cjs` из реестра `tools/examples/vault-data.cjs` — производный артефакт, руками не редактируется. Проверка: `npm run examples:check` (схема 0.14.0 + межобъектные правила каталога).
+Файл сгенерирован `tools/examples/generate.cjs` из реестра `tools/examples/vault-data.cjs` — производный артефакт, руками не редактируется. Проверка: `npm run examples:check` (схема 0.15.0 + межобъектные правила каталога).

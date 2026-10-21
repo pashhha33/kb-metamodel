@@ -200,14 +200,6 @@ function buildIndexes(objects, manifest) {
   return { byId, byStable, properties, facets, categories, aspects, relationTypes };
 }
 
-/** Идентификатор типа (snake_case) для определения ObjectType: берётся из соответствия префиксу. */
-const PREFIX_TO_TYPE = {
-  PERSON: 'person', CHAR: 'character', ORG: 'organization', PROJ: 'project', TASK: 'task',
-  BOOK: 'book', CHAP: 'chapter', ARTICLE: 'article', GALLERY: 'gallery',
-};
-function prefixToTypeId(o) {
-  return PREFIX_TO_TYPE[o.fm.type_prefix] || null;
-}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Схема: двухпроходная валидация формы
@@ -345,17 +337,26 @@ function main(objects, idx, manifest) {
   if (!aliasDup) pass('alias.r2');
 
   // ── 3. Типы и иерархия наследования ───────────────────────────────
-  const typeIndex = new Map(); // type_id -> определение ObjectType
+  const typeIndex = new Map(); // type_id -> определение ObjectType (ADR-0012: индекс из данных)
   const typeOfObjectType = new Map(); // id определения ObjectType -> type_id
   const prefixOwner = new Map();
-  for (const entry of manifest.objects) {
-    if (entry.kind !== 'object_type' || !entry.typeId) continue;
-    const def = objects.find((o) => o.id === entry.id);
-    if (!def) continue;
-    typeIndex.set(entry.typeId, def);
-    typeOfObjectType.set(entry.id, entry.typeId);
+  const typeIdOwner = new Map(); // type_id -> название определения (naming.r13)
+  for (const o of objects) {
+    if (o.type !== 'object_type') continue;
+    const tid = o.fm.type_id;
+    if (!tid) continue; // отсутствие поля — ошибка формы (схема 0.15.0, naming.r12)
+    if (M1_TYPES.has(tid)) {
+      diag('naming.r13', 'error', o, 'type_id «' + tid + '» совпадает с идентификатором системного типа M1 (ADR-0012)');
+    } else if (typeIdOwner.has(tid)) {
+      diag('naming.r13', 'error', o, 'type_id «' + tid + '» уже используется типом «' + typeIdOwner.get(tid) + '»');
+    } else {
+      typeIdOwner.set(tid, o.title);
+      typeIndex.set(tid, o);
+      pass('naming.r13');
+    }
+    typeOfObjectType.set(o.id, tid);
   }
-  if (typeIndex.size === 0) throw new Error('Индекс типов пуст: в манифесте нет записей kind: object_type с typeId');
+  if (typeIndex.size === 0) throw new Error('Индекс типов пуст: нет определений ObjectType с type_id (ADR-0012)');
   for (const o of objects) {
     if (o.type !== 'object_type') continue;
     if (o.fm.type_prefix) {
@@ -969,7 +970,7 @@ function main(objects, idx, manifest) {
         if (CONTRACT_FIELDS.has(k) || k.startsWith('cat_')) continue;
         const values = Array.isArray(v) ? v : [v];
         const other = end === subj ? obj : subj;
-        if (values.some((x) => typeof x === 'string' && x.includes('(' + prefixOfObject(other) + '-' + other.id + ')'))) {
+        if (values.some((x) => typeof x === 'string' && x.includes('(' + prefixOfObject(other, typeIndex) + '-' + other.id + ')'))) {
           diag('relation.r6', 'error', end, 'Связь «' + subj.title + '» → «' + obj.title + '» продублирована: свойство ' + k + ' и отношение «' + o.title + '»');
         } else pass('relation.r6');
       }
@@ -999,7 +1000,7 @@ function main(objects, idx, manifest) {
           const t = resolveLink(o, ref, 'view.r1');
           if (!t) diag('view.r1', 'error', o, 'Целевой тип представления «' + o.title + '» не разрешается');
           else if (t.type === 'object_type') {
-            const typeId = prefixToTypeId(t);
+            const typeId = t.fm.type_id; // ADR-0012
             const { keys } = effectiveProps(typeId);
             if (keys.size === 0) diag('view.r2', 'warn', o, 'Представление ссылается на тип «' + t.title + '» без свойств, пригодных для колонок');
             else pass('view.r2');
@@ -1021,7 +1022,7 @@ function main(objects, idx, manifest) {
         for (const ref2 of o.fm.target_types || []) {
           const t = resolveLink(o, ref2, 'meta.r15');
           if (!t) continue;
-          const typeId = prefixToTypeId(t);
+          const typeId = t.fm.type_id; // ADR-0012
           if (effectiveProps(typeId).keys.has(p.title)) ok = true;
         }
         if (!ok) diag('meta.r15', 'error', o, 'Поле ' + p.title + ' не принадлежит целевому типу автоматизации');
@@ -1136,7 +1137,7 @@ function main(objects, idx, manifest) {
       pass('link.r4');
       pass('link.r1'); // цель существует и однозначна — правило проверено (учёт exercised)
       const target = list[0];
-      const expectedPrefix = prefixOfObject(target);
+      const expectedPrefix = prefixOfObject(target, typeIndex);
       if (l.prefix !== expectedPrefix) {
         diag('link.r4', 'error', o, 'Префикс ссылки ' + l.prefix + ' не соответствует префиксу цели ' + expectedPrefix + ': ' + l.raw);
       } else pass('link.r4');
@@ -1175,7 +1176,8 @@ function main(objects, idx, manifest) {
 // Вспомогательные функции (объявлены после main для читаемости, поднимаются hoisting-ом)
 // ─────────────────────────────────────────────────────────────────────────────
 
-function prefixOfObject(o) {
+/** Префикс объекта: системные типы M1 — реестр ядра; экземпляры M0 — по определению типа (ADR-0012). */
+function prefixOfObject(o, typeIndex) {
   if (M1_TYPES.has(o.type)) {
     return {
       object_type: 'OTYPE', property_type: 'PTYPE', property: 'PROP', relation_type: 'RTYPE',
@@ -1183,13 +1185,9 @@ function prefixOfObject(o) {
       view: 'VIEW', automation: 'AUTO', aspect: 'ASPECT',
     }[o.type];
   }
-  return PREFIX_TO_TYPE_REV[o.type] || null;
+  const def = typeIndex ? typeIndex.get(o.type) : null;
+  return def && def.fm.type_prefix ? def.fm.type_prefix : null;
 }
-
-const PREFIX_TO_TYPE_REV = {
-  person: 'PERSON', character: 'CHAR', organization: 'ORG', project: 'PROJ', task: 'TASK',
-  book: 'BOOK', chapter: 'CHAP', article: 'ARTICLE', gallery: 'GALLERY',
-};
 
 function isKeyTitleType(type) {
   return ['property', 'property_type', 'relation_type', 'facet', 'aspect', 'automation'].includes(type);

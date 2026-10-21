@@ -40,27 +40,28 @@ npm run schema:all          # bundle → types → coverage → fixtures → val
 <!-- BEGIN GENERATED: validation-run (tools/validate.cjs) -->
 > Прогон выполнен `tools/validate.cjs` (Node 20.20.2, AJV 8.20.0). Дата: 2026-10-21.
 
-Схема: `schema/dist/metamodel-0.14.0.bundle.json` (производная от 16 фрагментов).
+Схема: `schema/dist/metamodel-0.15.0.bundle.json` (производная от 16 фрагментов).
 
-**Итог: 33 из 33 примеров прошли, 0 провалено.**
+**Итог: 34 из 34 примеров прошли, 0 провалено.**
 
 | Пример | Ожидание | Результат | Комментарий |
 |---|---|---|---|
-| `tools/fixtures/invalid/n01_bad_ulid.md` | invalid | ✅ | ожидаемо отклонено: /id must match pattern "^[0-9A-HJKMNP-TV-Z]{26}$"; (корень) must have required property 'label'; (корень) must have required property 'type_prefix' |
-| `tools/fixtures/invalid/n02_missing_title.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have required property 'title'; (корень) must have required property 'label'; (корень) must have required property 'type_prefix' |
-| `tools/fixtures/invalid/n03_unknown_status.md` | invalid | ✅ | ожидаемо отклонено: /status must be equal to one of the allowed values; (корень) must have required property 'label'; (корень) must have required property 'type_prefix' |
+| `tools/fixtures/invalid/n01_bad_ulid.md` | invalid | ✅ | ожидаемо отклонено: /id must match pattern "^[0-9A-HJKMNP-TV-Z]{26}$"; (корень) must have required property 'type_id'; (корень) must have required property 'label' |
+| `tools/fixtures/invalid/n02_missing_title.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have required property 'title'; (корень) must have required property 'type_id'; (корень) must have required property 'label' |
+| `tools/fixtures/invalid/n03_unknown_status.md` | invalid | ✅ | ожидаемо отклонено: /status must be equal to one of the allowed values; (корень) must have required property 'type_id'; (корень) must have required property 'label' |
 | `tools/fixtures/invalid/n04_abstract_with_prefix.md` | invalid | ✅ | ожидаемо отклонено: /type_prefix must be null; (корень) must match "then" schema; /type must be equal to constant |
 | `tools/fixtures/invalid/n05_concrete_bad_prefix.md` | invalid | ✅ | ожидаемо отклонено: /type_prefix must match pattern "^[A-Z][A-Z0-9]{2,11}$"; /type_prefix must be null; /type_prefix must match exactly one schema in oneOf |
-| `tools/fixtures/invalid/n06_sequence_unpaired.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have property sequence_key when property sequential_parent is present; /type must be equal to constant; /title must be equal to one of the allowed values |
-| `tools/fixtures/invalid/n07_property_reference_without_target.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have required property 'type_prefix'; (корень) must have required property 'is_abstract'; (корень) must have required property 'layer' |
-| `tools/fixtures/invalid/n08_property_target_facet_misuse.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have required property 'type_prefix'; (корень) must have required property 'is_abstract'; (корень) must have required property 'layer' |
-| `tools/fixtures/invalid/n09_taxonomy_empty_applicable_types.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have required property 'type_prefix'; (корень) must have required property 'is_abstract'; (корень) must have required property 'layer' |
-| `tools/fixtures/invalid/n10_media_bad_kind.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have required property 'label'; (корень) must have required property 'type_prefix'; (корень) must have required property 'is_abstract' |
-| `tools/fixtures/invalid/n11_m0_type_collides_with_m1.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have required property 'label'; (корень) must have required property 'type_prefix'; (корень) must have required property 'is_abstract' |
-| `tools/fixtures/invalid/n12_facet_reserved_key.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have required property 'type_prefix'; (корень) must have required property 'is_abstract'; (корень) must have required property 'layer' |
-| `tools/fixtures/invalid/n13_relation_type_title_not_key.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have required property 'type_prefix'; (корень) must have required property 'is_abstract'; (корень) must have required property 'layer' |
-| `tools/fixtures/invalid/n14_facet_title_not_key.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have required property 'type_prefix'; (корень) must have required property 'is_abstract'; (корень) must have required property 'layer' |
-| `tools/fixtures/invalid/n15_aspect_bad_layer.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have required property 'type_prefix'; (корень) must have required property 'is_abstract'; /type must be equal to constant |
+| `tools/fixtures/invalid/n06_sequence_unpaired.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have property sequence_key when property sequential_parent is present; (корень) must have required property 'type_id'; /type must be equal to constant |
+| `tools/fixtures/invalid/n07_property_reference_without_target.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have required property 'type_id'; (корень) must have required property 'type_prefix'; (корень) must have required property 'is_abstract' |
+| `tools/fixtures/invalid/n08_property_target_facet_misuse.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have required property 'type_id'; (корень) must have required property 'type_prefix'; (корень) must have required property 'is_abstract' |
+| `tools/fixtures/invalid/n09_taxonomy_empty_applicable_types.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have required property 'type_id'; (корень) must have required property 'type_prefix'; (корень) must have required property 'is_abstract' |
+| `tools/fixtures/invalid/n10_media_bad_kind.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have required property 'type_id'; (корень) must have required property 'label'; (корень) must have required property 'type_prefix' |
+| `tools/fixtures/invalid/n11_m0_type_collides_with_m1.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have required property 'type_id'; (корень) must have required property 'label'; (корень) must have required property 'type_prefix' |
+| `tools/fixtures/invalid/n12_facet_reserved_key.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have required property 'type_id'; (корень) must have required property 'type_prefix'; (корень) must have required property 'is_abstract' |
+| `tools/fixtures/invalid/n13_relation_type_title_not_key.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have required property 'type_id'; (корень) must have required property 'type_prefix'; (корень) must have required property 'is_abstract' |
+| `tools/fixtures/invalid/n14_facet_title_not_key.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have required property 'type_id'; (корень) must have required property 'type_prefix'; (корень) must have required property 'is_abstract' |
+| `tools/fixtures/invalid/n15_aspect_bad_layer.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have required property 'type_id'; (корень) must have required property 'type_prefix'; (корень) must have required property 'is_abstract' |
+| `tools/fixtures/invalid/n16_object_type_without_type_id.md` | invalid | ✅ | ожидаемо отклонено: (корень) must have required property 'type_id'; /type must be equal to constant; /title must be equal to one of the allowed values |
 | `tools/fixtures/valid/01_object_type_abstract.md` | valid | ✅ | — |
 | `tools/fixtures/valid/02_object_type_sequence.md` | valid | ✅ | — |
 | `tools/fixtures/valid/03_property_reference.md` | valid | ✅ | — |

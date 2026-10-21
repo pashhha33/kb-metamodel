@@ -22,4 +22,4 @@ expect: invalid, errors: sequential_parent
 > sequence.r1: sequential_parent и sequence_key задаются только парой. Выражено через dependentRequired.
 
 Контрольный пример сгенерирован `tools/fixtures/generate.cjs`. Вручную не правится.
-Ожидаемое поведение схемы версии 0.14.0 описано в строке `expect:` выше.
+Ожидаемое поведение схемы версии 0.15.0 описано в строке `expect:` выше.

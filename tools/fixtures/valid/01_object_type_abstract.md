@@ -5,6 +5,7 @@ title: Произведение
 created_at: 2026-10-21T10:00:00Z
 updated_at: 2026-10-21T12:30:00Z
 status: active
+type_id: work
 label: Произведение
 type_prefix: null
 is_abstract: true
@@ -25,4 +26,4 @@ expect: valid
 > Проверяет ветку naming.r7 для is_abstract: true — type_prefix обязан быть null.
 
 Контрольный пример сгенерирован `tools/fixtures/generate.cjs`. Вручную не правится.
-Ожидаемое поведение схемы версии 0.14.0 описано в строке `expect:` выше.
+Ожидаемое поведение схемы версии 0.15.0 описано в строке `expect:` выше.

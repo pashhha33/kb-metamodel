@@ -349,6 +349,7 @@ function fmObjectType(rec, stamp) {
   const fm = [
     ['id', rec.id],
     ['type', 'object_type'],
+    ['type_id', d.type_id],
     ['title', d.title],
     ['label', d.label],
     ['type_prefix', isAbstract ? null : d.type_prefix],

@@ -5,6 +5,7 @@ title: Книга
 created_at: 2026-10-21T10:00:00Z
 updated_at: 2026-10-21T12:30:00Z
 status: active
+type_id: book
 label: Книга
 type_prefix: BOOK-1
 is_abstract: false
@@ -19,4 +20,4 @@ expect: invalid, errors: type_prefix
 > naming.r4 и naming.r5: только ASCII A-Z и 0-9, длина 3–12. Дефис запрещён (R4 реестра).
 
 Контрольный пример сгенерирован `tools/fixtures/generate.cjs`. Вручную не правится.
-Ожидаемое поведение схемы версии 0.14.0 описано в строке `expect:` выше.
+Ожидаемое поведение схемы версии 0.15.0 описано в строке `expect:` выше.

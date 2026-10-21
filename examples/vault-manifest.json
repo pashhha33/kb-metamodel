@@ -1,6 +1,6 @@
 {
   "generated_by": "tools/examples/generate.cjs",
-  "schema_version": "0.14.0",
+  "schema_version": "0.15.0",
   "note": "Производный реестр канонического хранилища примеров — вход tools/examples/check.cjs. Системные типы записываются голой строкой snake_case (D-0067); виртуальные записи индекса типов отменены.",
   "objects": [
     {

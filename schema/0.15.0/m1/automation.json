@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secondbrain.local/schema/0.15.0/m1/automation.json",
+  "title": "Automation",
+  "description": "Автоматизация и форма создания объекта (M1). Форма создания выводится из типа объекта: отдельный тип Form отклонён как дублирование данных (ADR-0010 §3.4). Нормативный источник: docs/metamodel/00_overview.md §3; ADR-0010 §2.4, §3.3, §3.4.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "const": "automation"
+    },
+    "title": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{0,63}$",
+      "description": "Ключ автоматизации: EN snake_case (create_chapter)."
+    },
+    "label": {
+      "$ref": "../common/formats.json#/$defs/label",
+      "description": "Подпись автоматизации: «Создать главу»."
+    },
+    "trigger": {
+      "$ref": "../common/enums.json#/$defs/trigger",
+      "description": "manual, on_create, on_update, scheduled. Абстрактный идентификатор без названий инструментов (D-0057).",
+      "x-rules": [
+        "meta.r8"
+      ]
+    },
+    "mechanism": {
+      "$ref": "../common/enums.json#/$defs/mechanism",
+      "description": "Механизм выполнения автоматизации.",
+      "x-rules": [
+        "meta.r8"
+      ]
+    },
+    "target_types": {
+      "type": "array",
+      "items": {
+        "$ref": "../common/formats.json#/$defs/wikilink"
+      },
+      "description": "Типы объектов, к которым применяется автоматизация."
+    },
+    "form_fields": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "../common/formats.json#/$defs/wikilink"
+          },
+          {
+            "$ref": "../common/formats.json#/$defs/sys_field"
+          }
+        ]
+      },
+      "description": "Необязательное сужение и порядок полей формы создания. Пусто — выводятся все обязательные. Поля системного контракта адресуются как sys:title, sys:status и т.д., поскольку title — системный атрибут, а не объект Property (ADR-0010 §3.3).",
+      "x-notes": "meta.r15 (элементы разрешимы и принадлежат целевому типу либо являются sys-полями) — частично схема (форма адреса sys:), частично валидатор (принадлежность типу). Запись sys-поля wikilink-ом («[[title (sys)|…]]» в примере 03_chapter_scenario §3.4) нормативному виду противоречит — см. находку F-3.13."
+    },
+    "defaults": {
+      "type": "object",
+      "propertyNames": {
+        "anyOf": [
+          {
+            "$ref": "../common/formats.json#/$defs/property_key"
+          },
+          {
+            "$ref": "../common/formats.json#/$defs/sys_field"
+          }
+        ]
+      },
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "boolean",
+          "null",
+          "array"
+        ],
+        "items": {
+          "type": [
+            "string",
+            "number",
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "description": "Значения по умолчанию для полей формы. Поддерживаются служебные плейсхолдеры {next_sequence}, {parent}, {today} (ADR-0010 §2.2, §3.3)."
+    },
+    "require_confirmation": {
+      "type": "boolean",
+      "default": true,
+      "description": "Задел: подтверждение перед созданием. По умолчанию true — файл не появляется без явного подтверждения (принцип S6, Q-36 = A). В MVP не используется: всегда подтверждение."
+    },
+    "is_active": {
+      "type": "boolean",
+      "description": "Выключенная автоматизация сохраняется, но не применяется."
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "lifecycle": {
+      "$ref": "../common/enums.json#/$defs/lifecycle"
+    }
+  },
+  "required": [
+    "type",
+    "label",
+    "trigger",
+    "mechanism",
+    "is_active"
+  ],
+  "allOf": [
+    {
+      "$ref": "../common/system_contract.json"
+    }
+  ],
+  "unevaluatedProperties": false,
+  "x-strictness": "unevaluatedProperties: false — определения M1 имеют закрытый словарь полей (ядро M2 заморожено, D-0056). Опечатка в поле определения даёт понятную ошибку схемы вместо молчаливого игнорирования. Последствия для локализаций label_*: они объявлены явно только там, где это задел (ObjectType); добавление остальных — аддитивное изменение схемы.",
+  "x-title-role": "key (D-0063, NAME_MAPPING §0)"
+}

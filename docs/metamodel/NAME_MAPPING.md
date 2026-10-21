@@ -1,9 +1,9 @@
 ---
 doc: name-mapping
 status: actual
-version: 0.12.0
+version: 0.13.0
 updated: 2026-10-21
-metamodel_version: 0.14.0
+metamodel_version: 0.15.0
 adr: [ADR-0001, ADR-0002, ADR-0003, ADR-0004, ADR-0005, ADR-0006, ADR-0007, ADR-0008, ADR-0010, ADR-0011]
 purpose: Таблица переименований RU → EN и основа будущего мигратора
 ---
@@ -52,6 +52,7 @@ purpose: Таблица переименований RU → EN и основа �
 | Значение поля `type` | `snake_case`, EN, совпадает с именем типа в `snake_case` | `object_type`, `relation_type`, `media_asset` |
 | Ключ frontmatter (`key`) | `snake_case`, только `[a-z0-9_]`, ASCII | `title`, `parent_type`, `created_at` |
 | Префикс типа (`type_prefix`) | `[A-Z][A-Z0-9]*`, ASCII, уникален в реестре | `BOOK`, `PERSON`, `OTYPE` |
+| Идентификатор типа (`type_id`) | `^[a-z][a-z0-9_]*$`, EN, ≤ 64; уникален среди `ObjectType`, не совпадает с M1-типами, неизменяем (ADR-0012) | `book`, `person` |
 | Имя файла документа | `kebab-case` | `object_type.md`, `ADR-0001-english-keys-russian-labels.md` |
 | Отображаемое имя (`label`) | свободный текст, RU | `Издательство` |
 | ID элемента перечисления | `snake_case`, EN | `0..1`, `1..n`, `strict`, `polyhierarchical` |
@@ -340,6 +341,7 @@ YAML-парсер приводит незакавыченное значение
 
 | Версия | Дата | Изменение | ADR |
 |---|---|---|---|
+| 0.13.0 | 2026-10-21 | §1: формат идентификатора типа `type_id` — поле определения `ObjectType`, значение поля `type` экземпляров; индекс типов строится из данных (закрывает F-3.27) | ADR-0012 |
 | 0.12.0 | 2026-10-21 | §7.1: норма записи `applicable_types`/`target_types` (D-0067, Q-55 = A) — `ObjectType` wikilink-ссылкой, системные типы голой строкой snake_case; запись в таблице унифицирована (`media_asset`); промежуточный механизм виртуальных записей индекса типов (F-3.21) отменён | — (решение D-0067) |
 | 0.11.0 | 2026-10-21 | Добавлен §0 «Два смысла поля `title`» (D-0063, закрывает находку F-3.1): ключ для шести типов определений, отображаемое название — для остальных; следствия для `contract.r6`, `r11`, `r12` и для дублирования ключа фасета. §7.1 дополнен нормой таксономии-словаря (D-0064, F-3.10). §8 дополнен правилом записи даты закавыченной строкой (D-0065, F-3.4) | — (решения D-0063…D-0065) |
 | 0.9.0 | 2026-10-21 | Добавлены поля последовательностей (`sequential_parent`, `sequence_key`, `sequence_step`, `sequence_direction`, `title_template`), `Property.unique_within`, поля `Automation` (`form_fields`, `defaults`, `require_confirmation`), enum `sequence_direction`, адресация `sys:` | ADR-0010 |

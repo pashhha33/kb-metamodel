@@ -5,6 +5,7 @@ title: Глава
 created_at: 2026-10-21T10:00:00Z
 updated_at: 2026-10-21T12:30:00Z
 status: active
+type_id: chapter
 label: Глава
 type_prefix: CHAP
 is_abstract: false
@@ -32,4 +33,4 @@ expect: valid
 > Проверяет пару sequential_parent + sequence_key (sequence.r1), sequence_step > 0 (sequence.r6) и property_overrides с ужесточением.
 
 Контрольный пример сгенерирован `tools/fixtures/generate.cjs`. Вручную не правится.
-Ожидаемое поведение схемы версии 0.14.0 описано в строке `expect:` выше.
+Ожидаемое поведение схемы версии 0.15.0 описано в строке `expect:` выше.

@@ -192,6 +192,7 @@ const VALID = [
     note: 'Проверяет ветку naming.r7 для is_abstract: true — type_prefix обязан быть null.',
     fm: contract('work', {
       type: 'object_type',
+      type_id: 'work',
       label: 'Произведение',
       type_prefix: null,
       is_abstract: true,
@@ -209,6 +210,7 @@ const VALID = [
     note: 'Проверяет пару sequential_parent + sequence_key (sequence.r1), sequence_step > 0 (sequence.r6) и property_overrides с ужесточением.',
     fm: contract('chapter', {
       type: 'object_type',
+      type_id: 'chapter',
       label: 'Глава',
       type_prefix: 'CHAP',
       is_abstract: false,
@@ -491,6 +493,7 @@ const INVALID = [
     errors: ['type_prefix'],
     fm: contract('work', {
       type: 'object_type',
+      type_id: 'work',
       label: 'Произведение',
       type_prefix: 'WORK',
       is_abstract: true,
@@ -505,6 +508,7 @@ const INVALID = [
     errors: ['type_prefix'],
     fm: contract('book', {
       type: 'object_type',
+      type_id: 'book',
       label: 'Книга',
       type_prefix: 'BOOK-1',
       is_abstract: false,
@@ -623,6 +627,20 @@ const INVALID = [
       trigger_categories: [link('cat_ai')],
       properties: [link('prompt', 'Промпт')],
       is_active: true,
+    }),
+  },
+  {
+    name: 'n16_object_type_without_type_id',
+    heading: 'ObjectType без type_id',
+    note: 'ADR-0012 / naming.r12: type_id обязателен — индекс типов строится по полю определения, а не по соответствию префиксов.',
+    errors: ['type_id'],
+    fm: contract('book', {
+      type: 'object_type',
+      label: 'Книга',
+      type_prefix: 'BOOK',
+      is_abstract: false,
+      layer: 'domain',
+      properties: [],
     }),
   },
   {

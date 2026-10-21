@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secondbrain.local/schema/0.15.0/m1/taxonomy.json",
+  "title": "Taxonomy",
+  "description": "Область классификации: контейнер осей (фасетов), а не иерархия категорий. Иерархией является Facet со значением hierarchy_mode: strict. Нормативный источник: docs/metamodel/00_overview.md §4; ADR-0005 §3.1; ADR-0006 §3.1.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "const": "taxonomy"
+    },
+    "label": {
+      "$ref": "../common/formats.json#/$defs/label",
+      "description": "Подпись таксономии."
+    },
+    "applicable_types": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "../common/formats.json#/$defs/wikilink"
+          },
+          {
+            "$ref": "../common/formats.json#/$defs/system_type_name"
+          }
+        ]
+      },
+      "minItems": 1,
+      "description": "К каким типам объектов применима таксономия. Не пуст и элементы разрешимы (meta.r5). Ссылка на ObjectType записывается wikilink-ссылкой на его определение; системный тип (relation, media_asset, category) — голой строкой snake_case: у него нет определения ObjectType и файла-цели (D-0067).",
+      "x-notes": "meta.r5: список обязателен и непуст (minItems: 1); разрешимость элементов проверяет валидатор: wikilink — по индексу хранилища, голое имя — по реестру системных типов ядра. Для таксономии-словаря (пример — словарь ролей персонажа char_role) список содержит ровно один элемент: relation, поскольку значения словаря используются как значения свойства Relation.role (D-0064, запись имени — D-0067). Поле назначений cat_char_role при этом не создаётся: словарь не является осью назначения категорий объекта.",
+      "x-rules": [
+        "meta.r5"
+      ]
+    },
+    "hierarchy_mode": {
+      "$ref": "../common/enums.json#/$defs/hierarchy_mode",
+      "description": "Значение по умолчанию, наследуемое фасетом при пустом собственном поле (ADR-0005 §3.1 п.6). Имя поля совпадает с именем поля фасета — различие только в роли: здесь это значение по умолчанию."
+    },
+    "assignment_cardinality": {
+      "$ref": "../common/enums.json#/$defs/cardinality",
+      "description": "Значение кардинальности назначения по умолчанию для фасетов таксономии."
+    },
+    "root_requirement": {
+      "$ref": "../common/enums.json#/$defs/root_requirement",
+      "description": "Значение требования к корням по умолчанию для фасетов таксономии."
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "lifecycle": {
+      "$ref": "../common/enums.json#/$defs/lifecycle"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300,
+      "description": "Норма D-0063: для этого типа title — отображаемое название, а не ключ; ключом является label либо собственное поле (например, key у фасета)."
+    }
+  },
+  "required": [
+    "type",
+    "label",
+    "applicable_types"
+  ],
+  "allOf": [
+    {
+      "$ref": "../common/system_contract.json"
+    }
+  ],
+  "x-notes": "Поле facets удалено как хранимое: состав фасетов вычисляется из Facet.taxonomy (ADR-0005, закрывает C-15). Ссылки хранятся только вверх.",
+  "unevaluatedProperties": false,
+  "x-strictness": "unevaluatedProperties: false — определения M1 имеют закрытый словарь полей (ядро M2 заморожено, D-0056). Опечатка в поле определения даёт понятную ошибку схемы вместо молчаливого игнорирования. Последствия для локализаций label_*: они объявлены явно только там, где это задел (ObjectType); добавление остальных — аддитивное изменение схемы.",
+  "x-title-role": "display name (D-0063, NAME_MAPPING §0)"
+}

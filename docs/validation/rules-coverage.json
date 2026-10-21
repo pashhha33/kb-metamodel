@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-21T18:31:09.903Z",
-  "schema_version": "0.14.0",
+  "generated_at": "2026-10-21T19:06:44.726Z",
+  "schema_version": "0.15.0",
   "totals": {
-    "total": 115,
-    "error": 84,
+    "total": 117,
+    "error": 86,
     "warn": 27,
     "info": 4,
-    "schema": 29,
+    "schema": 31,
     "validator": 86
   },
   "covered": [
@@ -14,206 +14,220 @@
       "id": "contract.r1",
       "level": "error",
       "files": [
-        "schema/0.14.0/common/system_contract.json"
+        "schema/0.15.0/common/system_contract.json"
       ]
     },
     {
       "id": "contract.r2",
       "level": "error",
       "files": [
-        "schema/0.14.0/common/formats.json"
+        "schema/0.15.0/common/formats.json"
       ]
     },
     {
       "id": "contract.r4",
       "level": "error",
       "files": [
-        "schema/0.14.0/common/m0_instance.json"
+        "schema/0.15.0/common/m0_instance.json"
       ]
     },
     {
       "id": "contract.r6",
       "level": "error",
       "files": [
-        "schema/0.14.0/common/system_contract.json"
+        "schema/0.15.0/common/system_contract.json"
       ]
     },
     {
       "id": "contract.r7",
       "level": "error",
       "files": [
-        "schema/0.14.0/common/system_contract.json"
+        "schema/0.15.0/common/system_contract.json"
       ]
     },
     {
       "id": "contract.r8",
       "level": "error",
       "files": [
-        "schema/0.14.0/common/enums.json"
+        "schema/0.15.0/common/enums.json"
       ]
     },
     {
       "id": "naming.r1",
       "level": "error",
       "files": [
-        "schema/0.14.0/common/formats.json"
+        "schema/0.15.0/common/formats.json"
       ]
     },
     {
       "id": "naming.r2",
       "level": "error",
       "files": [
-        "schema/0.14.0/common/formats.json"
+        "schema/0.15.0/common/formats.json"
       ]
     },
     {
       "id": "naming.r4",
       "level": "error",
       "files": [
-        "schema/0.14.0/common/formats.json"
+        "schema/0.15.0/common/formats.json"
       ]
     },
     {
       "id": "naming.r5",
       "level": "error",
       "files": [
-        "schema/0.14.0/common/formats.json"
+        "schema/0.15.0/common/formats.json"
       ]
     },
     {
       "id": "naming.r7",
       "level": "error",
       "files": [
-        "schema/0.14.0/m1/object_type.json"
+        "schema/0.15.0/m1/object_type.json"
       ]
     },
     {
       "id": "naming.r8",
       "level": "error",
       "files": [
-        "schema/0.14.0/common/formats.json"
+        "schema/0.15.0/common/formats.json"
+      ]
+    },
+    {
+      "id": "naming.r12",
+      "level": "error",
+      "files": [
+        "schema/0.15.0/m1/object_type.json"
       ]
     },
     {
       "id": "format.r1",
       "level": "error",
       "files": [
-        "schema/0.14.0/common/enums.json",
-        "schema/0.14.0/m1/property.json"
+        "schema/0.15.0/common/enums.json",
+        "schema/0.15.0/m1/property.json"
       ]
     },
     {
       "id": "format.r2",
       "level": "error",
       "files": [
-        "schema/0.14.0/common/enums.json"
+        "schema/0.15.0/common/enums.json"
       ]
     },
     {
       "id": "link.r4",
       "level": "error",
       "files": [
-        "schema/0.14.0/common/formats.json"
+        "schema/0.15.0/common/formats.json"
       ]
     },
     {
       "id": "relation.r1",
       "level": "error",
       "files": [
-        "schema/0.14.0/m1/relation.json"
+        "schema/0.15.0/m1/relation.json"
       ]
     },
     {
       "id": "inherit.r1",
       "level": "error",
       "files": [
-        "schema/0.14.0/m1/object_type.json"
+        "schema/0.15.0/m1/object_type.json"
       ]
     },
     {
       "id": "inherit.r2",
       "level": "error",
       "files": [
-        "schema/0.14.0/m1/object_type.json"
+        "schema/0.15.0/m1/object_type.json"
       ]
     },
     {
       "id": "aspect.r6",
       "level": "info",
       "files": [
-        "schema/0.14.0/m1/aspect.json"
+        "schema/0.15.0/m1/aspect.json"
       ]
     },
     {
       "id": "meta.r1",
       "level": "error",
       "files": [
-        "schema/0.14.0/common/enums.json"
+        "schema/0.15.0/common/enums.json"
       ]
     },
     {
       "id": "meta.r2",
       "level": "error",
       "files": [
-        "schema/0.14.0/m1/property.json"
+        "schema/0.15.0/m1/property.json"
       ]
     },
     {
       "id": "meta.r3",
       "level": "error",
       "files": [
-        "schema/0.14.0/m1/property.json"
+        "schema/0.15.0/m1/property.json"
       ]
     },
     {
       "id": "meta.r5",
       "level": "error",
       "files": [
-        "schema/0.14.0/m1/taxonomy.json"
+        "schema/0.15.0/m1/taxonomy.json"
       ]
     },
     {
       "id": "meta.r7",
       "level": "error",
       "files": [
-        "schema/0.14.0/m1/view.json"
+        "schema/0.15.0/m1/view.json"
       ]
     },
     {
       "id": "meta.r8",
       "level": "error",
       "files": [
-        "schema/0.14.0/common/enums.json",
-        "schema/0.14.0/m1/automation.json"
+        "schema/0.15.0/common/enums.json",
+        "schema/0.15.0/m1/automation.json"
+      ]
+    },
+    {
+      "id": "meta.r16",
+      "level": "error",
+      "files": [
+        "schema/0.15.0/m1/property.json"
       ]
     },
     {
       "id": "alias.r3",
       "level": "error",
       "files": [
-        "schema/0.14.0/common/system_contract.json"
+        "schema/0.15.0/common/system_contract.json"
       ]
     },
     {
       "id": "sequence.r1",
       "level": "error",
       "files": [
-        "schema/0.14.0/m1/object_type.json"
+        "schema/0.15.0/m1/object_type.json"
       ]
     },
     {
       "id": "sequence.r6",
       "level": "error",
       "files": [
-        "schema/0.14.0/m1/object_type.json"
+        "schema/0.15.0/m1/object_type.json"
       ]
     },
     {
       "id": "media.r2",
       "level": "error",
       "files": [
-        "schema/0.14.0/common/enums.json",
-        "schema/0.14.0/m1/media_asset.json"
+        "schema/0.15.0/common/enums.json",
+        "schema/0.15.0/m1/media_asset.json"
       ]
     }
   ],
@@ -272,6 +286,11 @@
       "id": "naming.r11",
       "level": "error",
       "reason": "Требует имени бинарного файла, а не frontmatter"
+    },
+    {
+      "id": "naming.r13",
+      "level": "error",
+      "reason": "Межобъектная уникальность"
     },
     {
       "id": "format.r3",
@@ -525,11 +544,6 @@
     },
     {
       "id": "meta.r15",
-      "level": "error",
-      "reason": "Разрешение ссылок"
-    },
-    {
-      "id": "meta.r16",
       "level": "error",
       "reason": "Разрешение ссылок"
     },

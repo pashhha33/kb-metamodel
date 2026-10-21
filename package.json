@@ -1,6 +1,6 @@
 {
   "name": "second-brain-metamodel-tools",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "private": true,
   "description": "Инструменты фазы 3: сборка JSON Schema метамодели, генерация TypeScript-типов из схемы, матрица покрытия правил, песочница валидации. Не является плагином Obsidian: исходники плагина появляются в фазе 5 (plugin/).",
   "type": "commonjs",
