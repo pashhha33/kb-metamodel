@@ -436,6 +436,61 @@ function main(objects, idx, manifest) {
     return { keys, overrides };
   }
 
+  // ── 3.1. inherit.r1…r4 и meta.r4 (аудит 3d: правила каталога, не реализованные песочницей) ──
+  // Overrides типа и аспекта — только ужесточения (ADR-0003 §3.5, ADR-0008 §3.2).
+  // Базовая линия: defaults свойства + overrides предков (дальний → ближний); многоуровневые
+  // цепи внутри одного типа в каноне отсутствуют — полный алгоритм остаётся валидатору (фаза 5).
+  const CARD_RANK = { '1': 0, '0..1': 1, '1..n': 2, '0..n': 3 };
+  function validateOverrides(owner, ownerTypeId, list) {
+    for (const ov of list) {
+      const p = resolveLink(owner, ov.property, 'link.r1');
+      if (!p || p.type !== 'property') continue;
+      const baseline = { ...p.fm };
+      if (ownerTypeId) {
+        for (const anc of parentChain(ownerTypeId).slice(1).reverse()) {
+          for (const aov of anc.fm.property_overrides || []) {
+            const ap = resolveLink(anc, aov.property, 'link.r1');
+            if (ap && ap.id === p.id) {
+              if (aov.required !== undefined) baseline.required = aov.required;
+              if (aov.cardinality !== undefined) baseline.cardinality = aov.cardinality;
+            }
+          }
+        }
+      }
+      const ctx = 'Переопределение в «' + owner.title + '»';
+      if (ov.definition !== undefined && ov.definition !== baseline.definition) {
+        diag('inherit.r1', 'error', owner, ctx + ' меняет смысл свойства «' + p.title + '» (definition)');
+      } else pass('inherit.r1');
+      if (ov.value_type !== undefined && ov.value_type !== baseline.value_type) {
+        diag('inherit.r2', 'error', owner, ctx + ' меняет value_type свойства «' + p.title + '»');
+      } else pass('inherit.r2');
+      if (ov.required === false && baseline.required === true) {
+        diag('inherit.r3', 'error', owner, ctx + ' понижает обязательность свойства «' + p.title + '»');
+      } else pass('inherit.r3');
+      if (ov.cardinality !== undefined && CARD_RANK[ov.cardinality] !== undefined &&
+          CARD_RANK[baseline.cardinality] !== undefined &&
+          CARD_RANK[ov.cardinality] > CARD_RANK[baseline.cardinality]) {
+        diag('inherit.r4', 'error', owner, ctx + ' расширяет кардинальность свойства «' + p.title + '» (' +
+          baseline.cardinality + ' → ' + ov.cardinality + ')');
+      } else pass('inherit.r4');
+    }
+  }
+  for (const [, def] of typeIndex) validateOverrides(def, def.fm.type_id, def.fm.property_overrides || []);
+  for (const a of aspects) validateOverrides(a, null, a.fm.property_overrides || []);
+
+  // meta.r4: subject_types/object_types RelationType — разрешимые ObjectType (пустой список = «любой тип»).
+  for (const o of objects) {
+    if (o.type !== 'relation_type') continue;
+    for (const field of ['subject_types', 'object_types']) {
+      for (const ref of o.fm[field] || []) {
+        const t = resolveLink(o, ref, 'meta.r4');
+        if (!t) diag('meta.r4', 'error', o, field + ' типа отношения «' + o.title + '» не разрешается: ' + ref);
+        else if (t.type !== 'object_type') diag('meta.r4', 'error', o, field + ' типа отношения «' + o.title + '» ссылается не на тип: ' + t.rel);
+        else pass('meta.r4');
+      }
+    }
+  }
+
   // ── 4. Определения свойств ────────────────────────────────────────
   const propKeyOwner = new Map();
   for (const [key, p] of properties) {

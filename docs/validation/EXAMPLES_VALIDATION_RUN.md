@@ -47,7 +47,7 @@ sources: [examples/vault/**, docs/validation/RULES.md, schema/]
 >
 > Хранилище примеров: `examples/vault/` (105 заметок). Схема: 0.15.0 (двухпроходная валидация формы) + межобъектные правила каталога.
 
-**Итог: 0 error, 4 warn, 0 info. Правил, проверенных на примерах: 87 из 117.**
+**Итог: 0 error, 4 warn, 0 info. Правил, проверенных на примерах: 92 из 117.**
 
 ### Диагностика
 
@@ -98,10 +98,10 @@ sources: [examples/vault/**, docs/validation/RULES.md, schema/]
 | `format.r1` | error | ⬜ не реализовано в песочнице |
 | `format.r2` | error | ⬜ не реализовано в песочнице |
 | `format.r3` | info | ✅ нарушений нет |
-| `inherit.r1` | error | ⬜ не реализовано в песочнице |
-| `inherit.r2` | error | ⬜ не реализовано в песочнице |
-| `inherit.r3` | error | ⬜ не реализовано в песочнице |
-| `inherit.r4` | error | ⬜ не реализовано в песочнице |
+| `inherit.r1` | error | ✅ нарушений нет |
+| `inherit.r2` | error | ✅ нарушений нет |
+| `inherit.r3` | error | ✅ нарушений нет |
+| `inherit.r4` | error | ✅ нарушений нет |
 | `inherit.r5` | error | ✅ нарушений нет |
 | `inherit.r6` | error | ✅ нарушений нет |
 | `inherit.r7` | warn | ✅ нарушений нет |
@@ -128,7 +128,7 @@ sources: [examples/vault/**, docs/validation/RULES.md, schema/]
 | `meta.r1` | error | ⬜ не реализовано в песочнице |
 | `meta.r2` | error | ✅ нарушений нет |
 | `meta.r3` | error | ⬜ не реализовано в песочнице |
-| `meta.r4` | error | ⬜ не реализовано в песочнице |
+| `meta.r4` | error | ✅ нарушений нет |
 | `meta.r5` | error | ✅ нарушений нет |
 | `meta.r6` | error | ✅ нарушений нет |
 | `meta.r7` | error | ⬜ не реализовано в песочнице |

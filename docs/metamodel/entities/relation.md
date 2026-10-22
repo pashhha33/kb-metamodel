@@ -2,7 +2,7 @@
 doc: entity
 entity: Relation
 type_id: relation
-status: draft
+status: actual
 metamodel_version: 0.15.0
 updated: 2026-10-21
 parent: null
@@ -88,7 +88,7 @@ canonical_example: examples/vault/relations/Авторство «Мастера 
 | Поле | Как вычисляется | Где используется |
 |---|---|---|
 | обратные списки связей | выборка `Relation` по `subject`/`object` | панель объекта, отчёты |
-| подписи связи | `forward_label`/`inverse_label` из `RelationType` | UI (LabelProvider) |
+| подписи связи | `forward_label`/`inverse_label` из `RelationType` | UI (модуль подписей — `docs/plugin/ARCHITECTURE.md`) |
 
 ## 5. Связи
 
@@ -179,4 +179,5 @@ updated_at: "2026-10-21T18:00:00+03:00"
 
 | Версия документа | Дата | Что изменилось | Решение / ADR |
 |---|---|---|---|
+| 0.2.0 | 2026-10-21 | Статус `draft` → `actual`: пакетное утверждение пользователем (Q-69 = 3, Q-67 = A); формальная сверка `quality-check` — 0 расхождений; L-1 самопроверка (имена реализации вынесены в указатели на `docs/plugin/ARCHITECTURE.md`); F-3.3 закрыт (D-0074) | D-0074 |
 | 0.1.0 | 2026-10-21 | Описание создано по `ENTITY_TEMPLATE` 1.1.0 (фаза 3c, пачка 2) | D-0070 |

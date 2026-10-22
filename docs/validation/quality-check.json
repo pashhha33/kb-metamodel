@@ -1,47 +1,47 @@
 {
   "generated_by": "tools/quality-check.cjs",
-  "generated_at": "2026-10-21T21:25:32.209Z",
+  "generated_at": "2026-10-21T22:13:45.321Z",
   "entities": [
     {
       "file": "docs/metamodel/entities/aspect.md",
       "type_id": "aspect",
-      "status": "draft",
+      "status": "actual",
       "issues": []
     },
     {
       "file": "docs/metamodel/entities/automation.md",
       "type_id": "automation",
-      "status": "draft",
+      "status": "actual",
       "issues": []
     },
     {
       "file": "docs/metamodel/entities/category.md",
       "type_id": "category",
-      "status": "draft",
+      "status": "actual",
       "issues": []
     },
     {
       "file": "docs/metamodel/entities/facet.md",
       "type_id": "facet",
-      "status": "draft",
+      "status": "actual",
       "issues": []
     },
     {
       "file": "docs/metamodel/entities/media_asset.md",
       "type_id": "media_asset",
-      "status": "draft",
+      "status": "actual",
       "issues": []
     },
     {
       "file": "docs/metamodel/entities/object_type.md",
       "type_id": "object_type",
-      "status": "draft",
+      "status": "actual",
       "issues": []
     },
     {
       "file": "docs/metamodel/entities/property.md",
       "type_id": "property",
-      "status": "draft",
+      "status": "actual",
       "issues": []
     },
     {
@@ -53,25 +53,25 @@
     {
       "file": "docs/metamodel/entities/relation.md",
       "type_id": "relation",
-      "status": "draft",
+      "status": "actual",
       "issues": []
     },
     {
       "file": "docs/metamodel/entities/relation_type.md",
       "type_id": "relation_type",
-      "status": "draft",
+      "status": "actual",
       "issues": []
     },
     {
       "file": "docs/metamodel/entities/taxonomy.md",
       "type_id": "taxonomy",
-      "status": "draft",
+      "status": "actual",
       "issues": []
     },
     {
       "file": "docs/metamodel/entities/view.md",
       "type_id": "view",
-      "status": "draft",
+      "status": "actual",
       "issues": []
     }
   ],
